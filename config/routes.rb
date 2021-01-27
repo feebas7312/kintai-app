@@ -10,6 +10,12 @@ Rails.application.routes.draw do
     post 'companies', to: 'admins/registrations#create_company'
   end
 
+  devise_for :employees, controllers: {
+    sessions: 'employees/sessions',
+    passwords: 'employees/passwords',
+    registrations: 'employees/registrations'
+  }
+
   root to: 'admins_home#index'
   resources :admins_home, only: :index
 end

@@ -1,4 +1,4 @@
-class Admin < ApplicationRecord
+class Employee < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -12,8 +12,7 @@ class Admin < ApplicationRecord
     false
   end
 
-  has_one  :company
-  has_many :employees
+  belongs_to :admin
 
   with_options presence: true do
     validates :number
