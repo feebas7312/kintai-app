@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_26_101621) do
+ActiveRecord::Schema.define(version: 2021_01_26_143856) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "employee_number", null: false
@@ -23,9 +23,19 @@ ActiveRecord::Schema.define(version: 2021_01_26_101621) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["employee_number"], name: "index_admins_on_employee_number", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "companies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.time "opening_time", null: false
+    t.time "closing_time", null: false
+    t.bigint "admin_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_companies_on_admin_id"
+  end
+
+  add_foreign_key "companies", "admins"
 end

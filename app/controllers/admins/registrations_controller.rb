@@ -9,10 +9,29 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    @admin = Admin.new(sign_up_params)
+    unless @admin.valid?
+      render :new and return
+    end
+    session["devise.regist_data"] = {admin: @admin.attributes}
+    session["devise.regist_data"][:admin]["password"] = params[:admin][:password]
+    @company = @admin.build_company
+    render :new_company
+  end
+
+  def create_company
+    @admin = Admin.new(session["devise.regist_data"]["admin"])
+    @company = Company.new(company_params)
+    unless @company.valid?
+      render :new_company and return
+    end
+    @admin.build_company(@company.attributes)
+    @admin.save
+    session["devise.regist_data"]["admin"].clear
+    sign_in(:admin, @admin)
+    redirect_to root_path
+  end
 
   # GET /resource/edit
   # def edit
@@ -42,7 +61,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:employee_number, :last_name, :first_name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:employee_number, :last_name, :first_name, :email])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -59,4 +78,10 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+  def company_params
+    params.require(:company).permit(:name, :opening_time, :closing_time)
+  end
 end

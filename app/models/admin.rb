@@ -12,6 +12,8 @@ class Admin < ApplicationRecord
     false
   end
 
+  has_one :company
+
   with_options presence: true do
     validates :employee_number
     validates :last_name

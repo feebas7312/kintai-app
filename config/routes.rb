@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
-  root to: 'admins#index'
-
   devise_for :admins, controllers: {
     sessions: 'admins/sessions',
     passwords: 'admins/passwords',
     registrations: 'admins/registrations'
   }
 
-  resources :admins, only: :index
+  devise_scope :admin do
+    get 'companies', to: 'admins/registrations#new_company'
+    post 'companies', to: 'admins/registrations#create_company'
+  end
+
+  root to: 'admins_home#index'
+  resources :admins_home, only: :index
 end
