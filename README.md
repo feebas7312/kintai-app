@@ -17,7 +17,7 @@
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| employee_number    | string | null: false |
+| number             | string | null: false |
 | last_name          | string | null: false |
 | first_name         | string | null: false |
 | email              | string |             |
@@ -32,7 +32,7 @@
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| employee_number    | string     | null: false                    |
+| number             | string     | null: false                    |
 | last_name          | string     | null: false                    |
 | first_name         | string     | null: false                    |
 | email              | string     |                                |

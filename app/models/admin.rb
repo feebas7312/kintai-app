@@ -15,10 +15,10 @@ class Admin < ApplicationRecord
   has_one :company
 
   with_options presence: true do
-    validates :employee_number
+    validates :number
     validates :last_name
     validates :first_name
   end
 
-  validates :employee_number, uniqueness: true
+  validates :number, uniqueness: true
 end
