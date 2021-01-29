@@ -4,8 +4,23 @@
   <%= render "admins/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :number, '社員番号' %><br />
+    <%= f.text_field :number, autofocus: true, autocomplete: "employee_number", class: :form__text %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name, '姓' %><br />
+    <%= f.text_field :last_name, class: :form__txst %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_name, '名' %><br />
+    <%= f.text_field :first_name, class: :form__text %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, 'メールアドレス' %><br />
+    <%= f.email_field :email, autocomplete: "email" %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -13,21 +28,21 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.label :password, '新しいパスワード' %> <i>(変更したくない場合は空白にします)</i><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
     <% if @minimum_password_length %>
       <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <em><%= @minimum_password_length %>文字以上</em>
     <% end %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation, '新しいパスワード確認' %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.label :current_password, '現在のパスワード' %> <i>(変更するには現在のパスワードが必要です)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
