@@ -1,0 +1,27 @@
+<h2>店舗情報登録<h2>
+
+<%= form_with model: @company, local: true do |f| %>
+<%#= form_for @company do |f| %>
+  <%= render "admins/shared/error_messages", resource: @company %>
+
+  <div class="field">
+    <%= f.label :name, '会社名' %><br />
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :opening_time, '開店時間' %><br />
+    <%= f.time_select :opening_time, minute_step: 15, ignore_data: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :closing_time, '閉店時間' %><br />
+    <%= f.time_field :closing_time %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "新規登録" %>
+  </div>
+<% end %>
+
+<%= render "admins/shared/links" %>

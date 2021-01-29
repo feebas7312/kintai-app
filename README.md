@@ -5,8 +5,8 @@
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
 | name         | string     | null: false                    |
-| opening_time | integer    | null: false                    |
-| closing_time | integer    | null: false                    |
+| opening_time | time       | null: false                    |
+| closing_time | time       | null: false                    |
 | admin        | references | null: false, foreign_key: true |
 
 ### Association
@@ -17,7 +17,7 @@
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| employee_number    | string | null: false |
+| number             | string | null: false |
 | last_name          | string | null: false |
 | first_name         | string | null: false |
 | email              | string |             |
@@ -32,7 +32,7 @@
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| employee_number    | string     | null: false                    |
+| number             | string     | null: false                    |
 | last_name          | string     | null: false                    |
 | first_name         | string     | null: false                    |
 | email              | string     |                                |

@@ -1,0 +1,44 @@
+<h2>Sign up</h2>
+
+<%= form_with model: @admin, url: admin_registration_path, local: true do |f| %>
+  <%= render "admins/shared/error_messages", model: f.object %>
+
+  <div class="field">
+    <%= f.label :number, '社員番号' %><br />
+    <%= f.text_field :number, autofocus: true, autocomplete: "employee_number", class: :form__text %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name, '姓' %><br />
+    <%= f.text_field :last_name, class: :form__txst %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_name, '名' %><br />
+    <%= f.text_field :first_name, class: :form__text %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, 'メールアドレス' %><br />
+    <%= f.email_field :email, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, 'パスワード' %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %>文字以上)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, 'パスワード確認' %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "次へ" %>
+  </div>
+<% end %>
+
+<%= render "admins/shared/links" %>

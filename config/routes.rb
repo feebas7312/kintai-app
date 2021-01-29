@@ -1,3 +1,21 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :admins, controllers: {
+    sessions: 'admins/sessions',
+    passwords: 'admins/passwords',
+    registrations: 'admins/registrations'
+  }
+
+  devise_scope :admin do
+    get 'companies', to: 'admins/registrations#new_company'
+    post 'companies', to: 'admins/registrations#create_company'
+  end
+
+  devise_for :employees, controllers: {
+    sessions: 'employees/sessions',
+    passwords: 'employees/passwords',
+    registrations: 'employees/registrations'
+  }
+
+  root to: 'admins_home#index'
+  resources :admins_home, only: :index
 end
