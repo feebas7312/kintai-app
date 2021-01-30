@@ -1,3 +1,50 @@
+/* ヘッダー */
+header {
+  height: 70px;
+  width: 100%;
+  background-color: lightblue;
+}
+
+h1 {
+  letter-spacing: 2px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+.nav {
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.lists-left {
+  display: flex;
+}
+
+.lists-right {
+  display: flex;
+}
+
+.content1 {
+  margin: 5px;
+}
+
+
+
+/* フッター */
+footer {
+  height: 50px;
+  background-color: #f0f0f0;
+  text-align: center;
+  color: gray;
+}
+
+
+
 /* フォーム周り */
 
 /* .field{
