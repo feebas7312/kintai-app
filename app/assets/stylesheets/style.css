@@ -2,13 +2,27 @@
 header {
   height: 70px;
   width: 100%;
-  background-color: lightblue;
+  background-color: rgb(212, 243, 255);
+}
+
+.header__bar {
+  padding: 5px;
 }
 
 h1 {
   letter-spacing: 2px;
   font-size: 24px;
   font-weight: bold;
+}
+
+.grid-1 {
+  color: rgb(35, 35, 150);
+  margin-bottom: 10px;
+}
+
+.text1 {
+  color: black;
+  margin: 5px;
 }
 
 a {
@@ -29,9 +43,6 @@ a {
   display: flex;
 }
 
-.content1 {
-  margin: 5px;
-}
 
 
 

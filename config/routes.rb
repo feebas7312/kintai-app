@@ -17,5 +17,5 @@ Rails.application.routes.draw do
   }
 
   root to: 'admins_home#index'
-  resources :admins_home, only: :index
+  resources :admins_home, only: [:index, :destroy]
 end

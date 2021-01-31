@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2021_01_27_130112) do
     t.string "number", null: false
     t.string "last_name", null: false
     t.string "first_name", null: false
+    t.date "joining_date", null: false
     t.string "email", default: ""
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(version: 2021_01_27_130112) do
     t.string "number", null: false
     t.string "last_name", null: false
     t.string "first_name", null: false
+    t.date "joining_date", null: false
     t.string "email", default: ""
     t.string "encrypted_password", default: "", null: false
     t.bigint "admin_id", null: false

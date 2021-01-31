@@ -4,6 +4,11 @@
   <%= render "employees/shared/error_messages", resource: resource %>
 
   <div class="field">
+    <%= f.label :joining_date, '入社日' %><br />
+    <%= f.date_field :joining_date, class: :form__text %>
+  </div>
+
+  <div class="field">
     <%= f.label :number, '社員番号' %><br />
     <%= f.text_field :number, autofocus: true, autocomplete: "employee_number", class: :form__text %>
   </div>
