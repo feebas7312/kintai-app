@@ -1,1 +1,12 @@
 <%= render "shared/admin-header" %>
+
+<div>
+  <%= '社員番号' %><%= '名前' %><br />
+  <%= @admin.number %><%= @admin.last_name %><%= @admin.first_name %><br />
+  <% @employees.each do |employee| %>
+    <%= employee.number %><%= employee.last_name %><%= employee.first_name %><br />
+  <% end %>
+  <%= link_to 'スタッフを追加', new_employee_registration_path %>
+</div>
+
+<%= render "shared/footer" %>
