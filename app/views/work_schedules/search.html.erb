@@ -11,16 +11,35 @@
       <% end %>
     </ul>
   </div>
+
+  <%#= @works[0]["work_date"] %>
+  <%#= @works[1].work_date.day %>
+  <%#= Date.new(@year, @month, 1) %>
+  <%#= @days[0]+1 %>
+  <%#= "#{@admin.company.opening_time.strftime('%H:%M')}〜#{@admin.company.closing_time.strftime('%H:%M')}" %>
+
   <div class="shift">
     <% @days.times do |day| %>
       <ul class="shift-content">
-        <li class="text3"><%= "#{day+1}日" %></li>
-        <li class="text3"></li>
+        <li class="text3"><%= "#{day+1}日" %></li>        
+        <li class="text3">
+        <% @works.each do |work| %>
+          <% if work.admin_id == @admin.id && day+1 == work.work_date.day %>
+            <%= "#{work.work_start_time.strftime('%H:%M')}〜#{work.work_end_time.strftime('%H:%M')}" %>
+          <% end %>
+        <% end %>
+        </li>
         <% @employees.each do |employee| %>
-          <li class="text3"></li>
+          <li class="text3">
+          <% @works.each do |work| %>
+            <% if work.employee_id == employee.id && day+1 == work.work_date.day %>
+              <%= "#{work.work_start_time.strftime('%H:%M')}〜#{work.work_end_time.strftime('%H:%M')}" %>
+            <% end %>
+          <% end %>
+          </li>
         <% end %>
       </ul>
-      <% end %>
+    <% end %>
   </div>
 </div>
 
