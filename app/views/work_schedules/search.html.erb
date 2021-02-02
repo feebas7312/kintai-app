@@ -1,0 +1,27 @@
+<%= render "shared/admin-header" %>
+<%= render "shared/work-schedule" %>
+
+<div class="content">
+  <div class="member">
+    <ul class="member-content">
+      <li class="text2"><%= "#{@year}年#{@month}月度" %></li>
+      <li class="text2"><%= @admin.last_name %></li>
+      <% @employees.each do |employee| %>
+        <li class="text2"><%= employee.last_name %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="shift">
+    <% @days.times do |day| %>
+      <ul class="shift-content">
+        <li class="text3"><%= "#{day+1}日" %></li>
+        <li class="text3"></li>
+        <% @employees.each do |employee| %>
+          <li class="text3"></li>
+        <% end %>
+      </ul>
+      <% end %>
+  </div>
+</div>
+
+<%= render "shared/footer" %>

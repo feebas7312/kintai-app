@@ -43,6 +43,7 @@
 
 - has_one  :companies
 - has_many :employees
+- has_many :work_schedules
 
 ## employees テーブル
 
@@ -59,6 +60,7 @@
 ### Association
 
 - belongs_to :admin
+- has_many   :work_schedules
 
 ## admin_work_patterns テーブル
 
@@ -73,5 +75,18 @@
 | work_pattern_a | string | null: false |
 
 ## work_schedules テーブル
+
+| Column          | Type       | Options     |
+| --------------- | ---------- | ----------- |
+| work_date       | date       | null: false |
+| work_start_time | time       | null: false |
+| work_end_time   | time       | null: false |
+| admin           | references |             |
+| employee        | references |             |
+
+### Association
+
+- belongs_to :admin
+- belongs_to :employee
 
 ## request_days_off テーブル
