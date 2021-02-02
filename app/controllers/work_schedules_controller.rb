@@ -2,6 +2,14 @@ class WorkSchedulesController < ApplicationController
   def index
   end
 
+  def new
+    @admin = Admin.find(current_admin.id)
+    @employees = Employee.where(admin_id: @admin.id)
+    @year = Date.today.year
+    @month = Date.today.month
+    @days = Date.today.end_of_month.day
+  end
+
   def search
     if params["search_date(1i)"].empty? || params["search_date(2i)"].empty?
       render :index

@@ -1,6 +1,11 @@
 <%= render "shared/header" %>
-<h2 class="search-title">勤務計画検索</h2>
+<h2 class="planning-title">勤務計画作成</h2>
 <%= render "shared/search" %>
+
+<div class="create-btn">
+  <%= link_to '計算', "###", class: "planning-btn" %>
+  <%= link_to '保存', "###", class: "save-btn" %>
+</div>
 
 <div class="search-content">
   <div class="member">
@@ -18,19 +23,11 @@
       <ul class="shift-content">
         <li class="text3"><%= "#{day+1}日" %></li>        
         <li class="text3">
-        <% @works.each do |work| %>
-          <% if work.admin_id == @admin.id && day+1 == work.work_date.day %>
-            <%= "#{work.work_start_time.strftime('%H:%M')}〜#{work.work_end_time.strftime('%H:%M')}" %>
-          <% end %>
-        <% end %>
+        
         </li>
         <% @employees.each do |employee| %>
           <li class="text3">
-          <% @works.each do |work| %>
-            <% if work.employee_id == employee.id && day+1 == work.work_date.day %>
-              <%= "#{work.work_start_time.strftime('%H:%M')}〜#{work.work_end_time.strftime('%H:%M')}" %>
-            <% end %>
-          <% end %>
+
           </li>
         <% end %>
       </ul>
