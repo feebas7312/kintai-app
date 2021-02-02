@@ -18,6 +18,7 @@ class Employee < ApplicationRecord
     validates :number
     validates :last_name
     validates :first_name
+    validates :joining_date
   end
 
   validates :number, uniqueness: true

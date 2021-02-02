@@ -10,14 +10,22 @@ class Employees::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    @employee = Employee.new(sign_up_params)
+    if @employee.valid?
+      @employee.save
+      session[:employee_id] = nil
+      redirect_to root_path
+    else
+      render :new
+    end
+  end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    session[:employee_id] = params[:id]
+    super
+  end
 
   # PUT /resource
   # def update
@@ -42,12 +50,12 @@ class Employees::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:number, :last_name, :first_name, :email, :admin_id])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:number, :last_name, :first_name, :joining_date, :email, :admin_id])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:number, :last_name, :first_name, :email])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:number, :last_name, :first_name, :joining_date, :email])
   end
 
   # The path used after sign up.
