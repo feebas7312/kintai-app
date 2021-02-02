@@ -1,3 +1,14 @@
+.alert {
+  height: 30px;
+  width: 90%;
+  color: #3e3a3a;
+  background-color: #f3c0c0;
+  padding: 7px;
+  border-radius: 3px;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .search-title {
   width: 200px;
   padding-bottom: 5px;
@@ -27,7 +38,7 @@
 
 .member-content {
   display: flex;
-  background-color: rgb(212, 243, 255);
+  background-color: #b3d9ff;
 }
 
 .text2 {
