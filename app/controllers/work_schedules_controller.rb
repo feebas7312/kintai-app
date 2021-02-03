@@ -1,10 +1,6 @@
 class WorkSchedulesController < ApplicationController
   def new
-    # @admin = Admin.find(current_admin.id)
-    # @employees = Employee.where(admin_id: @admin.id)
-    # @year = Date.today.year
-    # @month = Date.today.month
-    # @days = Date.today.end_of_month.day
+    @work_schedule = WorkSchedule.new
     @admin = Admin.find(current_admin.id)
     @employees = Employee.where(admin_id: @admin.id)
     if params["search_date(1i)"].nil? || params["search_date(2i)"].nil?
@@ -14,7 +10,7 @@ class WorkSchedulesController < ApplicationController
       @works = SearchWorkSchedulesService.search(@year, @month)
     elsif params["search_date(1i)"].empty? || params["search_date(2i)"].empty?
       flash[:alert] = '⚠️⚠️⚠️ 年と月を入力してください ⚠️⚠️⚠️'
-      redirect_back fallback_location: :search
+      redirect_back fallback_location: :new
     else
       @year = params["search_date(1i)"].to_i
       @month = params["search_date(2i)"].to_i

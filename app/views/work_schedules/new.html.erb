@@ -22,7 +22,7 @@
   <%= link_to '保存', "###", class: "save-btn" %>
 </div>
 
-<div class="search-content">
+<div class="planning-content">
   <div class="member">
     <ul class="member-content">
       <li class="text2"><%= "#{@year}年#{@month}月度" %></li>
@@ -33,21 +33,23 @@
     </ul>
   </div>
 
-  <div class="shift">
-    <% @days.times do |day| %>
-      <ul class="shift-content">
-        <li class="text3"><%= "#{day+1}日" %></li>        
-        <li class="text3">
 
-        </li>
-        <% @employees.each do |employee| %>
+    <div class="shift">
+      <% @days.times do |day| %>
+        <ul class="shift-content">
+          <li class="text3"><%= "#{day+1}日" %></li>        
           <li class="text3">
 
           </li>
-        <% end %>
-      </ul>
-    <% end %>
-  </div>
+          <% @employees.each do |employee| %>
+            <li class="text3">
+
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+
 </div>
 
 <%= render "shared/footer" %>
