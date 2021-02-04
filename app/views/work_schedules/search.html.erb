@@ -13,14 +13,14 @@
                   prompt:'--',
                   date_separator: '%s'),
                 "<p> 年 </p>") + "<p> 月 </p>" %>
-  <%= f.submit "検索", class: "seach-btn" %>
+  <%= f.submit "検索", class: "search-btn" %>
   </div>
 <% end %>
 
 <div class="search-content">
   <div class="member">
     <ul class="member-content">
-      <li class="text2"><%= "#{@year}年#{@month}月度" %></li>
+      <li class="text4"><%= "#{@year}年#{@month}月度" %></li>
       <li class="text2"><%= @admin.last_name %></li>
       <% @employees.each do |employee| %>
         <li class="text2"><%= employee.last_name %></li>
@@ -31,7 +31,7 @@
   <div class="shift">
     <% @days.times do |day| %>
       <ul class="shift-content">
-        <li class="text3"><%= "#{day+1}日" %></li>        
+        <li class="text4"><%= "#{day+1}日" %></li>        
         <li class="text3">
         <% @works.each do |work| %>
           <% if work.admin_id == @admin.id && day+1 == work.work_date.day %>

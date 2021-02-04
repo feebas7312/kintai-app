@@ -19,6 +19,10 @@ class WorkSchedulesController < ApplicationController
     end
   end
 
+  def create
+    binding.pry
+  end
+
   def search
     @admin = Admin.find(current_admin.id)
     @employees = Employee.where(admin_id: @admin.id)
