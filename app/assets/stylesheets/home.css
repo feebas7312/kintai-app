@@ -17,6 +17,7 @@
 }
 
 .home-contents {
+  height: 350px;
   width: 60%;
   margin: 50px auto;
 }

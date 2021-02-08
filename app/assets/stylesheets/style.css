@@ -2,7 +2,8 @@
 header {
   height: 70px;
   width: 100%;
-  background-color: rgb(212, 243, 255);
+  background-color: #b3d9ff;
+  /* background-color: #bde9ff; */
 }
 
 .header__bar {
@@ -21,7 +22,7 @@ h1 {
 }
 
 .text1 {
-  color: black;
+  color: #000;
   margin: 5px;
 }
 

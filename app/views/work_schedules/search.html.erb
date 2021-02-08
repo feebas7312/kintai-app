@@ -1,10 +1,26 @@
-<%= render "shared/admin-header" %>
-<%= render "shared/work-schedule" %>
+<%= render "shared/header" %>
+<h2 class="search-title">勤務計画検索</h2>
+<%= render "shared/flash" %>
 
-<div class="content">
+<%= form_with url: search_work_schedules_path, method: :get, local: true do |f| %>
+  <div class='input-date-wrap'>
+    <%= raw sprintf(
+                f.date_select(
+                  :search_date,
+                  class:'select-date',
+                  use_month_numbers: true,
+                  discard_day: true,
+                  prompt:'--',
+                  date_separator: '%s'),
+                "<p> 年 </p>") + "<p> 月 </p>" %>
+  <%= f.submit "検索", class: "search-btn" %>
+  </div>
+<% end %>
+
+<div class="search-content">
   <div class="member">
     <ul class="member-content">
-      <li class="text2"><%= "#{@year}年#{@month}月度" %></li>
+      <li class="text4"><%= "#{@year}年#{@month}月度" %></li>
       <li class="text2"><%= @admin.last_name %></li>
       <% @employees.each do |employee| %>
         <li class="text2"><%= employee.last_name %></li>
@@ -12,16 +28,10 @@
     </ul>
   </div>
 
-  <%#= @works[0]["work_date"] %>
-  <%#= @works[1].work_date.day %>
-  <%#= Date.new(@year, @month, 1) %>
-  <%#= @days[0]+1 %>
-  <%#= "#{@admin.company.opening_time.strftime('%H:%M')}〜#{@admin.company.closing_time.strftime('%H:%M')}" %>
-
   <div class="shift">
     <% @days.times do |day| %>
       <ul class="shift-content">
-        <li class="text3"><%= "#{day+1}日" %></li>        
+        <li class="text4"><%= "#{day+1}日" %></li>        
         <li class="text3">
         <% @works.each do |work| %>
           <% if work.admin_id == @admin.id && day+1 == work.work_date.day %>
