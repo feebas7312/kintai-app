@@ -116,13 +116,13 @@
 
 ## work_schedules テーブル
 
-| Column          | Type       | Options     |
-| --------------- | ---------- | ----------- |
-| work_date       | date       | null: false |
-| work_start_time | integer    | null: false |
-| work_end_time   | integer    | null: false |
-| admin           | references |             |
-| employee        | references |             |
+| Column          | Type       | Options                           |
+| --------------- | ---------- | --------------------------------- |
+| work_date       | date       | null: false                       |
+| work_start_time | string     | null: false                       |
+| work_end_time   | string     | null: false                       |
+| admin           | references | foreign_key: true, optional: true |
+| employee        | references | foreign_key: true, optional: true |
 
 ### Association
 
