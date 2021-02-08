@@ -119,8 +119,8 @@
 | Column          | Type       | Options     |
 | --------------- | ---------- | ----------- |
 | work_date       | date       | null: false |
-| work_start_time | time       | null: false |
-| work_end_time   | time       | null: false |
+| work_start_time | integer    | null: false |
+| work_end_time   | integer    | null: false |
 | admin           | references |             |
 | employee        | references |             |
 

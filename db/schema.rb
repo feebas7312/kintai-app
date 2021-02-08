@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(version: 2021_01_31_212105) do
 
   create_table "work_schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "work_date", null: false
-    t.time "work_start_time", null: false
-    t.time "work_end_time", null: false
+    t.integer "work_start_time"
+    t.integer "work_end_time"
     t.bigint "admin_id"
     t.bigint "employee_id"
     t.datetime "created_at", precision: 6, null: false
@@ -70,4 +70,6 @@ ActiveRecord::Schema.define(version: 2021_01_31_212105) do
 
   add_foreign_key "companies", "admins"
   add_foreign_key "employees", "admins"
+  add_foreign_key "work_schedules", "admins"
+  add_foreign_key "work_schedules", "employees"
 end
