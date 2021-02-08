@@ -8,6 +8,6 @@ class WorkSchedule < ApplicationRecord
     validates :work_end_time, if: :work_start_time?
   end
 
-  # validates :admin_id, presence: true, unless: :employee_id?
-  # validates :employee_id, presence: true, unless: :admin_id?
+  validates :admin_id, presence: true, unless: :employee_id?
+  validates :employee_id, presence: true, unless: :admin_id?
 end
