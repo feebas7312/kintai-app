@@ -4,8 +4,6 @@ class WorkScheduleCollection
   extend ActiveModel::Translation
   include ActiveModel::AttributeMethods
   include ActiveModel::Validations
-  #WORK_NUM = 28 # 同時に生成するレコード数
-  # NUM = WORK_NUM * 5
   attr_accessor :collection
 
   def initialize(days, admin, attributes = [])
