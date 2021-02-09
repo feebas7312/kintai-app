@@ -12,8 +12,8 @@ class Admin < ApplicationRecord
     false
   end
 
-  has_one  :company
-  has_many :employees
+  has_one  :company, dependent: :destroy
+  has_many :employees, dependent: :destroy
 
   with_options presence: true do
     validates :number
