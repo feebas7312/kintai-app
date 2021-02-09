@@ -20,7 +20,7 @@
 .account-page__inner--left h2 {
   margin-bottom: 10px;
   color: #d65f4c;
-  font-size: 45px;
+  font-size: 40px;
   letter-spacing: 3px;
 }
 .account-page__inner--left h2:after {
@@ -66,4 +66,26 @@
   color: #fff;
   font-size: 15px;
   letter-spacing: 2px;
+}
+
+/* --- エラーメッセージ --- */
+
+#error_explanation {
+  margin-bottom: 20px;
+  padding: 20px 30px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+}
+#error_explanation h2 {
+  margin-bottom: 10px;
+  color: #d65f4c;
+  font-size: 14px;
+}
+#error_explanation ul {
+  margin: 0;
+  padding-left: 17px;
+  list-style: square;
+}
+#error_explanation li {
+  font-size: 13px;
 }

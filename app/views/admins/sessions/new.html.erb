@@ -11,13 +11,13 @@
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
         <div class="field-label">
-          <%= f.label :number, '社員番号' %><br />
+          <%= f.label :number, '社員番号' %>
         </div>
         <div class="field-input">
           <%= f.text_field :number, autofocus: true, autocomplete: "number" %>
         </div>
         <div class="field-label">
-          <%= f.label :password, 'パスワード' %><br />
+          <%= f.label :password, 'パスワード' %>
         </div>
         <div class="field-input">
           <%= f.password_field :password, autocomplete: "current-password" %>
