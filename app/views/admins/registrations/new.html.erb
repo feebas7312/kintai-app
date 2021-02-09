@@ -1,49 +1,62 @@
-<h2>Sign up</h2>
-
-<%= form_with model: @admin, url: admin_registration_path, local: true do |f| %>
-  <%= render "admins/shared/error_messages", model: f.object %>
-
-  <div class="field">
-    <%= f.label :joining_date, '入社日' %><br />
-    <%= f.date_field :joining_date, class: :form__text %>
+<div class="account-page">
+  <div class="account-page__inner--left">
+    <h2>新規登録</h2>
+    <h5>新しくユーザーを登録する（責任者専用）</h5>
+    <%= render "admins/shared/links" %>
   </div>
-
-  <div class="field">
-    <%= f.label :number, '社員番号' %><br />
-    <%= f.text_field :number, autofocus: true, autocomplete: "employee_number", class: :form__text %>
+  <div class="account-page__inner--right">
+    <%= form_with model: @admin, url: admin_registration_path, local: true do |f| %>
+      <div class="field">
+        <%= render "admins/shared/error_messages", model: f.object %>
+        <div class="field-label">
+          <%= f.label :joining_date, '入社日' %>
+        </div>
+        <div class="field-input">
+          <%= f.date_field :joining_date %>
+        </div>
+        <div class="field-label">
+          <%= f.label :number, '社員番号' %>
+        </div>
+        <div class="field-input">
+          <%= f.text_field :number, autofocus: true, autocomplete: "employee_number" %>
+        </div>
+        <div class="field-label">
+          <%= f.label :last_name, '姓' %>
+        </div>
+        <div class="field-input">
+          <%= f.text_field :last_name %>
+        </div>
+        <div class="field-label">
+          <%= f.label :first_name, '名' %>
+        </div>
+        <div class="field-input">
+          <%= f.text_field :first_name %>
+        </div>
+        <div class="field-label">
+          <%= f.label :email, 'メールアドレス' %>
+        </div>
+        <div class="field-input">
+          <%= f.email_field :email, autocomplete: "email" %>
+        </div>
+        <div class="field-label">
+          <%= f.label :password, 'パスワード' %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %>文字以上)</em>
+          <% end %>
+        </div>
+        <div class="field-input">
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </div>
+        <div class="field-label">
+          <%= f.label :password_confirmation, 'パスワード確認' %>
+        </div>
+        <div class="field-input">
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+        <div class="actions">
+          <%= f.submit "次へ", class: "btn" %>
+        </div>
+      </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :last_name, '姓' %><br />
-    <%= f.text_field :last_name, class: :form__txst %>
-  </div>
-
-  <div class="field">
-    <%= f.label :first_name, '名' %><br />
-    <%= f.text_field :first_name, class: :form__text %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email, 'メールアドレス' %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password, 'パスワード' %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %>文字以上)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, 'パスワード確認' %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "次へ" %>
-  </div>
-<% end %>
-
-<%= render "admins/shared/links" %>
+</div>

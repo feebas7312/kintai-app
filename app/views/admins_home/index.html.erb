@@ -35,8 +35,6 @@
 <% if employee_signed_in? %>
   <%= link_to '担当編集', edit_employee_registration_path %>
   <%= link_to '担当ログアウト', destroy_employee_session_path, method: :delete %>
-<% else %>
-  <%= link_to '担当ログイン', new_employee_session_path %>
 <% end %>
 
 <%= render "shared/footer" %>

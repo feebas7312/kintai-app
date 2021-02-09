@@ -8,7 +8,7 @@
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
   <div class="account-link">
-    <%= link_to "パスワードをお忘れですか?", new_password_path(resource_name) %><br />
+    <%= link_to "パスワードをお忘れですか?", new_password_path(resource_name) %>
   </div>
 <% end %>
 
