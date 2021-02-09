@@ -1,0 +1,91 @@
+/* ---------------------------
+    ユーザー新規登録・ログイン画面
+   --------------------------- */
+
+.account-page {
+  width: 980px;
+  margin: 60px auto;
+  padding: 60px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  display: flex;
+}
+.account-page__inner--left, .account-page__inner--right {
+  width: 50%;
+}
+
+/* --- サイドメニュー --- */
+
+.account-page__inner--left h2 {
+  margin-bottom: 10px;
+  color: #d65f4c;
+  font-size: 40px;
+  letter-spacing: 3px;
+}
+.account-page__inner--left h2:after {
+  width: 60px;
+  margin-top: 10px;
+  border-bottom: 1px solid #38aef0;
+  content: "";
+  display: block;
+}
+.account-page__inner--left h5 {
+  margin-bottom: 50px;
+  font-size: 15px;
+}
+.account-page .account-link {
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
+/* --- 入力フォーム --- */
+
+.account-page__inner--right .field {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.account-page .field-label {
+  padding: 10px 0;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+.account-page .field-input input {
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 13px;
+  letter-spacing: 1px;
+}
+.account-page .field .btn {
+  height: 50px;
+  margin-top: 20px;
+  padding: 0 30px;
+  border: none;
+  border-radius: 2px;
+  background-color: #38aef0;
+  color: #fff;
+  font-size: 15px;
+  letter-spacing: 2px;
+}
+
+/* --- エラーメッセージ --- */
+
+#error_explanation {
+  margin-bottom: 20px;
+  padding: 20px 30px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+}
+#error_explanation h2 {
+  margin-bottom: 10px;
+  color: #d65f4c;
+  font-size: 14px;
+}
+#error_explanation ul {
+  margin: 0;
+  padding-left: 17px;
+  list-style: square;
+}
+#error_explanation li {
+  font-size: 13px;
+}
