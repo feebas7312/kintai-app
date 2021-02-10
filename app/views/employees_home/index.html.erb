@@ -15,7 +15,7 @@
   </div>
 
   <div class="home-content">
-    <div class="home-content1"><%= link_to @admin.number, edit_admin_registration_path %></div>
+    <div class="home-content1"><%= @admin.number %></div>
     <div class="home-content2"><%= @admin.last_name %><%= @admin.first_name %></div>
     <div class="home-content3"><%= @admin.joining_date %></div>
   </div>
@@ -25,11 +25,8 @@
       <div class="home-content1"><%= employee.number %></div>
       <div class="home-content2"><%= employee.last_name %><%= employee.first_name %></div>
       <div class="home-content3"><%= employee.joining_date %></div>
-      <%= link_to '編集', edit_employee_registration_path(employee_id: employee.id) %>
-      <%= link_to '退職', admins_home_path(employee.id), data: { confirm: "Are you sure?" }, method: :delete, class: "staff-delete-btn" %>
     </div>
   <% end %>
-  <%= link_to 'スタッフを追加', new_employee_registration_path, class: "staff-new-btn" %>
 </div>
 
 <%= render "shared/footer" %>

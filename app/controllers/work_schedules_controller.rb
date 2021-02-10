@@ -34,7 +34,8 @@ class WorkSchedulesController < ApplicationController
   end
 
   def search
-    @admin = Admin.find(current_admin.id)
+    @admin = Admin.find(current_admin.id) if admin_signed_in?
+    @admin = Admin.find(current_employee.admin_id) if employee_signed_in?
     @employees = Employee.where(admin_id: @admin.id)
     if params["search_date(1i)"].nil? || params["search_date(2i)"].nil?
       @year = Date.today.year

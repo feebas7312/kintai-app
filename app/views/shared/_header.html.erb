@@ -1,18 +1,27 @@
 <header class="header">
   <div class="header__bar row">
-    <h1 class="grid-1"><a href="/" class="grid-1">勤怠管理システム</a></h1>
+    <% if admin_signed_in? %>
+      <h1 class="grid-1"><a href="/" class="grid-1">勤怠管理システム</a></h1>
+    <% end %>
+    <% if employee_signed_in? %>
+      <h1 class="grid-1"><a href="/employees_home" class="grid-1">勤怠管理システム</a></h1>
+    <% end %>
   </div>
   <div class="nav">
     <ul class="lists-left">
       <li><%= link_to '勤務計画閲覧', search_work_schedules_path, class: "text1" %></li>
-      <li><%= link_to '勤務計画作成', new_work_schedule_path, class: "text1" %></li>
+      <% if admin_signed_in? %>
+        <li><%= link_to '勤務計画作成', new_work_schedule_path, class: "text1" %></li>
+      <% end %>
     </ul>
     <ul class="lists-right">
       <% if admin_signed_in? %>
+        <li><%= link_to '編集', edit_admin_registration_path, class: "text1" %></li>
         <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "text1" %></li>
-      <% else %>
-        <li><%= link_to 'ログイン', new_admin_session_path, class: "text1" %></li>
-        <li><%= link_to '新規登録', new_admin_registration_path, class: "text1" %></li>
+      <% end %>
+      <% if employee_signed_in? %>
+        <li><%= link_to '担当編集', edit_employee_registration_path, class: "text1" %></li>
+        <li><%= link_to '担当ログアウト', destroy_employee_session_path, method: :delete, class: "text1" %></li>
       <% end %>
     </ul>
   </div>
