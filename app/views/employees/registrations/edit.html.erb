@@ -2,11 +2,18 @@
   <div class="account-page__inner--left">
     <h2>Staff編集</h2>
     <h5>売場スタッフの情報を編集する</h5>
-    <%= button_to "退職", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
-    <br />
-    <div class="account-link">
-      <%= link_to "トップページへ戻る", :back %>
-    </div>
+    <% if admin_signed_in? %>
+      <%= button_to "退職", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+      <br />
+      <div class="account-link">
+        <%= link_to "トップページへ戻る", root_path %>
+      </div>
+    <% end %>
+    <% if employee_signed_in? %>
+      <div class="account-link">
+        <%= link_to "トップページへ戻る", employees_home_index_path %>
+      </div>
+    <% end %>
   </div>
   <div class="account-page__inner--right">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>

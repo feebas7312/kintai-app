@@ -107,7 +107,7 @@ class Employees::RegistrationsController < Devise::RegistrationsController
     if admin_signed_in?
       root_path
     else
-      root_path   # スタッフのトップページ作成後に変更
+      employees_home_index_path
     end
   end
 
