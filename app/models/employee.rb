@@ -4,10 +4,12 @@ class Employee < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  attr_accessor :current_password
+
   def email_required?
     false
   end
-  
+
   def email_changed?
     false
   end
