@@ -1,0 +1,7 @@
+
+<ul class="lists-left">
+  <li><%= link_to '勤務計画閲覧', search_work_schedules_path, class: "text1" %></li>
+  <% if admin_signed_in? %>
+    <li><%= link_to '勤務計画作成', new_work_schedule_path, class: "text1" %></li>
+  <% end %>
+</ul>
