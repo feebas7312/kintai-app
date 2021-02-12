@@ -14,7 +14,7 @@ Company.create(
   admin_id: 1
 )
 
-5.times do |i|
+4.times do |i|
   Employee.create(
     [
       {
