@@ -8,7 +8,7 @@ Admin.create(
 )
 
 Company.create(
-  name: 'テスト店舗',
+  name: 'テスト会社',
   opening_time: '09:00:00',
   closing_time: '22:00:00',
   admin_id: 1

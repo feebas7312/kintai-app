@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   }
 
   root to: 'admins_home#index'
-  resources :admins_home, only: [:index, :destroy]
-  resources :employees_home, only: [:index]
+  resources :admins_home, only: [:index, :show, :destroy]
+  resources :employees_home, only: [:index, :show]
   resources :companies, only: [:show, :edit, :update]
   resources :work_schedules, only: [:new, :create] do
     collection do
