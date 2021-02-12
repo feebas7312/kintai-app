@@ -7,7 +7,6 @@
   
   <div class="account-page__inner--right">
     <%= form_with model: @company, local: true do |f| %>
-    <%#= form_for @company do |f| %>
       <div class="field">
         <%= render "admins/shared/error_messages", resource: @company %>
         <div class="field-label">

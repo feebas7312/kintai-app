@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   root to: 'admins_home#index'
   resources :admins_home, only: [:index, :destroy]
   resources :employees_home, only: [:index]
+  resources :companies, only: [:show]
   resources :work_schedules, only: [:new, :create] do
     collection do
       get 'search'

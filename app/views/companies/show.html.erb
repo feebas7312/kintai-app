@@ -1,0 +1,4 @@
+<%= @company.name %><br />
+<%= @company.opening_time %><br />
+<%= @company.closing_time %><br />
+<%= "#{@company.opening_time.strftime('%H:%M')}〜#{@company.closing_time.strftime('%H:%M')}" %>
