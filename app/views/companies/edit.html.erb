@@ -1,0 +1,14 @@
+会社情報編集
+<%= form_with model: @company, local: true do |f| %>
+  <%= f.label :name, '会社名' %>
+  <%= f.text_field :name %>
+
+  <%= f.label :opening_time, '開店時間' %>
+  <%= f.time_field :opening_time %>
+
+  <%= f.label :closing_time, '閉店時間' %>
+  <%= f.time_field :closing_time %>
+
+  <%= f.submit '変更' %>
+<% end %>
+<%= link_to '戻る', company_path(current_admin) %>
