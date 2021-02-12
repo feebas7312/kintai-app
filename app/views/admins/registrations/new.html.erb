@@ -4,6 +4,7 @@
     <h5>新しくユーザーを登録する（責任者専用）</h5>
     <%= render "admins/shared/links" %>
   </div>
+  
   <div class="account-page__inner--right">
     <%= form_with model: @admin, url: admin_registration_path, local: true do |f| %>
       <div class="field">

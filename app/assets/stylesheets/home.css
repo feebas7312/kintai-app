@@ -1,3 +1,13 @@
+.wrapper {
+  display: flex;
+}
+.side-bar {
+  width: 10%;
+}
+.wrapper .content {
+  width: 90%;
+}
+
 .company-name {
   width: 150px;
   padding-bottom: 5px;

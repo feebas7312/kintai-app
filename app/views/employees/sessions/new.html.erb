@@ -4,6 +4,7 @@
     <h5>登録されているスタッフでログイン</h5>
     <%= render "employees/shared/links" %>
   </div>
+  
   <div class="account-page__inner--right">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
