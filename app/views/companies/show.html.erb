@@ -1,5 +1,21 @@
+<%= render "shared/header" %>
+
 <%= @company.name %><br />
 <%= @company.opening_time %><br />
 <%= @company.closing_time %><br />
 <%= "#{@company.opening_time.strftime('%H:%M')}〜#{@company.closing_time.strftime('%H:%M')}" %><br />
 <%= link_to '編集', edit_company_path(current_admin) %>
+
+<br />
+
+<% if @work_patterns %>
+  <% @work_patterns.each do |pattern| %>
+    <%= pattern.start_time %>
+    <%= pattern.end_time %>
+    <%= link_to '削除', company_work_pattern_path(@company, pattern), method: :delete %>
+    <br />
+  <% end %>
+<% end %>
+<%= link_to 'パターン追加', new_company_work_pattern_path(@company) %>
+
+<%= render "shared/footer" %>

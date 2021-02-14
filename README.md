@@ -36,6 +36,7 @@
 ### Association
 
 - belongs_to :admin
+- has_many   :work_patterns
 
 ## admins テーブル
 
@@ -77,25 +78,26 @@
 
 ## work_patterns テーブル
 
-| Column         | Type   | Options     |
-| -------------- | ------ | ----------- |
-| work_pattern_a | string | null: false |
-| work_pattern_b | string | null: false |
-| work_pattern_c | string | null: false |
+| Column     | Type       | Options                        |
+| ---------- | ---------- | ------------------------------ |
+| start_time | string     | null: false                    |
+| end_time   | string     | null: false                    |
+| company    | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :admin_work_patterns
-- has_many :admins, through: admin_work_patterns
-- has_many :employee_work_patterns
-- has_many :employees, through: employee_work_patterns
+- belongs_to :company
+- has_many   :admin_work_patterns
+- has_many   :admins, through: admin_work_patterns
+- has_many   :employee_work_patterns
+- has_many   :employees, through: employee_work_patterns
 
 ## admin_work_patterns テーブル
 
-| Column          | Type       | Options     |
-| --------------- | ---------- | ----------- |
-| admin           | references | null: false |
-| work_pattern    | references | null: false |
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| admin           | references | null: false, foreign_key: true |
+| work_pattern    | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -104,10 +106,10 @@
 
 ## employee_work_patterns テーブル
 
-| Column          | Type       | Options     |
-| --------------- | ---------- | ----------- |
-| employee        | references | null: false |
-| work_pattern    | references | null: false |
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| employee        | references | null: false, foreign_key: true |
+| work_pattern    | references | null: false, foreign_key: true |
 
 ### Association
 

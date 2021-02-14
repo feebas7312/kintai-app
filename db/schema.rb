@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_31_212105) do
+ActiveRecord::Schema.define(version: 2021_02_14_043254) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "number", null: false
@@ -56,6 +56,15 @@ ActiveRecord::Schema.define(version: 2021_01_31_212105) do
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
+  create_table "work_patterns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "start_time", null: false
+    t.string "end_time", null: false
+    t.bigint "company_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_work_patterns_on_company_id"
+  end
+
   create_table "work_schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "work_date", null: false
     t.string "work_start_time"
@@ -70,6 +79,7 @@ ActiveRecord::Schema.define(version: 2021_01_31_212105) do
 
   add_foreign_key "companies", "admins"
   add_foreign_key "employees", "admins"
+  add_foreign_key "work_patterns", "companies"
   add_foreign_key "work_schedules", "admins"
   add_foreign_key "work_schedules", "employees"
 end
