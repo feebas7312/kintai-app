@@ -1,6 +1,6 @@
 <%= render "shared/header" %>
 
-<%= form_with(model: [@company, @work_pattern], local: true) do |f| %>
+<%= form_with model: [@company, @work_pattern], url: company_work_patterns_path(@company), local: true do |f| %>
   <%= f.label :start_time, '出勤時間' %>
   <%= f.text_field :start_time %>
 

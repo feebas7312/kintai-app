@@ -6,6 +6,7 @@ class WorkPatternsController < ApplicationController
 
   def create
     @work_pattern = WorkPattern.new(work_pattern_params)
+    @company = Company.find(params[:company_id])
     if @work_pattern.save
       redirect_to company_path(current_admin)
     else
