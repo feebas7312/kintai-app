@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   resources :admins_home, only: [:index, :show, :destroy]
   resources :employees_home, only: [:index, :show]
   resources :companies, only: [:show, :edit, :update] do
-    resources :work_patterns, only: [:new, :create]
+    resources :work_patterns, only: [:new, :create, :destroy]
   end
   resources :work_schedules, only: [:new, :create] do
     collection do

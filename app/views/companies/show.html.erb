@@ -12,6 +12,8 @@
   <% @work_patterns.each do |pattern| %>
     <%= pattern.start_time %>
     <%= pattern.end_time %>
+    <%= link_to '削除', company_work_pattern_path(@company, pattern), method: :delete %>
+    <br />
   <% end %>
 <% end %>
 <%= link_to 'パターン追加', new_company_work_pattern_path(@company) %>

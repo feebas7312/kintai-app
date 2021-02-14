@@ -14,6 +14,15 @@ class WorkPatternsController < ApplicationController
     end
   end
 
+  def destroy
+    @work_pattern = WorkPattern.find(params[:id])
+    if @work_pattern.destroy
+      redirect_to company_path(current_admin)
+    else
+      render company_path(current_admin)
+    end
+  end
+
   private
 
   def work_pattern_params

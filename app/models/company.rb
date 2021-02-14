@@ -1,6 +1,6 @@
 class Company < ApplicationRecord
   belongs_to :admin, optional: true
-  has_many :work_patterns
+  has_many :work_patterns, dependent: :destroy
 
   with_options presence: true do
     validates :name
