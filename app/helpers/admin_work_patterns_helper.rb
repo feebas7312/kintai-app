@@ -1,0 +1,2 @@
+module AdminWorkPatternsHelper
+end

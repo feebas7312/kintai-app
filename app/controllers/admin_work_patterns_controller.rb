@@ -1,0 +1,2 @@
+class AdminWorkPatternsController < ApplicationController
+end

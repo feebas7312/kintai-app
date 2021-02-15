@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_14_043254) do
+ActiveRecord::Schema.define(version: 2021_02_15_014906) do
+
+  create_table "admin_work_patterns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "admin_id"
+    t.bigint "work_pattern_id"
+    t.boolean "possibility", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_admin_work_patterns_on_admin_id"
+    t.index ["work_pattern_id"], name: "index_admin_work_patterns_on_work_pattern_id"
+  end
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "number", null: false
@@ -77,6 +87,8 @@ ActiveRecord::Schema.define(version: 2021_02_14_043254) do
     t.index ["employee_id"], name: "index_work_schedules_on_employee_id"
   end
 
+  add_foreign_key "admin_work_patterns", "admins"
+  add_foreign_key "admin_work_patterns", "work_patterns"
   add_foreign_key "companies", "admins"
   add_foreign_key "employees", "admins"
   add_foreign_key "work_patterns", "companies"
