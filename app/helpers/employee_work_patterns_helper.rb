@@ -1,0 +1,2 @@
+module EmployeeWorkPatternsHelper
+end

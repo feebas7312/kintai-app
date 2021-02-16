@@ -14,6 +14,7 @@ class Admin < ApplicationRecord
 
   has_one :company, dependent: :destroy
   has_many :employees, dependent: :destroy
+  has_many :admin_work_patterns, dependent: :destroy
 
   with_options presence: true do
     validates :number

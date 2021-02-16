@@ -15,6 +15,7 @@ class Employee < ApplicationRecord
   end
 
   belongs_to :admin
+  has_many :employee_work_patterns, dependent: :destroy
 
   with_options presence: true do
     validates :number
