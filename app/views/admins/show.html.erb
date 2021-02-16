@@ -1,0 +1,26 @@
+<%= render "shared/header" %>
+<%= render "shared/flash" %>
+
+<%= @admin.number %><br />
+<%= @admin.last_name %><br />
+<%= @admin.first_name %><br />
+
+<%= form_with model: @new_pattern, url: admin_work_patterns_path, local: true do |f| %>
+  <% i=0 %>
+  <% @new_pattern.collection.each do |pattern| %>
+    <%= fields_for 'admin_work_patterns[]', pattern do |field| %>
+      <%= field.hidden_field :admin_id, value: @admin.id %>
+      <%= field.hidden_field :work_pattern_id, value: @work_patterns[i].id %>
+      <% if @admin_work_patterns.find_by(admin_id: @admin.id, work_pattern_id: @work_patterns[i].id) %>
+        <%= field.check_box :possibility, {checked: true}, true, false %>
+      <% else %>
+        <%= field.check_box :possibility, {}, true, false %>
+      <% end %>
+      <%= @work_patterns[i].start_time %>〜<%= @work_patterns[i].end_time %><br />
+    <% end %>
+    <% i+=1 %>
+  <% end %>
+  <%= f.submit "変更" %>
+<% end %>
+
+<%= render "shared/footer" %>
