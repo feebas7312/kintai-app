@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     registrations: 'employees/registrations'
   }
 
+  get 'employees/show', to: 'employees#show'
+
   root to: 'admins_home#index'
   resources :admins_home, only: [:index, :show, :destroy]
   resources :employees_home, only: [:index, :show]
@@ -25,6 +27,7 @@ Rails.application.routes.draw do
     resources :work_patterns, only: [:new, :create, :destroy]
   end
   resources :admin_work_patterns, only: [:create]
+  resources :employee_work_patterns, only: [:create]
   resources :work_schedules, only: [:new, :create] do
     collection do
       get 'search'

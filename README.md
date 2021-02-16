@@ -54,7 +54,6 @@
 - has_one  :companies
 - has_many :employees
 - has_many :admin_work_patterns
- - has_many :work_patterns, through: admin_work_patterns
 - has_many :work_schedules
 
 ## employees テーブル
@@ -73,7 +72,6 @@
 
 - belongs_to :admin
 - has_many   :employee_work_patterns
- - has_many   :work_patterns, through: employee_work_patterns
 - has_many   :work_schedules
 
 ## work_patterns テーブル
@@ -88,9 +86,7 @@
 
 - belongs_to :company
 - has_many   :admin_work_patterns
- - has_many   :admins, through: admin_work_patterns
 - has_many   :employee_work_patterns
- - has_many   :employees, through: employee_work_patterns
 
 ## admin_work_patterns テーブル
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_15_014906) do
+ActiveRecord::Schema.define(version: 2021_02_16_015434) do
 
   create_table "admin_work_patterns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "admin_id"
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(version: 2021_02_15_014906) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["admin_id"], name: "index_companies_on_admin_id"
+  end
+
+  create_table "employee_work_patterns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "employee_id"
+    t.bigint "work_pattern_id"
+    t.boolean "possibility", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id"], name: "index_employee_work_patterns_on_employee_id"
+    t.index ["work_pattern_id"], name: "index_employee_work_patterns_on_work_pattern_id"
   end
 
   create_table "employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -90,6 +100,8 @@ ActiveRecord::Schema.define(version: 2021_02_15_014906) do
   add_foreign_key "admin_work_patterns", "admins"
   add_foreign_key "admin_work_patterns", "work_patterns"
   add_foreign_key "companies", "admins"
+  add_foreign_key "employee_work_patterns", "employees"
+  add_foreign_key "employee_work_patterns", "work_patterns"
   add_foreign_key "employees", "admins"
   add_foreign_key "work_patterns", "companies"
   add_foreign_key "work_schedules", "admins"

@@ -33,7 +33,7 @@
 
       <% @employees.each do |employee| %>
         <div class="home-content">
-          <div class="home-content1"><%= employee.number %></div>
+          <div class="home-content1"><%= link_to employee.number, employees_show_path(employee_id: employee.id) %></div>
           <div class="home-content2"><%= employee.last_name %><%= employee.first_name %></div>
           <div class="home-content3"><%= employee.joining_date %></div>
           <%= link_to '編集', edit_employee_registration_path(employee_id: employee.id) %>
