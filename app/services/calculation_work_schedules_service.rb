@@ -6,6 +6,8 @@ class CalculationWorkSchedulesService
     calc_schedules = []
 
     # continuous_work 連勤カウント
+    consecutive_work = consecutive_work_format(admin, employees)
+
     # total_work 出勤日数の合計
     days.times do |i|
       schedule = schedule_format(admin, employees)
@@ -14,25 +16,67 @@ class CalculationWorkSchedulesService
       end
       pattern_member = pattern_member_format(admin, employees, work_patterns)
       except_member = []
+
       pattern_member.each do |key, value|
         unless except_member.empty?
           except_member.each do |v|
             value.delete(v)
           end
         end
+
+        probability_member = []
+        value.each do |mem|
+          int = consecutive_work[mem.to_sym]
+          if int == 0
+            5.times do
+              probability_member << mem
+            end
+          elsif int == 1
+            4.times do
+              probability_member << mem
+            end
+          elsif int == 2
+            3.times do
+              probability_member << mem
+            end
+          elsif int == 3
+            2.times do
+              probability_member << mem
+            end
+          elsif int == 4
+            probability_member << mem
+          end
+        end
+
         pattern = WorkPattern.find(key.to_s)
-        num = value.length
-        result = value[rand(num)]
+        num = probability_member.length
+        result = probability_member[rand(num)]
         schedule[result.to_s.to_sym][:work_start_time] = pattern.start_time
         schedule[result.to_s.to_sym][:work_end_time] = pattern.end_time
         except_member << result
-        puts result
       end
+
       schedule.each do |key, value|
+        if value[:work_start_time] == "" && value[:work_end_time] == ""
+          consecutive_work[key] = 0
+        else
+          consecutive_work[key] += 1
+        end
         calc_schedules << value
       end
     end
     return calc_schedules
+  end
+
+  private
+
+  def self.consecutive_work_format(admin, employees)
+    consecutive_work = {}
+    consecutive_work[admin.number.to_sym] = 0
+    employees.each do |employee|
+      consecutive_work[employee.number.to_sym] = 0
+    end
+    return consecutive_work
   end
 
   def self.schedule_format(admin, employees)
@@ -41,15 +85,13 @@ class CalculationWorkSchedulesService
       work_date: "",
       work_start_time: "",
       work_end_time: "",
-      admin_id: admin.id,
-      employee_id: ""
+      admin_id: admin.id
     }
     employees.each do |employee|
       schedule[employee.number.to_sym] = {
         work_date: "",
         work_start_time: "",
         work_end_time: "",
-        admin_id: "",
         employee_id: employee.id
       }
     end
