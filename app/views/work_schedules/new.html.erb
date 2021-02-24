@@ -35,7 +35,7 @@
     </ul>
   </div>
 
-  <%= form_with model: @work_schedule, url: work_schedules_path, method: :post, local: true do |f| %>
+  <%= form_with model: @work_schedules, url: work_schedules_path, method: :post, local: true do |f| %>
     <div class="shift">
       <% day=0 %>
       <% @work_schedules.collection.each do |work_schedule| %>
@@ -69,6 +69,7 @@
       <% end %>
 
       <% end %>
+      <%= link_to '計算', calculation_work_schedules_path(year: @year, month: @month, days: @days), class: "planning-btn" %>
       <%= f.submit '保存', class: "search-btn" %>
     </div>
   <% end %>
