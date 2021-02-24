@@ -53,6 +53,16 @@ class WorkSchedulesController < ApplicationController
     end
   end
 
+  def calculation
+    @admin = Admin.find(current_admin.id)
+    @employees = Employee.where(admin_id: @admin.id)
+    @year = params[:year].to_i
+    @month = params[:month].to_i
+    @days = params[:days].to_i
+    @work_schedules = WorkScheduleCollection.new(@days, @admin)
+    @calc_schedules = CalculationWorkSchedulesService.calculation(@year, @month, @days, @admin, @employees)
+  end
+
   private
 
   def work_schedule_collection_params

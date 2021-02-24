@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :work_schedules, only: [:new, :create] do
     collection do
       get 'search'
+      get 'calculation'
     end
   end
 end
