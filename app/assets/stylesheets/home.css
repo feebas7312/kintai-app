@@ -1,81 +1,68 @@
-.wrapper {
-  display: flex;
-}
-.side-bar {
-  width: 10%;
-}
-.wrapper .content {
-  width: 90%;
-}
+/* --------------------
+     スタッフ一覧ページ     
+   -------------------- */
 
-.company-name {
+.number {
+  width: 130px;
+}
+.name {
   width: 150px;
-  padding-bottom: 5px;
-  margin: 50px auto 10px;
-  font-size: 25px;
-  text-align: center;
-  border-bottom: 1px solid red;
+}
+.joining-date {
+  width: 130px;
 }
 
-.team-desc {
+/* --- 責任者情報 --- */
+
+.admin-content {
   display: flex;
-  justify-content: center;
 }
-
-.desc-text {
-  padding: 10px 20px 0;
+.admin-content__block {
+  margin-bottom: 20px;
+  padding: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
-
-.home-contents {
-  height: 365px;
-  width: 60%;
-  margin: 50px auto;
-}
-
-.home-content {
-  height: 30px;
-  display: flex;
+.admin-content .content-header {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d8d8d8;
   text-align: center;
+  display: flex;
 }
-
-.home-content1 {
-  width: 120px;
-  color: black;
-  border: 1px solid black;
-  padding-top: 7px;
+.admin-content .member-content {
+  text-align: center;
+  display: flex;
 }
-
-.home-content2 {
-  width: 200px;
-  color: black;
-  border: 1px solid black;
-  padding-top: 7px;
-}
-
-.home-content3 {
-  width: 200px;
-  color: black;
-  border: 1px solid black;
-  padding-top: 7px;
-}
-
-
-.staff-new-btn {
-  display: inline-block;
-  padding: 0.5em 1em;
-  margin-top: 10px;
-  text-decoration: none;
+.admin-content .btn {
+  margin: 20px 0 0 5px;
+  padding: 7px 10px;
+  border-radius: 3px;
   background: lightgray;
   color: black;
-  border-radius: 3px;
+  text-decoration: none;
+  display: inline-block;
 }
 
-.staff-delete-btn {
-  display: inline-block;
-  padding: 0.5em 1em;
-  margin: 2px;
-  text-decoration: none;
+/* --- スタッフ情報 --- */
+
+.employee-content {
+  display: flex;
+}
+.employee-content .member-content{
+  margin-bottom: 20px;
+  padding: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+}
+.employee-content .btn {
+  margin: 5px 0 0 5px;
+  padding: 7px 10px;
+  border-radius: 3px;
   background: lightgray;
   color: black;
-  border-radius: 3px;
+  text-decoration: none;
+  display: inline-block;
 }

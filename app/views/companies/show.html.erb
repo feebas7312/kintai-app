@@ -1,5 +1,11 @@
 <%= render "shared/header" %>
 
+      <h2 class="company-name"><%= @admin.company.name %></h2>
+      <div class="team-desc">
+        <p class="desc-text">営業時間：<%= "#{@admin.company.opening_time.strftime('%H:%M')}〜#{@admin.company.closing_time.strftime('%H:%M')}" %></p>
+        <p class="desc-text">チーム人数：<%= @employees.length+1 %></p>
+      </div>
+
 <%= @company.name %><br />
 <%= @company.opening_time %><br />
 <%= @company.closing_time %><br />

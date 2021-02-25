@@ -1,0 +1,149 @@
+.wrapper{
+  display: flex;
+}
+
+/* --------------------
+        サイドバー        
+   -------------------- */
+
+.side-bar {
+  height: 100vh;
+  width: 300px;
+  background-color: #253141;
+}
+
+/* --- サイドヘッダー --- */
+
+.side-bar-header {
+  height: 100px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.side-bar-header span {
+  height: 30px;
+  margin-top: 5px;
+  color: #f0f0f0;
+  font-size: 20px;
+  cursor: pointer;
+  display: block;
+  position: relative;
+}
+.side-bar-header span:after {
+  content: '▼';
+  font-size: .7em;
+  margin-left: -4px;
+}
+.side-bar-header span:hover ul {
+  display: block;
+}
+.side-bar-header ul {
+  border-left: 1px solid #d8d8d8;
+  border-right: 1px solid #d8d8d8;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+  top: 25px;
+  left: 0;
+  display: none;
+  position: absolute;
+}
+.side-bar-header ul li {
+  width: 120px;
+  background-color: #f0f0f0;
+}
+.side-bar-header ul li a{
+  padding: 10px 15px;
+  border-bottom: 1px solid #d8d8d8;
+  color: #000000;
+  font-size: 15px;
+  text-decoration: none;
+  display: block;
+}
+.side-bar-header ul li:hover a {
+  color: #38aef0;
+}
+
+/* --- サイドメニュー --- */
+
+.side-bar-menu {
+  height: calc(100vh - 100px);
+  background-color: #2F3E51;
+  padding: 0 20px;
+  overflow: scroll;
+}
+.side-bar-menu p {
+  margin-top: 30px;
+  /* color: #d65f4c; */
+  color: lightblue;
+  font-size: 15px;
+}
+.menu-list {
+  padding: 15px 0 40px;
+}
+.menu-list li {
+  margin-top: 10px;
+}
+.menu-list .link {
+  color: #f0f0f0;
+  text-decoration: none;
+}
+
+
+/* --------------------
+        メイン画面        
+   -------------------- */
+
+.main {
+  width: calc(100vw - 300px);
+  background-color: #ffffff;
+}
+
+/* --- メインヘッダー --- */
+
+.main-header {
+  height: 100px;
+  padding: 0 40px;
+  display: flex;
+  justify-content: center;
+}
+.page-title {
+  height: 30px;
+  width: 200px;
+  margin-top: 40px;
+  border-bottom: 1px solid #d65f4c;
+  font-size: 20px;
+  text-align: center;
+}
+
+/* --- メインコンテンツ --- */
+
+.main-contents {
+  height: calc(100vh - 100px - 90px);
+  background-color: #fafafa;
+  padding: 46px 40px 0;
+  overflow: scroll;
+}
+
+/* --- 送信フォーム --- */
+
+.form {
+  height: 90px;
+  background-color: #dddddd;
+  padding: 25px 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+.form .btn {
+  height: 40px;
+  margin-left: 10px;
+  padding: 13px 10px;
+  border: none;
+  border-radius: 2px;
+  /* background-color: gray; */
+  /* background-color: #38aef0; */
+  /* background-color: #d65f4c; */
+  background-color: #4c78d6;
+  color: #fafafa;
+  font-size: 13px;
+  text-decoration: none;
+}

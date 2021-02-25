@@ -1,4 +1,4 @@
-.planning-title {
+/* .planning-title {
   width: 200px;
   padding-bottom: 5px;
   margin: 50px auto 10px;
@@ -15,7 +15,6 @@
 .planning-btn {
   display: inline-block;
   padding: 0.5em 1em;
-  /* margin-top: 10px; */
   color: black;
   background-color: lightgray;
   border-radius: 3px;
@@ -24,7 +23,6 @@
 .save-btn {
   display: inline-block;
   padding: 0.5em 1em;
-  /* margin-top: 10px; */
   color: black;
   background-color: lightgray;
   border-radius: 3px;
@@ -36,4 +34,4 @@
 
 .field {
   width: 50px;
-}
+} */

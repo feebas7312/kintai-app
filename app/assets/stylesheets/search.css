@@ -1,4 +1,4 @@
-.alert {
+/* .alert {
   height: 30px;
   width: 90%;
   color: #3e3a3a;
@@ -33,7 +33,6 @@
 .member {
   width: 90%;
   margin: 0px auto;
-  /* margin: 30px auto; */
 }
 
 .member-content {
@@ -47,7 +46,6 @@
   text-align: center;
   padding-top: 7px;
   border: 1px solid black;
-  /* margin: 10px; */
 }
 
 .shift {
@@ -78,4 +76,4 @@
   text-align: center;
   padding-top: 7px;
   border: 1px solid black;
-}
+} */
