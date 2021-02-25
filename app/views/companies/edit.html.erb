@@ -1,18 +1,38 @@
-<%= render "shared/header" %>
-
-会社情報編集
-<%= form_with model: @company, local: true do |f| %>
-  <%= f.label :name, '会社名' %>
-  <%= f.text_field :name %>
-
-  <%= f.label :opening_time, '開店時間' %>
-  <%= f.time_field :opening_time %>
-
-  <%= f.label :closing_time, '閉店時間' %>
-  <%= f.time_field :closing_time %>
-
-  <%= f.submit '変更' %>
-<% end %>
-<%= link_to '戻る', company_path(current_admin) %>
-
-<%= render "shared/footer" %>
+<div class="account-page">
+  <div class="account-page__inner--left">
+    <h2>Edit</h2>
+    <h5>会社情報を編集する</h5>
+    <div class="account-link">
+      <%= link_to '戻る', company_path(current_admin) %>
+    </div>
+  </div>
+  
+  <div class="account-page__inner--right">
+    <%= form_with model: @company, local: true do |f| %>
+      <div class="field">
+        <%= render "admins/shared/error_messages", resource: @company %>
+        <div class="field-label">
+          <%= f.label :name, '会社名' %>
+        </div>
+        <div class="field-input">
+          <%= f.text_field :name, autofocus: true %>
+        </div>
+        <div class="field-label">
+          <%= f.label :opening_time, '開店時間' %>
+        </div>
+        <div class="field-input">
+          <%= f.time_field :opening_time %>
+        </div>
+        <div class="field-label">
+          <%= f.label :closing_time, '閉店時間' %>
+        </div>
+        <div class="field-input">
+          <%= f.time_field :closing_time %>
+        </div>
+        <div class="actions">
+          <%= f.submit "変更", class: "btn" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
