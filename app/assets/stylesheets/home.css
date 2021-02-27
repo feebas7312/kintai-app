@@ -18,15 +18,15 @@
   display: flex;
 }
 .admin-content__block {
-  margin-bottom: 20px;
   padding: 10px 0;
   border: 1px solid #ddd;
   border-radius: 5px;
+  margin-bottom: 20px;
 }
 .admin-content .content-header {
-  margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #d8d8d8;
+  margin-bottom: 10px;
   text-align: center;
   display: flex;
 }
@@ -35,9 +35,9 @@
   display: flex;
 }
 .admin-content .btn {
-  margin: 40px 0 0 5px;
   padding: 7px 10px;
   border-radius: 3px;
+  margin: 40px 0 0 5px;
   background: lightgray;
   color: black;
   text-decoration: none;
@@ -50,17 +50,17 @@
   display: flex;
 }
 .employee-content .member-content{
-  margin-bottom: 20px;
   padding: 10px 0;
   border: 1px solid #ddd;
   border-radius: 5px;
+  margin-bottom: 20px;
   text-align: center;
   display: flex;
 }
 .employee-content .btn {
-  margin: 5px 0 0 5px;
   padding: 7px 10px;
   border-radius: 3px;
+  margin: 5px 0 0 5px;
   background: lightgray;
   color: black;
   text-decoration: none;

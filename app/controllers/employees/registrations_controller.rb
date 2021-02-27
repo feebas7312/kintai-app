@@ -2,7 +2,7 @@
 
 class Employees::RegistrationsController < Devise::RegistrationsController
   prepend_before_action :require_no_authentication, only: [:cancel]
-  prepend_before_action :authenticate_scope!, only: [:destroy]
+  prepend_before_action :authenticate_scope!, only: []
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
@@ -17,7 +17,7 @@ class Employees::RegistrationsController < Devise::RegistrationsController
     if @employee.valid?
       @employee.save
       session[:employee_id] = nil
-      redirect_to root_path
+      redirect_to admins_home_path(current_admin)
     else
       render :new
     end
@@ -69,9 +69,13 @@ class Employees::RegistrationsController < Devise::RegistrationsController
   end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    if admin_signed_in?
+      @employee = Employee.find(params[:id])
+      @employee.destroy
+    end
+    redirect_to admins_home_path(current_admin)
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
