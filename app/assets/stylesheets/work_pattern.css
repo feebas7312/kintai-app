@@ -1,0 +1,17 @@
+/* --------------------
+      出勤パターン        
+   -------------------- */
+
+/* --- 登録ページ --- */
+
+.admin, .employee {
+  padding-bottom: 15px;
+  border-bottom: 1px solid #d8d8d8;
+  margin-bottom: 10px;
+}
+.admin-number, .employee-number {
+  padding-bottom: 5px;
+}
+.admin-name, .employee-name {
+  padding-bottom: 5px;
+}
