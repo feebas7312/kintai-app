@@ -24,7 +24,7 @@
 ![勤務計画作成](https://i.gyazo.com/7296e53e20f6d9cf2cd0f541be5ac2a4.gif)
 
 ## 勤務計画閲覧
-![勤務計画閲覧]()
+![勤務計画閲覧](https://i.gyazo.com/373dd3c6db8443749bcf9436e4316e59.gif)
 
 # 工夫したポイント
 現在アプリ作成中
