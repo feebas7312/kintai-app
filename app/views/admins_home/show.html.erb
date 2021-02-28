@@ -15,24 +15,24 @@
             <div class='joining-date'>入社日</div>
           </div>
           <div class='member-content'>
-            <div class='number'><%= link_to @admin.number, admins_show_path %></div>
+            <div class='number'><%= link_to @admin.number, edit_admin_registration_path %></div>
             <div class='name'><%= @admin.last_name %><%= @admin.first_name %></div>
             <div class='joining-date'><%= @admin.joining_date %></div>
           </div>
         </div>
         <div class='edit-btn'>
-          <%= link_to '編集', edit_admin_registration_path, class: 'btn' %>
+          <%= link_to 'パターン登録', admins_show_path, class: 'btn' %>
         </div>
       </div>
       <% @employees.each do |employee| %>
         <div class='employee-content'>
           <div class='member-content'>
-            <div class='number'><%= link_to employee.number, employees_show_path(employee_id: employee.id) %></div>
+            <div class='number'><%= link_to employee.number, edit_employee_registration_path(employee_id: employee.id) %></div>
             <div class='name'><%= employee.last_name %><%= employee.first_name %></div>
             <div class='joining-date'><%= employee.joining_date %></div>
           </div>
           <div class='edit-btn'>
-            <%= link_to '編集', edit_employee_registration_path(employee_id: employee.id), class: 'btn' %>
+            <%= link_to 'パターン登録', employees_show_path(employee_id: employee.id), class: 'btn' %>
           </div>
         </div>
       <% end %>

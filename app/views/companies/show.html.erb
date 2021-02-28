@@ -7,24 +7,24 @@
     </div>
 
     <div class='main-contents'>
-
+      <div class='company-header'>会社詳細</div>
       <div class='company-content'>
-        <%= @admin.company.name %>
-        <p class="desc-text">営業時間：<%= "#{@admin.company.opening_time.strftime('%H:%M')}〜#{@admin.company.closing_time.strftime('%H:%M')}" %></p>
-        <p class="desc-text">チーム人数：<%= @employees.length+1 %></p>
+        <p class='desc-text'>会社名：<%= @admin.company.name %></p>
+        <p class='desc-text'>営業時間：<%= "#{@admin.company.opening_time.strftime('%H:%M')}〜#{@admin.company.closing_time.strftime('%H:%M')}" %></p>
+        <p class='desc-text'>チーム人数：<%= @employees.length+1 %></p>
       </div>
 
+      <div class='pattern-header'>出勤パターン一覧</div>
       <div class='pattern-content'>
         <% if @work_patterns %>
           <% @work_patterns.each do |pattern| %>
-            <%= pattern.start_time %>
-            <%= pattern.end_time %>
-            <%= link_to '削除', company_work_pattern_path(@company, pattern), method: :delete %>
-            <br />
+            <div class='pattern-list'>
+              <%= pattern.start_time %>〜<%= pattern.end_time %>
+              <%= link_to '削除', company_work_pattern_path(@company, pattern), method: :delete, class: 'btn' %>
+            </div>
           <% end %>
         <% end %>
       </div>
-
     </div>
 
     <div class='form'>
