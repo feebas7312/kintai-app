@@ -1,0 +1,40 @@
+<div class='side-bar'>
+  <div class='side-bar-header'>
+    <div class='header-name'>
+      <% if admin_signed_in? %>
+        <span><%= current_admin.last_name %><%= current_admin.first_name %>
+          <ul class="user-info">
+            <li><%= link_to '編集', edit_admin_registration_path %></li>
+            <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+          </ul>
+        </span>
+      <% end %>
+      <% if employee_signed_in? %>
+        <span><%= current_employee.last_name %><%= current_employee.first_name %>
+          <ul class="user-info">
+            <li><%= link_to '編集', edit_employee_registration_path %></li>
+            <li><%= link_to 'ログアウト', destroy_employee_session_path, method: :delete %></li>
+          </ul>
+        </span>
+      <% end %>
+    </div>
+  </div>
+
+  <div class='side-bar-menu'>
+    <p>MENU</p>
+    <% if admin_signed_in? %>
+      <ul class="menu-list">
+        <li><%= link_to '会社情報', company_path(current_admin), class: 'link' %></li>
+        <li><%= link_to 'スタッフ一覧', admins_home_path(current_admin), class: 'link' %></li>
+        <li><%= link_to '勤務計画閲覧', search_work_schedules_path, class: 'link' %></li>
+        <li><%= link_to '勤務計画作成', new_work_schedule_path, class: 'link' %></li>
+      </ul>
+    <% end %>
+    <% if employee_signed_in? %>
+      <ul class="menu-list">
+        <li><%= link_to 'スタッフ一覧', employees_home_path(current_employee), class: 'link' %></li>
+        <li><%= link_to '勤務計画閲覧', search_work_schedules_path, class: 'link' %></li>
+      </ul>
+    <% end %>
+  </div>
+</div>

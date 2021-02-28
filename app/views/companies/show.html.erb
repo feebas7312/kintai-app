@@ -1,21 +1,35 @@
-<%= render "shared/header" %>
+<div class='wrapper'>
+  <%= render 'shared/side_bar' %>
 
-<%= @company.name %><br />
-<%= @company.opening_time %><br />
-<%= @company.closing_time %><br />
-<%= "#{@company.opening_time.strftime('%H:%M')}〜#{@company.closing_time.strftime('%H:%M')}" %><br />
-<%= link_to '編集', edit_company_path(current_admin) %>
+  <div class='main'>
+    <div class='main-header'>
+      <h2 class='page-title'>会社情報</h2>
+    </div>
 
-<br />
+    <div class='main-contents'>
+      <div class='company-header'>会社詳細</div>
+      <div class='company-content'>
+        <p class='desc-text'>会社名：<%= @admin.company.name %></p>
+        <p class='desc-text'>営業時間：<%= "#{@admin.company.opening_time.strftime('%H:%M')}〜#{@admin.company.closing_time.strftime('%H:%M')}" %></p>
+        <p class='desc-text'>チーム人数：<%= @employees.length+1 %></p>
+      </div>
 
-<% if @work_patterns %>
-  <% @work_patterns.each do |pattern| %>
-    <%= pattern.start_time %>
-    <%= pattern.end_time %>
-    <%= link_to '削除', company_work_pattern_path(@company, pattern), method: :delete %>
-    <br />
-  <% end %>
-<% end %>
-<%= link_to 'パターン追加', new_company_work_pattern_path(@company) %>
+      <div class='pattern-header'>出勤パターン一覧</div>
+      <div class='pattern-content'>
+        <% if @work_patterns %>
+          <% @work_patterns.each do |pattern| %>
+            <div class='pattern-list'>
+              <%= pattern.start_time %>〜<%= pattern.end_time %>
+              <%= link_to '削除', company_work_pattern_path(@company, pattern), method: :delete, class: 'btn' %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
 
-<%= render "shared/footer" %>
+    <div class='form'>
+      <%= link_to '会社情報編集', edit_company_path(current_admin), class: 'btn' %>
+      <%= link_to 'パターン追加', new_company_work_pattern_path(@company), class: 'btn' %>
+    </div>
+  </div>
+</div>

@@ -4,10 +4,10 @@
 
 .account-page {
   width: 980px;
-  margin: 60px auto;
   padding: 60px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  margin: 60px auto;
   background-color: #fff;
   display: flex;
 }
@@ -25,14 +25,23 @@
 }
 .account-page__inner--left h2:after {
   width: 60px;
-  margin-top: 10px;
   border-bottom: 1px solid #38aef0;
+  margin-top: 10px;
   content: "";
   display: block;
 }
 .account-page__inner--left h5 {
   margin-bottom: 50px;
   font-size: 15px;
+}
+.account-page__inner--left .btn {
+  padding: 7px 10px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  background: lightgray;
+  color: black;
+  text-decoration: none;
+  display: inline-block;
 }
 .account-page .account-link {
   margin-bottom: 5px;
@@ -52,16 +61,16 @@
 }
 .account-page .field-input input {
   width: 100%;
-  margin-bottom: 5px;
   padding: 13px;
+  margin-bottom: 5px;
   letter-spacing: 1px;
 }
 .account-page .field .btn {
   height: 50px;
-  margin-top: 20px;
   padding: 0 30px;
   border: none;
   border-radius: 2px;
+  margin-top: 20px;
   background-color: #38aef0;
   color: #fff;
   font-size: 15px;
@@ -71,10 +80,10 @@
 /* --- エラーメッセージ --- */
 
 #error_explanation {
-  margin-bottom: 20px;
   padding: 20px 30px;
   border: 1px solid #ddd;
   border-radius: 2px;
+  margin-bottom: 20px;
 }
 #error_explanation h2 {
   margin-bottom: 10px;
@@ -82,8 +91,8 @@
   font-size: 14px;
 }
 #error_explanation ul {
-  margin: 0;
   padding-left: 17px;
+  margin: 0;
   list-style: square;
 }
 #error_explanation li {

@@ -1,43 +1,38 @@
-<%= render "shared/header" %>
+<div class='wrapper'>
+  <%= render 'shared/side_bar' %>
 
-<div class="wrapper">
-  <div class="side-bar">
-    <ul class="lists-left">
-      <li><%= link_to 'スタッフ一覧', employees_home_path(current_employee) %></li>
-      <li><%= link_to '勤務計画閲覧', search_work_schedules_path, class: "text1" %></li>
-    </ul>
-  </div>
-
-  <div class="content">
-    <h2 class="company-name"><%= @admin.company.name %></h2>
-
-    <div class="team-desc">
-      <p class="desc-text">営業時間：<%= "#{@admin.company.opening_time.strftime('%H:%M')}〜#{@admin.company.closing_time.strftime('%H:%M')}" %></p>
-      <p class="desc-text">チーム人数：<%= @employees.length+1 %></p>
+  <div class='main'>
+    <div class='main-header'>
+      <h2 class='page-title'>スタッフ一覧</h2>
     </div>
 
-    <div class="home-contents">
-      <div class="home-content">
-        <div class="home-content1">社員番号</div>
-        <div class="home-content2">名前</div>
-        <div class="home-content3">入社日</div>
+    <div class='main-contents'>
+      <div class='admin-content'>
+        <div class='admin-content__block'>
+          <div class='content-header'>
+            <div class='number'>社員番号</div>
+            <div class='name'>名前</div>
+            <div class='joining-date'>入社日</div>
+          </div>
+          <div class='member-content'>
+            <div class='number'><%= @admin.number %></div>
+            <div class='name'><%= @admin.last_name %><%= @admin.first_name %></div>
+            <div class='joining-date'><%= @admin.joining_date %></div>
+          </div>
+        </div>
       </div>
-
-      <div class="home-content">
-        <div class="home-content1"><%= @admin.number %></div>
-        <div class="home-content2"><%= @admin.last_name %><%= @admin.first_name %></div>
-        <div class="home-content3"><%= @admin.joining_date %></div>
-      </div>
-
       <% @employees.each do |employee| %>
-        <div class="home-content">
-          <div class="home-content1"><%= employee.number %></div>
-          <div class="home-content2"><%= employee.last_name %><%= employee.first_name %></div>
-          <div class="home-content3"><%= employee.joining_date %></div>
+        <div class='employee-content'>
+          <div class='member-content'>
+            <div class='number'><%= employee.number %></div>
+            <div class='name'><%= employee.last_name %><%= employee.first_name %></div>
+            <div class='joining-date'><%= employee.joining_date %></div>
+          </div>
         </div>
       <% end %>
     </div>
+
+    <div class='form'>
+    </div>
   </div>
 </div>
-
-<%= render "shared/footer" %>

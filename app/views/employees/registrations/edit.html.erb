@@ -3,10 +3,10 @@
     <h2>Staff編集</h2>
     <h5>売場スタッフの情報を編集する</h5>
     <% if admin_signed_in? %>
-      <%= button_to "退職", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+      <%= link_to "退職", employee_registration_path(id: @employee.id), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn' %>
       <br />
       <div class="account-link">
-        <%= link_to "トップページへ戻る", root_path %>
+        <%= link_to "スタッフ一覧へ戻る", admins_home_path(current_admin) %>
       </div>
     <% end %>
     <% if employee_signed_in? %>

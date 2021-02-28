@@ -1,0 +1,40 @@
+/* --------------------
+      会社情報ページ        
+   -------------------- */
+
+.company-header {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+.company-content {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.desc-text {
+  padding: 5px 0;
+  margin: 10px;
+}
+.pattern-header {
+  margin: 30px 0 10px;
+  font-size: 18px;
+}
+.pattern-content {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.pattern-list {
+  padding: 5px 0;
+  margin-left: 10px;
+}
+.pattern-list:before {
+  content: "・"
+}
+.pattern-list .btn {
+  padding: 7px 10px;
+  border-radius: 3px;
+  margin: 5px 0 0 5px;
+  background: lightgray;
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+}

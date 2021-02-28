@@ -4,11 +4,8 @@ class CalculationWorkSchedulesService
     work_patterns = WorkPattern.where(company_id: admin.company.id)
     date = Date.new(year, month, 1)
     calc_schedules = []
-
-    # continuous_work 連勤カウント
     consecutive_work = consecutive_work_format(admin, employees)
 
-    # total_work 出勤日数の合計
     days.times do |i|
       schedule = schedule_format(admin, employees)
       schedule.each_value do |value|

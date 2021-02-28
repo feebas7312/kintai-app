@@ -1,0 +1,88 @@
+/* --------------------
+      勤務計画ページ        
+   -------------------- */
+
+/* --- 検索フォーム --- */
+
+.search {
+  width: 1100px;
+  position: fixed;
+  /* left: 29.3%; */
+  right: 18px;
+}
+.input-date-wrap {
+  padding: 0 5px 30px;
+  display: flex;
+  justify-content: center;
+  /* flex-wrap: wrap; */
+  line-height: 30px;
+}
+
+/* --- シフト欄 --- */
+
+.planning-content {
+  /* width: 100vw; */
+  /* width: 1400px; */
+  /* padding: 0 40px 0 0; */
+  margin-bottom: 30px;
+  /* overflow: scroll; */
+  position: relative;
+  /* top: 60px; */
+  top: 100px;
+}
+.planning-content .member-content {
+  background-color: #b3d9ff;
+  display: flex;
+  /* overflow: scroll; */
+}
+.shift-content {
+  background-color: #fff;
+  display: flex;
+  /* overflow: scroll; */
+  /* overflow: auto; */
+}
+.shift-content:nth-child(odd) {
+  background-color: #eee;
+}
+.shift-content .field {
+  width: 50px;
+}
+.date-field {
+  height: 30px;
+  width: 150px;
+  /* width: 20%; */
+  padding-top: 7px;
+  border: 1px solid black;
+  text-align: center;
+}
+.name-field {
+  height: 30px;
+  width: 150px;
+  /* width: 400px; */
+  /* width: 30%; */
+  padding-top: 7px;
+  border: 1px solid black;
+  text-align: center;
+}
+.input-field {
+  height: 30px;
+  width: 150px;
+  /* width: 400px; */
+  /* width: 30%; */
+  padding-top: 5px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+/* --- エラーメッセージ --- */
+
+.alert {
+  height: 30px;
+  width: 90%;
+  padding: 7px;
+  border-radius: 3px;
+  margin: 0 auto 20px;
+  background-color: #f3c0c0;
+  color: #3e3a3a;
+  text-align: center;
+}

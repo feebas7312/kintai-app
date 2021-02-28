@@ -1,6 +1,7 @@
 class CompaniesController < ApplicationController
   def show
     @admin = Admin.find(params[:id])
+    @employees = Employee.where(admin_id: @admin.id)
     @company = @admin.company
     @work_patterns = WorkPattern.where(company_id: @company.id)
   end
