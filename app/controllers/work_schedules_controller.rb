@@ -61,6 +61,10 @@ class WorkSchedulesController < ApplicationController
     @days = params[:days].to_i
     @work_schedules = WorkScheduleCollection.new(@days, @admin)
     @calc_schedules = CalculationWorkSchedulesService.calculation(@year, @month, @days, @admin, @employees)
+    unless @calc_schedules
+      flash[:alert] = '⚠️⚠️⚠️ 登録パターンに対して従業員数が足りません ⚠️⚠️⚠️'
+      redirect_back fallback_location: :new
+    end
   end
 
   private
