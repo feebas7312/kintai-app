@@ -45,12 +45,16 @@ class CalculationWorkSchedulesService
           end
         end
 
-        pattern = WorkPattern.find(key.to_s)
-        num = probability_member.length
-        result = probability_member[rand(num)]
-        schedule[result.to_s.to_sym][:work_start_time] = pattern.start_time
-        schedule[result.to_s.to_sym][:work_end_time] = pattern.end_time
-        except_member << result
+        begin
+          pattern = WorkPattern.find(key.to_s)
+          num = probability_member.length
+          result = probability_member[rand(num)]
+          schedule[result.to_s.to_sym][:work_start_time] = pattern.start_time
+          schedule[result.to_s.to_sym][:work_end_time] = pattern.end_time
+          except_member << result   
+        rescue => exception
+          return false
+        end
       end
 
       schedule.each do |key, value|

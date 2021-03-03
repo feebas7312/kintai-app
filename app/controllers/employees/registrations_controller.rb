@@ -109,7 +109,7 @@ class Employees::RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(resource)
     if admin_signed_in?
-      root_path
+      admins_home_path(current_admin)
     else
       employees_home_index_path
     end
