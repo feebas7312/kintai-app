@@ -45,18 +45,28 @@
                   <div class='date-field'><%= "#{day}日" %></div>
                   <div class='input-field'>
                     <%= field.hidden_field :work_date, value: Date.new(@year, @month, day) %>
-                    <%= field.text_field :work_start_time, prompt: '--', minute_step: 15, ignore_data: true, class: 'field' %>〜
-                    <%= field.text_field :work_end_time, prompt: '--', minute_step: 15, ignore_data: true, class: 'field' %>
                     <%= field.hidden_field :admin_id, value: @admin.id %>
+                    <% if @exist_works.empty? %>
+                      <%= field.text_field :work_start_time, class: 'field' %>〜
+                      <%= field.text_field :work_end_time, class: 'field' %>
+                    <% else %>
+                      <%= field.text_field :work_start_time, value: @exist_works.find_by(admin_id: @admin.id, work_date: Date.new(@year, @month, day)).work_start_time, class: 'field' %>〜
+                      <%= field.text_field :work_end_time, value: @exist_works.find_by(admin_id: @admin.id, work_date: Date.new(@year, @month, day)).work_end_time, class: 'field' %>
+                    <% end%>
                   </div>
                 <% end %>
                 <%= fields_for 'work_schedules[]', work_schedule do |field| %>
                   <% @employees.each do |employee| %>
                     <div class='input-field'>
                       <%= field.hidden_field :work_date, value: Date.new(@year, @month, day) %>
-                      <%= field.text_field :work_start_time, prompt: '--', minute_step: 15, ignore_data: true, class: 'field' %>〜
-                      <%= field.text_field :work_end_time, prompt: '--', minute_step: 15, ignore_data: true, class: 'field' %>
                       <%= field.hidden_field :employee_id, value: employee.id %>
+                      <% if @exist_works.empty? %>
+                        <%= field.text_field :work_start_time, class: 'field' %>〜
+                        <%= field.text_field :work_end_time, class: 'field' %>
+                      <% else %>
+                        <%= field.text_field :work_start_time, value: @exist_works.find_by(employee_id: employee.id, work_date: Date.new(@year, @month, day)).work_start_time, class: 'field' %>〜
+                        <%= field.text_field :work_end_time, value: @exist_works.find_by(employee_id: employee.id, work_date: Date.new(@year, @month, day)).work_end_time, class: 'field' %>
+                      <% end %>
                     </div>
                   <% end %>
                 <% end %>

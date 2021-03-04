@@ -6,7 +6,7 @@ class WorkSchedulesController < ApplicationController
       @year = Date.today.year
       @month = Date.today.month
       @days = Date.today.end_of_month.day
-      @works = SearchWorkSchedulesService.search(@year, @month)
+      @exist_works = SearchWorkSchedulesService.search(@year, @month)
     elsif params["search_date(1i)"].empty? || params["search_date(2i)"].empty?
       flash[:alert] = '⚠️⚠️⚠️ 年と月を入力してください ⚠️⚠️⚠️'
       redirect_back fallback_location: :new
@@ -14,7 +14,7 @@ class WorkSchedulesController < ApplicationController
       @year = params["search_date(1i)"].to_i
       @month = params["search_date(2i)"].to_i
       @days = Date.new(@year, @month, -1).day
-      @works = SearchWorkSchedulesService.search(@year, @month)
+      @exist_works = SearchWorkSchedulesService.search(@year, @month)
     end
     @work_schedules = WorkScheduleCollection.new(@days, @admin)
   end
