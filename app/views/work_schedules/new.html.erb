@@ -46,12 +46,13 @@
                   <div class='input-field'>
                     <%= field.hidden_field :work_date, value: Date.new(@year, @month, day) %>
                     <%= field.hidden_field :admin_id, value: @admin.id %>
-                    <% if @exist_works.empty? %>
+                    <% if @exist_schedules.empty? %>
                       <%= field.text_field :work_start_time, class: 'field' %>〜
                       <%= field.text_field :work_end_time, class: 'field' %>
                     <% else %>
-                      <%= field.text_field :work_start_time, value: @exist_works.find_by(admin_id: @admin.id, work_date: Date.new(@year, @month, day)).work_start_time, class: 'field' %>〜
-                      <%= field.text_field :work_end_time, value: @exist_works.find_by(admin_id: @admin.id, work_date: Date.new(@year, @month, day)).work_end_time, class: 'field' %>
+                      <%= field.hidden_field :id, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: Date.new(@year, @month, day)).id %>
+                      <%= field.text_field :work_start_time, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: Date.new(@year, @month, day)).work_start_time, class: 'field' %>〜
+                      <%= field.text_field :work_end_time, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: Date.new(@year, @month, day)).work_end_time, class: 'field' %>
                     <% end%>
                   </div>
                 <% end %>
@@ -60,12 +61,13 @@
                     <div class='input-field'>
                       <%= field.hidden_field :work_date, value: Date.new(@year, @month, day) %>
                       <%= field.hidden_field :employee_id, value: employee.id %>
-                      <% if @exist_works.empty? %>
+                      <% if @exist_schedules.empty? %>
                         <%= field.text_field :work_start_time, class: 'field' %>〜
                         <%= field.text_field :work_end_time, class: 'field' %>
                       <% else %>
-                        <%= field.text_field :work_start_time, value: @exist_works.find_by(employee_id: employee.id, work_date: Date.new(@year, @month, day)).work_start_time, class: 'field' %>〜
-                        <%= field.text_field :work_end_time, value: @exist_works.find_by(employee_id: employee.id, work_date: Date.new(@year, @month, day)).work_end_time, class: 'field' %>
+                        <%= field.hidden_field :id, value: @exist_schedules.find_by(employee_id: employee.id, work_date: Date.new(@year, @month, day)).id %>
+                        <%= field.text_field :work_start_time, value: @exist_schedules.find_by(employee_id: employee.id, work_date: Date.new(@year, @month, day)).work_start_time, class: 'field' %>〜
+                        <%= field.text_field :work_end_time, value: @exist_schedules.find_by(employee_id: employee.id, work_date: Date.new(@year, @month, day)).work_end_time, class: 'field' %>
                       <% end %>
                     </div>
                   <% end %>
@@ -75,6 +77,8 @@
                 <% break %>
               <% end %>
             <% end %>
+            <%= f.hidden_field :year, value: @year %>
+            <%= f.hidden_field :month, value: @month %>
             <%#= link_to '計算', calculation_work_schedules_path(year: @year, month: @month, days: @days), class: "planning-btn" %>
             <%#= f.submit '保存', class: "search-btn" %>
           <%# end %>
