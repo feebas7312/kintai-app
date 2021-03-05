@@ -10,6 +10,7 @@ class WorkScheduleCollection
     if attributes.present?
       self.collection = attributes.map do |value|
         WorkSchedule.new(
+          id: value['id'],
           work_date: value['work_date'],
           work_start_time: value['work_start_time'],
           work_end_time: value['work_end_time'],
@@ -30,12 +31,10 @@ class WorkScheduleCollection
 
   def save
     is_success = true
+    work_schedules = []
+    binding.pry
     ActiveRecord::Base.transaction do
-      collection.each do |result|
-        # バリデーションを全てかけたいからsave!ではなくsaveを使用
-        is_success = false unless result.save
-      end
-      # バリデーションエラーがあった時は例外を発生させてロールバックさせる
+      is_success = false unless WorkSchedule.import collection, on_duplicate_key_update: [:work_start_time, :work_end_time]
       raise ActiveRecord::RecordInvalid unless is_success
     end
     rescue
