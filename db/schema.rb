@@ -40,6 +40,10 @@ ActiveRecord::Schema.define(version: 2021_02_16_015434) do
 
   create_table "companies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
+    t.string "postal_code"
+    t.string "address"
+    t.string "phone_number"
+    t.integer "cutoff_date_id", null: false
     t.time "opening_time", null: false
     t.time "closing_time", null: false
     t.bigint "admin_id"
