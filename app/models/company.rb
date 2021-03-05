@@ -7,8 +7,9 @@ class Company < ApplicationRecord
 
   with_options presence: true do
     validates :name
-    validates :cutoff_date, numericality: { message: 'Select' }
     validates :opening_time
     validates :closing_time
   end
+
+  validates :cutoff_date_id, numericality: { message: 'Select' }
 end

@@ -1,6 +1,16 @@
 /* --------------------
-      会社情報ページ        
+        会社情報        
    -------------------- */
+
+/* --- 登録ページ --- */
+
+.select-box {
+  width: 55px;
+  padding: 10px 0;
+  margin-bottom: 15px;
+}
+
+/* --- 詳細ページ --- */
 
 .company-header {
   margin-bottom: 10px;

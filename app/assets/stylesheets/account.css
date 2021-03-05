@@ -62,7 +62,7 @@
 .account-page .field-input input {
   width: 100%;
   padding: 13px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   letter-spacing: 1px;
 }
 .account-page .field .btn {
@@ -75,6 +75,15 @@
   color: #fff;
   font-size: 15px;
   letter-spacing: 2px;
+}
+.account-page .indispensable {
+  padding: 3px;
+  border-radius: 2px;
+  margin-left: 8px;
+  background-color: #ea352d;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 /* --- エラーメッセージ --- */
