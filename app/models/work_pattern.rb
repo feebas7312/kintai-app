@@ -4,8 +4,8 @@ class WorkPattern < ApplicationRecord
   has_many :employee_work_patterns, dependent: :destroy
 
   with_options presence: true do
-    validates :start_time, format: { with: /\A\d{4}\z/, message: '半角数字4桁で入力してください' }
-    validates :end_time, format: { with: /\A\d{4}\z/, message: '半角数字4桁で入力してください' }
+    validates :start_time, format: { with: /\A\d{4}\z/, message: 'Please enter in 4 digits' }
+    validates :end_time, format: { with: /\A\d{4}\z/, message: 'Please enter in 4 digits' }
     validates :company_id
   end
 end
