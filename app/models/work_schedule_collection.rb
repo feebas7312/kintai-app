@@ -32,11 +32,8 @@ class WorkScheduleCollection
   def save
     is_success = true
     work_schedules = []
-    binding.pry
-    ActiveRecord::Base.transaction do
-      is_success = false unless WorkSchedule.import collection, on_duplicate_key_update: [:work_start_time, :work_end_time]
-      raise ActiveRecord::RecordInvalid unless is_success
-    end
+    is_success = false unless WorkSchedule.import collection, on_duplicate_key_update: [:work_start_time, :work_end_time], all_or_none: true
+    raise ActiveRecord::RecordInvalid unless is_success
     rescue
       p 'エラー'
     ensure
