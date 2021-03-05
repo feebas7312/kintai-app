@@ -24,6 +24,6 @@ class CompaniesController < ApplicationController
   private
 
   def company_params
-    params.require(:company).permit(:name, :opening_time, :closing_time).merge(admin_id: current_admin.id)
+    params.require(:company).permit(:name, :postal_code, :address, :phone_number, :cutoff_date_id, :opening_time, :closing_time).merge(admin_id: current_admin.id)
   end
 end
