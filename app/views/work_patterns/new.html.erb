@@ -9,6 +9,7 @@
 
   <div class="account-page__inner--right">
     <%= form_with model: [@company, @work_pattern], url: company_work_patterns_path(@company), local: true do |f| %>
+      <%= render 'shared/error_messages', model: f.object %>
       <div class='field'>
         <div class='field-label'>
           <%= f.label :start_time, '出勤時間' %>
