@@ -50,12 +50,16 @@
 
 ## companies テーブル
 
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| name         | string     | null: false                    |
-| opening_time | time       | null: false                    |
-| closing_time | time       | null: false                    |
-| admin        | references | null: false, foreign_key: true |
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| name           | string     | null: false                    |
+| postal_code    | string     |                                |
+| address        | string     |                                |
+| phone_number   | string     |                                |
+| cutoff_date_id | integer    | null: false                    |
+| opening_time   | time       | null: false                    |
+| closing_time   | time       | null: false                    |
+| admin          | references | null: false, foreign_key: true |
 
 ### Association
 

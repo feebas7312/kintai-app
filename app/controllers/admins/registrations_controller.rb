@@ -80,6 +80,6 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # end
 
   def company_params
-    params.require(:company).permit(:name, :opening_time, :closing_time)
+    params.require(:company).permit(:name, :postal_code, :address, :phone_number, :cutoff_date_id, :opening_time, :closing_time)
   end
 end

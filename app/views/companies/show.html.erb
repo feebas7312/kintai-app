@@ -7,24 +7,38 @@
     </div>
 
     <div class='main-contents'>
-      <div class='company-header'>会社詳細</div>
+      <div class='company-header'>会社概要</div>
       <div class='company-content'>
-        <p class='desc-text'>会社名：<%= @admin.company.name %></p>
-        <p class='desc-text'>営業時間：<%= "#{@admin.company.opening_time.strftime('%H:%M')}〜#{@admin.company.closing_time.strftime('%H:%M')}" %></p>
-        <p class='desc-text'>チーム人数：<%= @employees.length+1 %></p>
+        <div class='company-content__left'>
+          <p class='desc-text'>会社名：<%= @admin.company.name %></p>
+          <p class='desc-text'>所在地：
+            <% unless @admin.company.postal_code.empty? %>
+              <%= "〒#{@admin.company.postal_code}" %>
+            <% end %>
+            <%= @admin.company.address %>
+          </p>
+          <p class='desc-text'>電話番号：<%= @admin.company.phone_number %></p>
+        </div>
+        <div class='company-content__right'>
+          <p class='desc-text'>締日：<%= @admin.company.cutoff_date.name %>
+          <p class='desc-text'>営業時間：<%= "#{@admin.company.opening_time.strftime('%H:%M')}〜#{@admin.company.closing_time.strftime('%H:%M')}" %></p>
+          <p class='desc-text'>従業員数：<%= "#{@employees.length+1}人" %></p>
+        </div>
       </div>
 
-      <div class='pattern-header'>出勤パターン一覧</div>
-      <div class='pattern-content'>
-        <% if @work_patterns %>
-          <% @work_patterns.each do |pattern| %>
-            <div class='pattern-list'>
-              <%= pattern.start_time %>〜<%= pattern.end_time %>
-              <%= link_to '削除', company_work_pattern_path(@company, pattern), method: :delete, class: 'btn' %>
-            </div>
+      <% unless @work_patterns.empty? %>
+        <div class='pattern-header'>出勤パターン一覧</div>
+        <div class='pattern-content'>
+          <% if @work_patterns %>
+            <% @work_patterns.each do |pattern| %>
+              <div class='pattern-list'>
+                <%= pattern.start_time %>〜<%= pattern.end_time %>
+                <%= link_to '削除', company_work_pattern_path(@company, pattern), method: :delete, class: 'btn' %>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
 
     <div class='form'>
