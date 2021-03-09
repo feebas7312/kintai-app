@@ -39,41 +39,41 @@
           </div>
 
           <%= form_with model: @work_schedules, url: work_schedules_path, method: :post, local: true do |f| %>
-            <% @work_schedules.collection.each.with_index(1) do |work_schedule, day| %>
+            <% @work_schedules.collection.each_with_index do |work_schedule, i| %>
               <div class='shift-content'>
                 <%= fields_for 'work_schedules[]', work_schedule do |field| %>
-                  <div class='date-field'><%= "#{day}日" %></div>
+                  <div class='date-field'><%= "#{@date[i].day}日#{@wdays[@date[i].wday]}" %></div>
                   <div class='input-field'>
-                    <%= field.hidden_field :work_date, value: Date.new(@year, @month, day) %>
+                    <%= field.hidden_field :work_date, value: @date[i] %>
                     <%= field.hidden_field :admin_id, value: @admin.id %>
                     <% if @exist_schedules.empty? %>
                       <%= field.text_field :work_start_time, class: 'field' %>〜
                       <%= field.text_field :work_end_time, class: 'field' %>
                     <% else %>
-                      <%= field.hidden_field :id, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: Date.new(@year, @month, day)).id %>
-                      <%= field.text_field :work_start_time, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: Date.new(@year, @month, day)).work_start_time, class: 'field' %>〜
-                      <%= field.text_field :work_end_time, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: Date.new(@year, @month, day)).work_end_time, class: 'field' %>
+                      <%= field.hidden_field :id, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]).id %>
+                      <%= field.text_field :work_start_time, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]).work_start_time, class: 'field' %>〜
+                      <%= field.text_field :work_end_time, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]).work_end_time, class: 'field' %>
                     <% end%>
                   </div>
                 <% end %>
                 <%= fields_for 'work_schedules[]', work_schedule do |field| %>
                   <% @employees.each do |employee| %>
                     <div class='input-field'>
-                      <%= field.hidden_field :work_date, value: Date.new(@year, @month, day) %>
+                      <%= field.hidden_field :work_date, value: @date[i] %>
                       <%= field.hidden_field :employee_id, value: employee.id %>
                       <% if @exist_schedules.empty? %>
                         <%= field.text_field :work_start_time, class: 'field' %>〜
                         <%= field.text_field :work_end_time, class: 'field' %>
                       <% else %>
-                        <%= field.hidden_field :id, value: @exist_schedules.find_by(employee_id: employee.id, work_date: Date.new(@year, @month, day)).id %>
-                        <%= field.text_field :work_start_time, value: @exist_schedules.find_by(employee_id: employee.id, work_date: Date.new(@year, @month, day)).work_start_time, class: 'field' %>〜
-                        <%= field.text_field :work_end_time, value: @exist_schedules.find_by(employee_id: employee.id, work_date: Date.new(@year, @month, day)).work_end_time, class: 'field' %>
+                        <%= field.hidden_field :id, value: @exist_schedules.find_by(employee_id: employee.id, work_date: @date[i]).id %>
+                        <%= field.text_field :work_start_time, value: @exist_schedules.find_by(employee_id: employee.id, work_date: @date[i]).work_start_time, class: 'field' %>〜
+                        <%= field.text_field :work_end_time, value: @exist_schedules.find_by(employee_id: employee.id, work_date: @date[i]).work_end_time, class: 'field' %>
                       <% end %>
                     </div>
                   <% end %>
                 <% end %>
               </div>
-              <% if day == @days %>
+              <% if i+1 == @days %>
                 <% break %>
               <% end %>
             <% end %>
