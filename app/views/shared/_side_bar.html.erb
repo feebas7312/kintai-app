@@ -26,14 +26,14 @@
       <ul class="menu-list">
         <li><%= link_to '会社情報', company_path(current_admin), class: 'link' %></li>
         <li><%= link_to 'スタッフ一覧', admins_home_path(current_admin), class: 'link' %></li>
-        <li><%= link_to '勤務計画閲覧', search_work_schedules_path, class: 'link' %></li>
+        <li><%= link_to '勤務計画閲覧', work_schedules_path, class: 'link' %></li>
         <li><%= link_to '勤務計画作成', new_work_schedule_path, class: 'link' %></li>
       </ul>
     <% end %>
     <% if employee_signed_in? %>
       <ul class="menu-list">
         <li><%= link_to 'スタッフ一覧', employees_home_path(current_employee), class: 'link' %></li>
-        <li><%= link_to '勤務計画閲覧', search_work_schedules_path, class: 'link' %></li>
+        <li><%= link_to '勤務計画閲覧', work_schedules_path, class: 'link' %></li>
       </ul>
     <% end %>
   </div>

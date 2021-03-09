@@ -1,15 +1,14 @@
 class CalculationWorkSchedulesService
 
-  def self.calculation(year, month, days, admin, employees)
+  def self.calculation(year, month, days, start_day, admin, employees)
     work_patterns = WorkPattern.where(company_id: admin.company.id)
-    date = Date.new(year, month, 1)
     calc_schedules = []
     consecutive_work = consecutive_work_format(admin, employees)
 
     days.times do |i|
       schedule = schedule_format(admin, employees)
       schedule.each_value do |value|
-        value[:work_date] = date + i
+        value[:work_date] = Date.new(year, month, start_day)+i
       end
       pattern_member = pattern_member_format(admin, employees, work_patterns)
       except_member = []
