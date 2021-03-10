@@ -22,6 +22,8 @@
                             use_month_numbers: true,
                             discard_day: true,
                             prompt:'--',
+                            start_year: (Time.now.year - 2),
+                            end_year: (Time.now.year + 2),
                             date_separator: '%s'),
                           "<p> 年 </p>") + "<p> 月 </p>" %>
               <%= f.submit "検索", class: 'search-btn' %>
@@ -42,20 +44,24 @@
             <div class='shift-content'>
               <div class='date-field'><%= "#{@date[i].day}日#{@wdays[@date[i].wday]}" %></div>
               <div class='input-field'>
-                <% exist = @exist_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:admin_id] == @admin.id } %>
-                <% unless exist.work_start_time.empty? && exist.work_end_time.empty? %>
-                  <%= "#{exist.work_start_time}〜#{exist.work_end_time}" %>
-                <% else %>
-                  <%= "休日" %>
-                <% end %>
-              </div>
-              <% @employees.each do |employee| %>
-                <div class='input-field'>
-                  <% exist = @exist_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:employee_id] == employee.id } %>
+                <% unless @exist_schedules.empty? %>
+                  <% exist = @exist_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:admin_id] == @admin.id } %>
                   <% unless exist.work_start_time.empty? && exist.work_end_time.empty? %>
                     <%= "#{exist.work_start_time}〜#{exist.work_end_time}" %>
                   <% else %>
                     <%= "休日" %>
+                  <% end %>
+                <% end %>
+              </div>
+              <% @employees.each do |employee| %>
+                <div class='input-field'>
+                  <% unless @exist_schedules.empty? %>
+                    <% exist = @exist_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:employee_id] == employee.id } %>
+                    <% unless exist.work_start_time.empty? && exist.work_end_time.empty? %>
+                      <%= "#{exist.work_start_time}〜#{exist.work_end_time}" %>
+                    <% else %>
+                      <%= "休日" %>
+                    <% end %>
                   <% end %>
                 </div>
               <% end %>

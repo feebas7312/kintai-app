@@ -1,5 +1,6 @@
 class WorkSchedulesController < ApplicationController
   def index
+    delete_old_data
     @admin = Admin.find(current_admin.id) if admin_signed_in?
     @admin = Admin.find(current_employee.admin_id) if employee_signed_in?
     @employees = Employee.where(admin_id: @admin.id)
@@ -57,6 +58,21 @@ class WorkSchedulesController < ApplicationController
     end
   end
 
+  def destroy
+    @admin = Admin.find(current_admin.id)
+    @employees = Employee.where(admin_id: @admin.id)
+    @start_day = @admin.company.cutoff_date.next_day
+    @year = params[:year].to_i
+    @month = params[:month].to_i
+    @days = params[:days].to_i
+    @exist_schedules = SearchWorkSchedulesService.search(@year, @month, @days, @start_day, @admin, @employees)
+    if @exist_schedules.delete_all
+      redirect_to new_work_schedule_path
+    else
+      redirect_back fallback_location: :new
+    end
+  end
+
   def calculation
     @admin = Admin.find(current_admin.id)
     @employees = Employee.where(admin_id: @admin.id)
@@ -86,5 +102,9 @@ class WorkSchedulesController < ApplicationController
       @date << Date.new(@year, @month, @start_day) + i
     end
     @wdays = ['(日)','(月)','(火)','(水)','(木)','(金)','(土)']
+  end
+
+  def delete_old_data
+    WorkSchedule.where("work_date < ?", Date.today - 2.years).delete_all
   end
 end
