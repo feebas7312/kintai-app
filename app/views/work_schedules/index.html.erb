@@ -22,6 +22,8 @@
                             use_month_numbers: true,
                             discard_day: true,
                             prompt:'--',
+                            start_year: (Time.now.year - 2),
+                            end_year: (Time.now.year + 2),
                             date_separator: '%s'),
                           "<p> 年 </p>") + "<p> 月 </p>" %>
               <%= f.submit "検索", class: 'search-btn' %>
