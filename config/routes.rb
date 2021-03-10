@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   end
   resources :admin_work_patterns, only: [:create]
   resources :employee_work_patterns, only: [:create]
-  resources :work_schedules, only: [:index, :new, :create] do
+  resources :work_schedules, only: [:index, :new, :create, :destroy] do
     collection do
       get 'calculation'
     end

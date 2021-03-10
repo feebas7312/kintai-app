@@ -57,6 +57,21 @@ class WorkSchedulesController < ApplicationController
     end
   end
 
+  def destroy
+    @admin = Admin.find(current_admin.id)
+    @employees = Employee.where(admin_id: @admin.id)
+    @start_day = @admin.company.cutoff_date.next_day
+    @year = params[:year].to_i
+    @month = params[:month].to_i
+    @days = params[:days].to_i
+    @exist_schedules = SearchWorkSchedulesService.search(@year, @month, @days, @start_day, @admin, @employees)
+    if @exist_schedules.delete_all
+      redirect_to new_work_schedule_path
+    else
+      redirect_back fallback_location: :new
+    end
+  end
+
   def calculation
     @admin = Admin.find(current_admin.id)
     @employees = Employee.where(admin_id: @admin.id)

@@ -86,6 +86,7 @@
       </div>
 
       <div class='form'>
+          <%= link_to '削除', work_schedule_path(@admin.id, year: @year, month: @month, days: @days), method: :delete, class: 'btn' %>
           <%= link_to '計算', calculation_work_schedules_path(year: @year, month: @month, days: @days), class: 'btn' %>
           <%= f.submit '保存', class: 'btn' %>
         <% end %>
