@@ -68,14 +68,19 @@
 
 ## admins テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| number             | string | null: false |
-| last_name          | string | null: false |
-| first_name         | string | null: false |
-| joining_date       | date   | null: false |
-| email              | string |             |
-| encrypted_password | string | null: false |
+| Column               | Type    | Options     |
+| -------------------- | ------- | ----------- |
+| number               | string  | null: false |
+| last_name            | string  | null: false |
+| first_name           | string  | null: false |
+| birth_date           | date    | null: false |
+| phone_number         | string  |             |
+| email                | string  |             |
+| encrypted_password   | string  | null: false |
+| joining_date         | date    | null: false |
+| employment_status_id | integer | null: false |
+| salary_system_id     | integer | null: false |
+| wages                | integer |             |
 
 ### Association
 
@@ -86,15 +91,20 @@
 
 ## employees テーブル
 
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| number             | string     | null: false                    |
-| last_name          | string     | null: false                    |
-| first_name         | string     | null: false                    |
-| joining_date       | date       | null: false                    |
-| email              | string     |                                |
-| encrypted_password | string     | null: false                    |
-| admin              | references | null: false, foreign_key: true |
+| Column               | Type       | Options                        |
+| -------------------- | ---------- | ------------------------------ |
+| number               | string     | null: false                    |
+| last_name            | string     | null: false                    |
+| first_name           | string     | null: false                    |
+| birth_date           | date       | null: false                    |
+| phone_number         | string     |                                |
+| email                | string     |                                |
+| encrypted_password   | string     | null: false                    |
+| joining_date         | date       | null: false                    |
+| employment_status_id | integer    | null: false                    |
+| salary_system_id     | integer    | null: false                    |
+| wages                | integer    |                                |
+| admin                | references | null: false, foreign_key: true |
 
 ### Association
 
