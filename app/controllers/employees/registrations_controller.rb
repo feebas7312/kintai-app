@@ -90,12 +90,12 @@ class Employees::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:number, :last_name, :first_name, :joining_date, :email, :admin_id])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:number, :last_name, :first_name, :birth_date, :phone_number, :email, :joining_date, :employment_status_id, :salary_system_id, :wages, :admin_id])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:number, :last_name, :first_name, :joining_date, :email])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:number, :last_name, :first_name, :birth_date, :phone_number, :email, :joining_date, :employment_status_id, :salary_system_id, :wages])
   end
 
   def update_resource_without_password(resource, params)
