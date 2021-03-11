@@ -1,10 +1,16 @@
 Admin.create(
-  number: "351550",
-  last_name: "責任者",
-  first_name: "test",
-  joining_date: "2015-04-01",
-  password: "password",
-  password_confirmation: "password"
+  number: '351550',
+  last_name: '責任者',
+  first_name: 'test',
+  birth_date: '1987-03-12',
+  phone_number: '0901234567',
+  email: '',
+  password: 'password',
+  password_confirmation: 'password',
+  joining_date: '2015-04-01',
+  employment_status_id: 1,
+  salary_system_id: 1,
+  wages: ''
 )
 
 Company.create(
@@ -23,11 +29,17 @@ Company.create(
     [
       {
         number: "F35155#{i+1}",
-        last_name: "スタッフ",
+        last_name: 'スタッフ',
         first_name: "#{i+1}",
-        joining_date: "2020-09-20",
-        password: "password",
-        password_confirmation: "password",
+        birth_date: '1991-05-29',
+        phone_number: '',
+        email: '',
+        password: 'password',
+        password_confirmation: 'password',
+        joining_date: '2020-09-20',
+        employment_status_id: 3,
+        salary_system_id: 2,
+        wages: '',
         admin_id: 1
       }
     ]
