@@ -11,51 +11,60 @@
     <%= form_with model: @employee, url: employee_registration_path, local: true do |f| %>
       <div class="field">
         <%= render "employees/shared/error_messages", model: f.object %>
-        <div class="field-label">
-          <%= f.label :joining_date, '入社日' %>
+        <div class="field-label"><%= f.label :number, '社員番号' %><span class="indispensable">必須</span></div>
+        <div class="field-input"><%= f.text_field :number, autofocus: true, autocomplete: "employee_number", class: :form__text %></div>
+
+        <div class="field-label"><%= f.label :last_name, '姓' %><span class="indispensable">必須</span></div>
+        <div class="field-input"><%= f.text_field :last_name, class: :form__txst %></div>
+
+        <div class="field-label"><%= f.label :first_name, '名' %><span class="indispensable">必須</span></div>
+        <div class="field-input"><%= f.text_field :first_name, class: :form__text %></div>
+
+        <div class="field-label"><%= f.label :birth_date, '生年月日' %><span class="indispensable">必須</span></div>
+        <div class='input-birth-wrap'>
+          <%= raw sprintf(
+                      f.date_select(
+                        :birth_date,
+                        class:'select-birth',
+                        id:"birth-date",
+                        use_month_numbers: true,
+                        prompt:'--',
+                        start_year: 1930,
+                        end_year: (Time.now.year - 15),
+                        date_separator: '%s'),
+                      "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
         </div>
-        <div class="field-input">
-          <%= f.date_field :joining_date, class: :form__text %>
-        </div>
-        <div class="field-label">
-          <%= f.label :number, '社員番号' %>
-        </div>
-        <div class="field-input">
-          <%= f.text_field :number, autofocus: true, autocomplete: "employee_number", class: :form__text %>
-        </div>
-        <div class="field-label">
-          <%= f.label :last_name, '姓' %>
-        </div>
-        <div class="field-input">
-          <%= f.text_field :last_name, class: :form__txst %>
-        </div>
-        <div class="field-label">
-          <%= f.label :first_name, '名' %>
-        </div>
-        <div class="field-input">
-          <%= f.text_field :first_name, class: :form__text %>
-        </div>
-        <div class="field-label">
-          <%= f.label :email, 'メールアドレス' %>
-        </div>
-        <div class="field-input">
-          <%= f.email_field :email, autocomplete: "email" %>
-        </div>
+
+        <div class="field-label"><%= f.label :phone_number, '電話番号' %></div>
+        <div class="field-input"><%= f.telephone_field :phone_number, placeholder: "例）09012345678", maxlength: "11" %></div>
+
+        <div class="field-label"><%= f.label :email, 'メールアドレス' %></div>
+        <div class="field-input"><%= f.email_field :email, autocomplete: "email" %></div>
+
         <div class="field-label">
           <%= f.label :password, 'パスワード' %>
           <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %>文字以上)</em>
           <% end %>
+          <span class="indispensable">必須</span>
         </div>
-        <div class="field-input">
-          <%= f.password_field :password, autocomplete: "new-password" %>
-        </div>
-        <div class="field-label">
-          <%= f.label :password_confirmation, 'パスワード確認' %>
-        </div>
-        <div class="field-input">
-          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-        </div>
+        <div class="field-input"><%= f.password_field :password, autocomplete: "new-password" %></div>
+
+        <div class="field-label"><%= f.label :password_confirmation, 'パスワード確認' %><span class="indispensable">必須</span></div>
+        <div class="field-input"><%= f.password_field :password_confirmation, autocomplete: "new-password" %></div>
+
+        <div class="field-label"><%= f.label :joining_date, '入社日' %><span class="indispensable">必須</span></div>
+        <div class="field-input"><%= f.date_field :joining_date %></div>
+
+        <div class="field-label"><%= f.label :employment_status_id, '雇用形態' %><span class="indispensable">必須</span></div>
+        <div class="field-input"><%= f.collection_select(:employment_status_id, EmploymentStatus.all, :id, :name, { include_blank: "---" }, { class: "select-box" }) %></div>
+
+        <div class="field-label"><%= f.label :salary_system_id, '給与体系' %><span class="indispensable">必須</span></div>
+        <div class="field-input"><%= f.collection_select(:salary_system_id, SalarySystem.all, :id, :name, { include_blank: "---" }, { class: "select-box" }) %></div>
+
+        <div class="field-label"><%= f.label :wages, '給与' %></div>
+        <div class="field-input"><%= f.text_field :wages %></div>
+
         <%= f.hidden_field :admin_id, value: current_admin.id %>
         <div class="actions">
           <%= f.submit "登録", class: "btn" %>
