@@ -85,6 +85,19 @@
   font-size: 12px;
   font-weight: bold;
 }
+.account-page .input-birth-wrap {
+  padding: 0 5px 30px;
+  display: flex;
+  /* justify-content: center; */
+  flex-wrap: wrap;
+  line-height: 30px;
+}
+.select-box {
+  width: 100%;
+  /* width: 55px; */
+  padding: 13px;
+  margin-bottom: 15px;
+}
 
 /* --- エラーメッセージ --- */
 
