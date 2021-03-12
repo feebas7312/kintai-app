@@ -13,11 +13,15 @@
             <div class='number'>社員番号</div>
             <div class='name'>名前</div>
             <div class='joining-date'>入社日</div>
+            <div class='employment-status'>雇用形態</div>
+            <div class='salary-system'>給与体系</div>
           </div>
           <div class='member-content'>
             <div class='number'><%= link_to @admin.number, edit_admin_registration_path %></div>
             <div class='name'><%= @admin.last_name %><%= @admin.first_name %></div>
             <div class='joining-date'><%= @admin.joining_date %></div>
+            <div class='employment-status'><%= @admin.employment_status.name %></div>
+            <div class='salary-system'><%= @admin.salary_system.name %></div>
           </div>
         </div>
         <div class='edit-btn'>
@@ -30,6 +34,8 @@
             <div class='number'><%= link_to employee.number, edit_employee_registration_path(employee_id: employee.id) %></div>
             <div class='name'><%= employee.last_name %><%= employee.first_name %></div>
             <div class='joining-date'><%= employee.joining_date %></div>
+            <div class='employment-status'><%= employee.employment_status.name %></div>
+            <div class='salary-system'><%= employee.salary_system.name %></div>
           </div>
           <div class='edit-btn'>
             <%= link_to 'パターン登録', employees_show_path(employee_id: employee.id), class: 'btn' %>
