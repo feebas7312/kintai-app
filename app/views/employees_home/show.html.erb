@@ -13,11 +13,13 @@
             <div class='number'>社員番号</div>
             <div class='name'>名前</div>
             <div class='joining-date'>入社日</div>
+            <div class='employment-status'>雇用形態</div>
           </div>
           <div class='member-content'>
             <div class='number'><%= @admin.number %></div>
             <div class='name'><%= @admin.last_name %><%= @admin.first_name %></div>
             <div class='joining-date'><%= @admin.joining_date %></div>
+            <div class='employment-status'><%= @admin.employment_status.name %></div>
           </div>
         </div>
       </div>
@@ -27,6 +29,7 @@
             <div class='number'><%= employee.number %></div>
             <div class='name'><%= employee.last_name %><%= employee.first_name %></div>
             <div class='joining-date'><%= employee.joining_date %></div>
+            <div class='employment-status'><%= employee.employment_status.name %></div>
           </div>
         </div>
       <% end %>
