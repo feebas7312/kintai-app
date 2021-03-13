@@ -82,4 +82,8 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   def company_params
     params.require(:company).permit(:name, :postal_code, :address, :phone_number, :cutoff_date_id, :opening_time, :closing_time)
   end
+
+  def after_update_path_for(resource)
+      admins_home_path(current_admin)
+  end
 end

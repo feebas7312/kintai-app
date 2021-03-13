@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Employees::SessionsController < Devise::SessionsController
+  before_action :move_to_admin_home, if: proc { admin_signed_in? }
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -27,5 +28,9 @@ class Employees::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     employees_home_index_path
+  end
+
+  def move_to_admin_home
+    redirect_to root_path
   end
 end
