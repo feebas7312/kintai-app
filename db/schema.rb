@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 2021_02_16_015434) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["number"], name: "index_admins_on_number", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
@@ -86,7 +85,6 @@ ActiveRecord::Schema.define(version: 2021_02_16_015434) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["admin_id"], name: "index_employees_on_admin_id"
-    t.index ["number"], name: "index_employees_on_number", unique: true
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 

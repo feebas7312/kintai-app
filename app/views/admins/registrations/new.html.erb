@@ -39,13 +39,7 @@
         <div class="field-label"><%= f.label :email, 'メールアドレス' %></div>
         <div class="field-input"><%= f.email_field :email, autocomplete: "email" %></div>
 
-        <div class="field-label">
-          <%= f.label :password, 'パスワード' %>
-          <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %>文字以上)</em>
-          <% end %>
-          <span class="indispensable">必須</span>
-        </div>
+        <div class="field-label"><%= f.label :password, 'パスワード（6文字以上）' %><span class="indispensable">必須</span></div>
         <div class="field-input"><%= f.password_field :password, autocomplete: "new-password" %></div>
 
         <div class="field-label"><%= f.label :password_confirmation, 'パスワード確認' %><span class="indispensable">必須</span></div>

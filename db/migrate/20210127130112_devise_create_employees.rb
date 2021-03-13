@@ -46,7 +46,6 @@ class DeviseCreateEmployees < ActiveRecord::Migration[6.0]
       t.timestamps null: false
     end
 
-    add_index :employees, :number,               unique: true
     # add_index :employees, :email,                unique: true
     add_index :employees, :reset_password_token, unique: true
     # add_index :employees, :confirmation_token,   unique: true
