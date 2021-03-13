@@ -1,4 +1,6 @@
 class CompaniesController < ApplicationController
+  before_action :authenticate_admin!
+
   def show
     @admin = Admin.find(params[:id])
     @employees = Employee.where(admin_id: @admin.id)

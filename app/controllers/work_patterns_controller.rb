@@ -1,4 +1,6 @@
 class WorkPatternsController < ApplicationController
+  before_action :authenticate_admin!
+
   def new
     @work_pattern = WorkPattern.new
     @company = Company.find(params[:company_id])

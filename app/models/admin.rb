@@ -28,7 +28,6 @@ class Admin < ApplicationRecord
     validates :joining_date
   end
 
-  validates :number, uniqueness: true
   validates :phone_number, format: { with: /\A\d{10}$|^\d{11}\z/, message: 'Input only number' }, if: :phone_number?
   validates :employment_status_id, numericality: { message: 'Select' }
   validates :salary_system_id, numericality: { message: 'Select' }

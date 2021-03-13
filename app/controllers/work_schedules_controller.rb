@@ -1,4 +1,7 @@
 class WorkSchedulesController < ApplicationController
+  before_action :authenticate_admin!, except: [:index]
+  before_action :authenticate_employee!, only: [:index], unless: proc { admin_signed_in? || employee_signed_in? }
+
   def index
     delete_old_data
     @admin = Admin.find(current_admin.id) if admin_signed_in?

@@ -2,8 +2,8 @@ class AdminsHomeController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @admin = Admin.find(current_admin.id)
-    @employees = Employee.where(admin_id: @admin.id)
+    # @admin = Admin.find(current_admin.id)
+    # @employees = Employee.where(admin_id: @admin.id)
   end
 
   def show

@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class='edit-btn'>
-          <%= link_to 'パターン登録', admins_show_path, class: 'btn' %>
+          <%= link_to 'パターン登録', new_admin_work_pattern_path, class: 'btn' %>
         </div>
       </div>
       <% @employees.each do |employee| %>
@@ -38,7 +38,7 @@
             <div class='salary-system'><%= employee.salary_system.name %></div>
           </div>
           <div class='edit-btn'>
-            <%= link_to 'パターン登録', employees_show_path(employee_id: employee.id), class: 'btn' %>
+            <%= link_to 'パターン登録', new_employee_work_pattern_path(employee_id: employee.id), class: 'btn' %>
           </div>
         </div>
       <% end %>

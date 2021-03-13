@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     registrations: 'admins/registrations'
   }
 
-  get 'admins/show', to: 'admins#show'
+  # get 'admins/show', to: 'admins#show'
 
   devise_scope :admin do
     get 'companies', to: 'admins/registrations#new_company'
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     registrations: 'employees/registrations'
   }
 
-  get 'employees/show', to: 'employees#show'
+  # get 'employees/show', to: 'employees#show'
 
   root to: 'admins_home#index'
   resources :admins_home, only: [:index, :show, :destroy]
@@ -26,8 +26,8 @@ Rails.application.routes.draw do
   resources :companies, only: [:show, :edit, :update] do
     resources :work_patterns, only: [:new, :create, :destroy]
   end
-  resources :admin_work_patterns, only: [:create]
-  resources :employee_work_patterns, only: [:create]
+  resources :admin_work_patterns, only: [:new, :create]
+  resources :employee_work_patterns, only: [:new, :create]
   resources :work_schedules, only: [:index, :new, :create, :destroy] do
     collection do
       get 'calculation'
