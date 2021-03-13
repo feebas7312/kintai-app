@@ -1,6 +1,13 @@
 class AdminWorkPatternsController < ApplicationController
   before_action :authenticate_admin!
 
+  def new
+    @admin = Admin.find(current_admin.id)
+    @work_patterns = WorkPattern.where(company_id: @admin.company.id)
+    @admin_work_patterns = AdminWorkPattern.where(admin_id: @admin.id)
+    @new_pattern = AdminWorkPatternCollection.new(@work_patterns)
+  end
+
   def create
     @admin = Admin.find(current_admin.id)
     @work_patterns = WorkPattern.where(company_id: @admin.company.id)
@@ -8,9 +15,9 @@ class AdminWorkPatternsController < ApplicationController
     @new_pattern = AdminWorkPatternCollection.new(@work_patterns, admin_work_patterns_collection_params)
     if @new_pattern.save
       flash[:alert] = '登録しました'
-      redirect_to admins_show_path
+      redirect_to new_admin_work_pattern_path
     else
-      render admins_show_path
+      render new_admin_work_pattern_path
     end
   end
 
