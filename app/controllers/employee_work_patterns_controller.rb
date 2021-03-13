@@ -1,4 +1,6 @@
 class EmployeeWorkPatternsController < ApplicationController
+  before_action :authenticate_admin!
+
   def create
     @employee = Employee.find(params[:employee_id])
     @admin = Admin.find(@employee.admin_id)

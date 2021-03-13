@@ -1,4 +1,6 @@
 class AdminsController < ApplicationController
+  before_action :authenticate_admin!
+
   def show
     @admin = Admin.find(current_admin.id)
     @work_patterns = WorkPattern.where(company_id: @admin.company.id)
