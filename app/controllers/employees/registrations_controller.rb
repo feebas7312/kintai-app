@@ -111,7 +111,7 @@ class Employees::RegistrationsController < Devise::RegistrationsController
     if admin_signed_in?
       admins_home_path(current_admin)
     else
-      employees_home_index_path
+      employees_home_path(current_employee)
     end
   end
 

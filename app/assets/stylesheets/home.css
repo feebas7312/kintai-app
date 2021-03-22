@@ -2,20 +2,37 @@
      スタッフ一覧ページ     
    -------------------- */
 
+.staff-content {
+  padding: 0 30px;
+  margin-top: 70px;
+}
+.staff-header {
+  width: 200px;
+  padding: 10px 20px;
+  border-left: 5px solid #5ab4bd;
+  margin: 0 0 15px 10px;
+  background-color: #f4f4f4;
+  color: #494949;
+  font-size: 18px;
+  text-align: center;
+}
 .number {
-  width: 130px;
+  width: 150px;
 }
 .name {
   width: 150px;
 }
 .joining-date {
-  width: 130px;
+  width: 150px;
 }
 .employment-status {
   width: 150px;
 }
 .salary-system {
-  width: 130px;
+  width: 150px;
+}
+.birth-date {
+  width: 150px;
 }
 
 /* --- 責任者情報 --- */

@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
   before_action :authenticate_admin!
 
   def show
-    @admin = Admin.find(params[:id])
+    @admin = Admin.find(current_admin.id)
     @employees = Employee.where(admin_id: @admin.id)
     @company = @admin.company
     @work_patterns = WorkPattern.where(company_id: @company.id)

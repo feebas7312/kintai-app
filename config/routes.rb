@@ -20,9 +20,9 @@ Rails.application.routes.draw do
 
   # get 'employees/show', to: 'employees#show'
 
-  root to: 'admins_home#index'
-  resources :admins_home, only: [:index, :show, :destroy]
-  resources :employees_home, only: [:index, :show]
+  root to: 'companies#show'
+  resources :admins_home, only: [:show, :destroy]
+  resources :employees_home, only: [:show]
   resources :companies, only: [:show, :edit, :update] do
     resources :work_patterns, only: [:new, :create, :destroy]
   end

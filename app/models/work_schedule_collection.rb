@@ -6,7 +6,7 @@ class WorkScheduleCollection
   include ActiveModel::Validations
   attr_accessor :collection
 
-  def initialize(days, admin, attributes = [])
+  def initialize(days, admin, employees, attributes = [])
     if attributes.present?
       self.collection = attributes.map do |value|
         WorkSchedule.new(
@@ -19,7 +19,7 @@ class WorkScheduleCollection
         )
       end
     else
-      members = Employee.where(admin_id: admin.id).length+1
+      members = employees.length + 1
       work_num = days.to_i * members
       self.collection = work_num.times.map{ WorkSchedule.new }
     end

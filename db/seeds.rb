@@ -24,13 +24,13 @@ Company.create(
   admin_id: 1
 )
 
-4.times do |i|
+7.times do |i|
   Employee.create(
     [
       {
         number: "F35155#{i+1}",
-        last_name: 'スタッフ',
-        first_name: "#{i+1}",
+        last_name: "スタッフ#{i+1}",
+        first_name: 'テスト',
         birth_date: '1991-05-29',
         phone_number: '',
         email: '',

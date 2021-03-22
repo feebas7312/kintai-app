@@ -10,7 +10,7 @@ class WorkPatternsController < ApplicationController
     @work_pattern = WorkPattern.new(work_pattern_params)
     @company = Company.find(params[:company_id])
     if @work_pattern.save
-      redirect_to company_path(current_admin)
+      redirect_to root_path
     else
       render :new
     end
@@ -19,9 +19,13 @@ class WorkPatternsController < ApplicationController
   def destroy
     @work_pattern = WorkPattern.find(params[:id])
     if @work_pattern.destroy
-      redirect_to company_path(current_admin)
+      redirect_to root_path
     else
-      render company_path(current_admin)
+      @admin = Admin.find(current_admin.id)
+      @employees = Employee.where(admin_id: @admin.id)
+      @company = @admin.company
+      @work_patterns = WorkPattern.where(company_id: @company.id)
+      render root_path
     end
   end
 

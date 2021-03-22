@@ -1,77 +1,109 @@
-<div class='shift-page'>
-  <div class='wrapper'>
-    <%= render 'shared/side_bar' %>
+<div class="tabs">
+  <% if admin_signed_in? %>
+    <input type='radio' id='company-page' name='tab-item'>
+    <%= link_to '会社情報', company_path(current_admin), class: 'tab-item' %>
+    <input type='radio' id='staff-page' name='tab-item'>
+    <%= link_to 'スタッフ一覧', admins_home_path(current_admin), class: 'tab-item' %>
+    <input type='radio' id='index-page' name='tab-item' checked>
+    <%= link_to '勤務計画閲覧', work_schedules_path, class: 'tab-item' %>
+    <input type='radio' id='new-page' name='tab-item'>
+    <%= link_to '勤務計画作成', new_work_schedule_path, class: 'tab-item' %>
+  <% end %>
+  <% if employee_signed_in? %>
+    <div class='employee-tabs'>
+      <input type='radio' id='staff-page' name='tab-item'>
+      <%= link_to 'スタッフ一覧', employees_home_path(current_employee), class: 'tab-item' %>
+      <input type='radio' id='index-page' name='tab-item' checked>
+      <%= link_to '勤務計画閲覧', work_schedules_path, class: 'tab-item' %>
+    </div>
+  <% end %>
 
+  <div class="tab-content">
     <div class='main'>
-      <div class='main-header'>
-        <h2 class='page-title'>勤務計画検索</h2>
+      <div class='user-menu'>
+        <% if admin_signed_in? %>
+          <span><%= current_admin.last_name %><%= current_admin.first_name %>
+            <ul class="menu-lists">
+              <li><%= link_to '編集', edit_admin_registration_path %></li>
+              <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+            </ul>
+          </span>
+        <% end %>
+        <% if employee_signed_in? %>
+          <span><%= current_employee.last_name %><%= current_employee.first_name %>
+            <ul class="menu-lists">
+              <li><%= link_to '編集', edit_employee_registration_path %></li>
+              <li><%= link_to 'ログアウト', destroy_employee_session_path, method: :delete %></li>
+            </ul>
+          </span>
+        <% end %>
       </div>
 
-      <div class='main-contents'>
-        <div class='search'>
-          <% if flash[:alert].present? %>
-            <div class='alert'><%= flash[:alert] %></div>
-          <% end %>
+      <div class='search'>
+        <% if flash[:alert].present? %>
+          <div class='alert'><%= flash[:alert] %></div>
+        <% end %>
 
-          <%= form_with url: work_schedules_path, method: :get, local: true do |f| %>
-            <div class='input-date-wrap'>
-              <%= raw sprintf(
-                          f.date_select(
-                            :search_date,
-                            class:'select-date',
-                            use_month_numbers: true,
-                            discard_day: true,
-                            prompt:'--',
-                            start_year: (Time.now.year - 2),
-                            end_year: (Time.now.year + 2),
-                            date_separator: '%s'),
-                          "<p> 年 </p>") + "<p> 月 </p>" %>
-              <%= f.submit "検索", class: 'search-btn' %>
-            </div>
+        <%= form_with url: work_schedules_path, method: :get, local: true do |f| %>
+          <div class='input-date-wrap'>
+            <%= raw sprintf(
+                        f.date_select(
+                          :search_date,
+                          class:'select-date',
+                          use_month_numbers: true,
+                          discard_day: true,
+                          prompt:'--',
+                          start_year: (Time.now.year - 2),
+                          end_year: (Time.now.year + 2),
+                          date_separator: '%s'),
+                        "<p> 年 </p>") + "<p> 月 </p>" %>
+            <%= f.submit "検索", class: 'search-btn' %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class='planning-content'>
+        <div class='member-content'>
+          <div class='date-field'><%= "#{@year}年#{@month}月度" %></div>
+          <div class='name-field'><%= @admin.last_name %></div>
+          <% @employees.each do |employee| %>
+            <div class='name-field'><%= employee.last_name %></div>
           <% end %>
         </div>
 
-        <div class='planning-content'>
-          <div class='member-content'>
-            <div class='date-field'><%= "#{@year}年#{@month}月度" %></div>
-            <div class='name-field'><%= @admin.last_name %></div>
+        <% @days.times do |i| %>
+          <div class='shift-content'>
+            <div class='date-field'><%= "#{@date[i].day}日#{@wdays[@date[i].wday]}" %></div>
+            <div class='input-field admin-input-field'>
+              <% unless @exist_schedules.empty? %>
+                <% exist = @exist_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:admin_id] == @admin.id } %>
+                <% unless exist.work_start_time.empty? && exist.work_end_time.empty? %>
+                  <%= "#{exist.work_start_time}〜#{exist.work_end_time}" %>
+                <% else %>
+                  <%= "休日" %>
+                <% end %>
+              <% end %>
+            </div>
             <% @employees.each do |employee| %>
-              <div class='name-field'><%= employee.last_name %></div>
-            <% end %>
-          </div>
-
-          <% @days.times do |i| %>
-            <div class='shift-content'>
-              <div class='date-field'><%= "#{@date[i].day}日#{@wdays[@date[i].wday]}" %></div>
               <div class='input-field'>
                 <% unless @exist_schedules.empty? %>
-                  <% exist = @exist_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:admin_id] == @admin.id } %>
-                  <% unless exist.work_start_time.empty? && exist.work_end_time.empty? %>
-                    <%= "#{exist.work_start_time}〜#{exist.work_end_time}" %>
-                  <% else %>
-                    <%= "休日" %>
-                  <% end %>
-                <% end %>
-              </div>
-              <% @employees.each do |employee| %>
-                <div class='input-field'>
-                  <% unless @exist_schedules.empty? %>
-                    <% exist = @exist_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:employee_id] == employee.id } %>
+                  <% exist = @exist_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:employee_id] == employee.id } %>
+                  <% unless exist.nil? %>
                     <% unless exist.work_start_time.empty? && exist.work_end_time.empty? %>
                       <%= "#{exist.work_start_time}〜#{exist.work_end_time}" %>
                     <% else %>
                       <%= "休日" %>
                     <% end %>
                   <% end %>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-
-      <div class='form'>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
+
+  </div>
+  <div class='form'>
   </div>
 </div>

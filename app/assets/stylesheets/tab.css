@@ -1,0 +1,144 @@
+/* --------------------
+      ヘッダータブ        
+   -------------------- */
+
+/*タブ切り替え全体のスタイル*/
+.tabs {
+  /* width: 90%;
+  margin: 30px auto; */
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/*タブのスタイル*/
+.tab-item {
+  height: 50px;
+  width: calc(100%/4);
+  border-bottom: 3px solid #5ab4bd;
+  background-color: #d9d9d9;
+  color: #565656;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  line-height: 50px;
+  display: block;
+  float: left;
+  transition: all 0.2s ease;
+}
+.employee-tabs .tab-item {
+  width: calc(100%/2);
+}
+.tab-item:hover {
+  opacity: 0.75;
+}
+
+/*ラジオボタンを全て消す*/
+input[name="tab-item"] {
+  display: none;
+}
+
+/*タブ切り替えの中身のスタイル*/
+.tab-content {
+  height: 580px;
+  /* padding: 40px 40px 0; */
+  padding: 0 40px;
+  clear: both;
+  overflow: scroll;
+}
+
+/*選択されているタブのスタイルを変える*/
+.tabs input:checked + .tab-item {
+  background-color: #5ab4bd;
+  /* background-color: #d65f4c; */
+  /* background-color: #b3d9ff; */
+  color: #fff;
+}
+
+
+/* --------------------
+      ユーザーメニュー        
+   -------------------- */
+
+.user-menu {
+  text-align: right;
+  position: fixed;
+  top: 70px;
+  right: 40px;
+  z-index: 2;
+}
+.user-menu span {
+  height: 30px;
+  /* margin: 20px 0 30px; */
+  color: #565656;
+  font-size: 20px;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+.user-menu span:before {
+  content: 'ログイン中：';
+  font-size: 15px;
+}
+.user-menu span:after {
+  content: '▼';
+  font-size: .7em;
+  margin-left: -4px;
+}
+.user-menu span:hover ul {
+  display: block;
+}
+.user-menu ul {
+  border-left: 1px solid #d8d8d8;
+  border-right: 1px solid #d8d8d8;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+  top: 25px;
+  right: 0;
+  display: none;
+  position: absolute;
+}
+.user-menu ul li {
+  width: 120px;
+  background-color: #f0f0f0;
+}
+.user-menu ul li a{
+  padding: 10px 15px;
+  border-bottom: 1px solid #d8d8d8;
+  color: #000000;
+  font-size: 15px;
+  text-align: left;
+  text-decoration: none;
+  display: block;
+}
+.user-menu ul li:hover a {
+  color: #38aef0;
+}
+
+
+/* --------------------
+      送信フォーム        
+   -------------------- */
+
+.form {
+  height: 70px;
+  width: 100%;
+  padding: 15px 40px;
+  background-color: #d9d9d9;
+  display: flex;
+  justify-content: flex-end;
+  bottom: 0;
+}
+.shift-page .form {
+  position: fixed;
+}
+.form .btn {
+  height: 40px;
+  padding: 13px 15px;
+  border: none;
+  border-radius: 2px;
+  margin-left: 10px;
+  background-color: #4c78d6;
+  color: #fafafa;
+  font-size: 13px;
+  text-decoration: none;
+}

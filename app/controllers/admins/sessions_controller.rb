@@ -27,6 +27,6 @@ class Admins::SessionsController < Devise::SessionsController
   # end
 
   def move_to_employee_home
-    redirect_to employees_home_index_path
+    redirect_to employees_home_path
   end
 end
