@@ -12,7 +12,7 @@ class WorkSchedulesController < ApplicationController
       @month = Date.today.month
       @days = Date.today.end_of_month.day
     elsif params["search_date(1i)"].empty? || params["search_date(2i)"].empty?
-      flash[:alert] = '⚠️⚠️⚠️ 年と月を入力してください ⚠️⚠️⚠️'
+      flash[:error] = '⚠️⚠️⚠️ 年と月を入力してください ⚠️⚠️⚠️'
       return redirect_back fallback_location: :search
     else
       @year = params["search_date(1i)"].to_i
@@ -32,7 +32,7 @@ class WorkSchedulesController < ApplicationController
       @month = Date.today.month
       @days = Date.today.end_of_month.day
     elsif params["search_date(1i)"].empty? || params["search_date(2i)"].empty?
-      flash[:alert] = '⚠️⚠️⚠️ 年と月を入力してください ⚠️⚠️⚠️'
+      flash[:error] = '⚠️⚠️⚠️ 年と月を入力してください ⚠️⚠️⚠️'
       return redirect_back fallback_location: :new
     else
       @year = params["search_date(1i)"].to_i
@@ -87,7 +87,7 @@ class WorkSchedulesController < ApplicationController
     @work_schedules = WorkScheduleCollection.new(@days, @admin, @employees)
     @calc_schedules = CalculationWorkSchedulesService.calculation(@year, @month, @days, @start_day, @admin, @employees)
     unless @calc_schedules
-      flash[:alert] = '⚠️⚠️⚠️ 登録パターンに対して従業員数が足りません ⚠️⚠️⚠️'
+      flash[:error] = '⚠️⚠️⚠️ 登録パターンに対して従業員数が足りません ⚠️⚠️⚠️'
       redirect_back fallback_location: :new
     end
   end

@@ -3,7 +3,7 @@
    --------------------------- */
 
 .account-page {
-  width: 980px;
+  width: 1000px;
   padding: 60px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -11,8 +11,11 @@
   background-color: #fff;
   display: flex;
 }
-.account-page__inner--left, .account-page__inner--right {
-  width: 50%;
+.account-page__inner--left {
+  width: 45%;
+}
+.account-page__inner--right {
+  width: 55%;
 }
 
 /* --- サイドメニュー --- */
@@ -119,4 +122,14 @@
 }
 #error_explanation li {
   font-size: 13px;
+}
+.login-flash-message {
+  height: 30px;
+  width: 90%;
+  padding: 7px;
+  border-radius: 3px;
+  margin: 0 auto 10px;
+  background-color: #f3c0c0;
+  color: #3e3a3a;
+  text-align: center;
 }

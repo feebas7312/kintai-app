@@ -1,5 +1,9 @@
-<% flash.each do |key, value| %>
-    <p class="alert alert-<%= key %>">
-      <%= value %>
-    </p>
+<% if flash.present? %>
+  <% flash.each do |key, value| %>
+    <div class='login-flash-message'>
+      <p class="alert-<%= key %>">
+        <%= value %>
+      </p>
+    </div>
+  <% end %>
 <% end %>

@@ -24,6 +24,11 @@
   border-radius: 2px;
   margin-bottom: 20px;
 }
+.error-alert h2 {
+  margin-bottom: 10px;
+  color: #d65f4c;
+  font-size: 14px;
+}
 .error-alert ul {
   padding-left: 17px;
   margin: 0;

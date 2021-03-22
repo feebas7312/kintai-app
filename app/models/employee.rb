@@ -29,8 +29,8 @@ class Employee < ApplicationRecord
     validates :joining_date
   end
 
-  validates :number, uniqueness: { scope: :admin_id }
-  validates :phone_number, format: { with: /\A\d{10}$|^\d{11}\z/, message: 'Input only number' }, if: :phone_number?
-  validates :employment_status_id, numericality: { message: 'Select' }
-  validates :salary_system_id, numericality: { message: 'Select' }
+  validates :number, uniqueness: { scope: :admin_id, message: 'が重複しています' }
+  validates :phone_number, format: { with: /\A\d{10}$|^\d{11}\z/, message: 'を数字のみで入力してください' }, if: :phone_number?
+  validates :employment_status_id, numericality: { message: 'を選択してください' }
+  validates :salary_system_id, numericality: { message: 'を選択してください' }
 end
