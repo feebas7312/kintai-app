@@ -1,98 +1,112 @@
-<div class='shift-page'>
-  <div class='wrapper'>
-    <%= render 'shared/side_bar' %>
+<div class="tabs">
+  <input type='radio' id='company-page' name='tab-item'>
+  <%= link_to '会社情報', company_path(current_admin), class: 'tab-item' %>
+  <input type='radio' id='staff-page' name='tab-item'>
+  <%= link_to 'スタッフ一覧', admins_home_path(current_admin), class: 'tab-item' %>
+  <input type='radio' id='index-page' name='tab-item'>
+  <%= link_to '勤務計画閲覧', work_schedules_path, class: 'tab-item' %>
+  <input type='radio' id='new-page' name='tab-item' checked>
+  <%= link_to '勤務計画作成', new_work_schedule_path, class: 'tab-item' %>
 
+  <div class="tab-content">
     <div class='main'>
-      <div class='main-header'>
-        <h2 class='page-title'>勤務計画作成</h2>
+      <div class='user-menu'>
+        <% if admin_signed_in? %>
+          <span><%= current_admin.last_name %><%= current_admin.first_name %>
+            <ul class="menu-lists">
+              <li><%= link_to '編集', edit_admin_registration_path %></li>
+              <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+            </ul>
+          </span>
+        <% end %>
       </div>
 
-      <div class='main-contents'>
-        <div class='search'>
-          <% if flash[:alert].present? %>
-            <div class='alert'><%= flash[:alert] %></div>
-          <% end %>
+      <div class='search'>
+        <% if flash[:alert].present? %>
+          <div class='alert'><%= flash[:alert] %></div>
+        <% end %>
 
-          <%= form_with url: new_work_schedule_path, method: :get, local: true do |f| %>
-            <div class='input-date-wrap'>
-              <%= raw sprintf(
-                          f.date_select(
-                            :search_date,
-                            class:'select-date',
-                            use_month_numbers: true,
-                            discard_day: true,
-                            prompt:'--',
-                            start_year: (Time.now.year - 2),
-                            end_year: (Time.now.year + 2),
-                            date_separator: '%s'),
-                          "<p> 年 </p>") + "<p> 月 </p>" %>
-              <%= f.submit "検索", class: 'search-btn' %>
-            </div>
+        <%= form_with url: new_work_schedule_path, method: :get, local: true do |f| %>
+          <div class='input-date-wrap'>
+            <%= raw sprintf(
+                        f.date_select(
+                          :search_date,
+                          class:'select-date',
+                          use_month_numbers: true,
+                          discard_day: true,
+                          prompt:'--',
+                          start_year: Time.now.year,
+                          end_year: (Time.now.year + 2),
+                          date_separator: '%s'),
+                        "<p> 年 </p>") + "<p> 月 </p>" %>
+            <%= f.submit "検索", class: 'search-btn' %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class='planning-content'>
+        <div class='member-content'>
+          <div class='date-field'><%= "#{@year}年#{@month}月度" %></div>
+          <div class='name-field'><%= @admin.last_name %></div>
+          <% @employees.each do |employee| %>
+            <div class='name-field'><%= employee.last_name %></div>
           <% end %>
         </div>
-
-        <div class='planning-content'>
-          <div class='member-content'>
-            <div class='date-field'><%= "#{@year}年#{@month}月度" %></div>
-            <div class='name-field'><%= @admin.last_name %></div>
-            <% @employees.each do |employee| %>
-              <div class='name-field'><%= employee.last_name %></div>
-            <% end %>
-          </div>
-
-          <%= form_with model: @work_schedules, url: work_schedules_path, method: :post, local: true do |f| %>
-            <% @work_schedules.collection.each_with_index do |work_schedule, i| %>
-              <div class='shift-content'>
-                <%= fields_for 'work_schedules[]', work_schedule do |field| %>
-                  <div class='date-field'><%= "#{@date[i].day}日#{@wdays[@date[i].wday]}" %></div>
+        <%= form_with model: @work_schedules, url: work_schedules_path, method: :post, local: true do |f| %>
+          <% @work_schedules.collection.each_with_index do |work_schedule, i| %>
+            <div class='shift-content'>
+              <%= fields_for 'work_schedules[]', work_schedule do |field| %>
+                <div class='date-field'><%= "#{@date[i].day}日#{@wdays[@date[i].wday]}" %></div>
+                <div class='input-field'>
+                  <%= field.hidden_field :work_date, value: @date[i] %>
+                  <%= field.hidden_field :admin_id, value: @admin.id %>
+                  <% if @exist_schedules.empty? %>
+                    <%= field.text_field :work_start_time, class: 'field' %>〜
+                    <%= field.text_field :work_end_time, class: 'field' %>
+                  <% else %>
+                    <%= field.hidden_field :id, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]).id %>
+                    <%= field.text_field :work_start_time, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]).work_start_time, class: 'field' %>〜
+                    <%= field.text_field :work_end_time, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]).work_end_time, class: 'field' %>
+                  <% end%>
+                </div>
+              <% end %>
+              <%= fields_for 'work_schedules[]', work_schedule do |field| %>
+                <% @employees.each do |employee| %>
                   <div class='input-field'>
                     <%= field.hidden_field :work_date, value: @date[i] %>
-                    <%= field.hidden_field :admin_id, value: @admin.id %>
+                    <%= field.hidden_field :employee_id, value: employee.id %>
                     <% if @exist_schedules.empty? %>
                       <%= field.text_field :work_start_time, class: 'field' %>〜
                       <%= field.text_field :work_end_time, class: 'field' %>
+                    <% elsif exist = @exist_schedules.find_by(employee_id: employee.id, work_date: @date[i]) %>
+                      <%= field.hidden_field :id, value: exist.id %>
+                      <%= field.text_field :work_start_time, value: exist.work_start_time, class: 'field' %>〜
+                      <%= field.text_field :work_end_time, value: exist.work_end_time, class: 'field' %>
                     <% else %>
-                      <%= field.hidden_field :id, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]).id %>
-                      <%= field.text_field :work_start_time, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]).work_start_time, class: 'field' %>〜
-                      <%= field.text_field :work_end_time, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]).work_end_time, class: 'field' %>
-                    <% end%>
+                      <%= field.text_field :work_start_time, class: 'field' %>〜
+                      <%= field.text_field :work_end_time, class: 'field' %>
+                    <% end %>
                   </div>
                 <% end %>
-                <%= fields_for 'work_schedules[]', work_schedule do |field| %>
-                  <% @employees.each do |employee| %>
-                    <div class='input-field'>
-                      <%= field.hidden_field :work_date, value: @date[i] %>
-                      <%= field.hidden_field :employee_id, value: employee.id %>
-                      <% if @exist_schedules.empty? %>
-                        <%= field.text_field :work_start_time, class: 'field' %>〜
-                        <%= field.text_field :work_end_time, class: 'field' %>
-                      <% else %>
-                        <%= field.hidden_field :id, value: @exist_schedules.find_by(employee_id: employee.id, work_date: @date[i]).id %>
-                        <%= field.text_field :work_start_time, value: @exist_schedules.find_by(employee_id: employee.id, work_date: @date[i]).work_start_time, class: 'field' %>〜
-                        <%= field.text_field :work_end_time, value: @exist_schedules.find_by(employee_id: employee.id, work_date: @date[i]).work_end_time, class: 'field' %>
-                      <% end %>
-                    </div>
-                  <% end %>
-                <% end %>
-              </div>
-              <% if i+1 == @days %>
-                <% break %>
               <% end %>
+            </div>
+            <% if i+1 == @days %>
+              <% break %>
             <% end %>
-            <%= f.hidden_field :year, value: @year %>
-            <%= f.hidden_field :month, value: @month %>
-            <%#= link_to '計算', calculation_work_schedules_path(year: @year, month: @month, days: @days), class: "planning-btn" %>
-            <%#= f.submit '保存', class: "search-btn" %>
-          <%# end %>
-        </div>
-      </div>
-
-      <div class='form'>
-          <%= link_to '削除', work_schedule_path(@admin.id, year: @year, month: @month, days: @days), method: :delete, class: 'btn' %>
-          <%= link_to '計算', calculation_work_schedules_path(year: @year, month: @month, days: @days), class: 'btn' %>
-          <%= f.submit '保存', class: 'btn' %>
-        <% end %>
+          <% end %>
+          <%= f.hidden_field :year, value: @year %>
+          <%= f.hidden_field :month, value: @month %>
+          <%#= link_to '計算', calculation_work_schedules_path(year: @year, month: @month, days: @days), class: "planning-btn" %>
+          <%#= f.submit '保存', class: "search-btn" %>
+        <%# end %>
       </div>
     </div>
+  </div>
+
+  <div class='form'>
+      <%= link_to '削除', work_schedule_path(@admin.id, year: @year, month: @month, days: @days), method: :delete, class: 'btn' %>
+      <%= link_to '計算', calculation_work_schedules_path(year: @year, month: @month, days: @days), class: 'btn' %>
+      <%= f.submit '保存', class: 'btn' %>
+    <% end %>
   </div>
 </div>

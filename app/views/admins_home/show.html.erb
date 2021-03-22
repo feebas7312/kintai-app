@@ -1,51 +1,71 @@
-<div class='wrapper'>
-  <%= render 'shared/side_bar' %>
+<div class="tabs">
+  <input type='radio' id='company-page' name='tab-item'>
+  <%= link_to '会社情報', company_path(current_admin), class: 'tab-item' %>
+  <input type='radio' id='staff-page' name='tab-item' checked>
+  <%= link_to 'スタッフ一覧', admins_home_path(current_admin), class: 'tab-item' %>
+  <input type='radio' id='index-page' name='tab-item'>
+  <%= link_to '勤務計画閲覧', work_schedules_path, class: 'tab-item' %>
+  <input type='radio' id='new-page' name='tab-item'>
+  <%= link_to '勤務計画作成', new_work_schedule_path, class: 'tab-item' %>
 
-  <div class='main'>
-    <div class='main-header'>
-      <h2 class='page-title'>スタッフ一覧</h2>
-    </div>
-
-    <div class='main-contents'>
-      <div class='admin-content'>
-        <div class='admin-content__block'>
-          <div class='content-header'>
-            <div class='number'>社員番号</div>
-            <div class='name'>名前</div>
-            <div class='joining-date'>入社日</div>
-            <div class='employment-status'>雇用形態</div>
-            <div class='salary-system'>給与体系</div>
-          </div>
-          <div class='member-content'>
-            <div class='number'><%= link_to @admin.number, edit_admin_registration_path %></div>
-            <div class='name'><%= @admin.last_name %><%= @admin.first_name %></div>
-            <div class='joining-date'><%= @admin.joining_date %></div>
-            <div class='employment-status'><%= @admin.employment_status.name %></div>
-            <div class='salary-system'><%= @admin.salary_system.name %></div>
-          </div>
-        </div>
-        <div class='edit-btn'>
-          <%= link_to 'パターン登録', new_admin_work_pattern_path, class: 'btn' %>
-        </div>
-      </div>
-      <% @employees.each do |employee| %>
-        <div class='employee-content'>
-          <div class='member-content'>
-            <div class='number'><%= link_to employee.number, edit_employee_registration_path(employee_id: employee.id) %></div>
-            <div class='name'><%= employee.last_name %><%= employee.first_name %></div>
-            <div class='joining-date'><%= employee.joining_date %></div>
-            <div class='employment-status'><%= employee.employment_status.name %></div>
-            <div class='salary-system'><%= employee.salary_system.name %></div>
-          </div>
-          <div class='edit-btn'>
-            <%= link_to 'パターン登録', new_employee_work_pattern_path(employee_id: employee.id), class: 'btn' %>
-          </div>
-        </div>
+  <div class="tab-content">
+    <div class='user-menu'>
+      <% if admin_signed_in? %>
+        <span><%= current_admin.last_name %><%= current_admin.first_name %>
+          <ul class="menu-lists">
+            <li><%= link_to '編集', edit_admin_registration_path %></li>
+            <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+          </ul>
+        </span>
       <% end %>
     </div>
 
-    <div class='form'>
-      <%= link_to 'スタッフを追加', new_employee_registration_path, class: 'btn' %>
+    <div class='main'>
+      <div class='staff-content'>
+        <div class='staff-header'><%= @admin.company.name %></div>
+        <div class='admin-content'>
+          <div class='admin-content__block'>
+            <div class='content-header'>
+              <div class='number'>社員番号</div>
+              <div class='name'>名前</div>
+              <div class='joining-date'>入社日</div>
+              <div class='employment-status'>雇用形態</div>
+              <div class='salary-system'>給与体系</div>
+              <div class='birth-date'>生年月日</div>
+            </div>
+            <div class='member-content'>
+              <div class='number'><%= link_to @admin.number, edit_admin_registration_path %></div>
+              <div class='name'><%= @admin.last_name %><%= @admin.first_name %></div>
+              <div class='joining-date'><%= @admin.joining_date %></div>
+              <div class='employment-status'><%= @admin.employment_status.name %></div>
+              <div class='salary-system'><%= @admin.salary_system.name %></div>
+              <div class='birth-date'><%= @admin.birth_date %></div>
+            </div>
+          </div>
+          <div class='edit-btn'>
+            <%= link_to 'パターン登録', new_admin_work_pattern_path, class: 'btn' %>
+          </div>
+        </div>
+        <% @employees.each do |employee| %>
+          <div class='employee-content'>
+            <div class='member-content'>
+              <div class='number'><%= link_to employee.number, edit_employee_registration_path(employee_id: employee.id) %></div>
+              <div class='name'><%= employee.last_name %><%= employee.first_name %></div>
+              <div class='joining-date'><%= employee.joining_date %></div>
+              <div class='employment-status'><%= employee.employment_status.name %></div>
+              <div class='salary-system'><%= employee.salary_system.name %></div>
+              <div class='birth-date'><%= @admin.birth_date %></div>
+            </div>
+            <div class='edit-btn'>
+              <%= link_to 'パターン登録', new_employee_work_pattern_path(employee_id: employee.id), class: 'btn' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
+  </div>
+
+  <div class='form'>
+    <%= link_to 'スタッフを追加', new_employee_registration_path, class: 'btn' %>
   </div>
 </div>
