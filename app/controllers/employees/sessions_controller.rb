@@ -27,7 +27,7 @@ class Employees::SessionsController < Devise::SessionsController
   # end
 
   def after_sign_in_path_for(resource)
-    employees_home_index_path
+    employees_home_path(current_employee)
   end
 
   def move_to_admin_home
