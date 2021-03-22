@@ -66,9 +66,6 @@
         </div>
         <div class="field-input"><%= f.password_field :current_password, autocomplete: "current-password" %></div>
 
-        <div class="field-label"><%= f.label :joining_date, '入社日' %><span class="indispensable">必須</span></div>
-        <div class="field-input"><%= f.date_field :joining_date %></div>
-
         <div class="field-label"><%= f.label :employment_status_id, '雇用形態' %><span class="indispensable">必須</span></div>
         <div class="field-input"><%= f.collection_select(:employment_status_id, EmploymentStatus.all, :id, :name, { include_blank: "---" }, { class: "select-box" }) %></div>
 
