@@ -1,0 +1,44 @@
+ja:
+  activerecord:
+    attributes:
+      company:
+        name: 会社名
+        postal_code: 郵便番号
+        address: 所在地
+        phone_number: 電話番号
+        cutoff_date_id: 締日
+        opening_time: 開店時間
+        closing_time: 閉店時間
+      admin:
+        number: 社員番号
+        last_name: 姓
+        first_name: 名
+        birth_date: 生年月日
+        phone_number: 電話番号
+        joining_date: 入社日
+        employment_status_id: 雇用形態
+        salary_system_id: 給与体系
+        wages: 給与
+      employee:
+        number: 社員番号
+        last_name: 姓
+        first_name: 名
+        birth_date: 生年月日
+        phone_number: 電話番号
+        joining_date: 入社日
+        employment_status_id: 雇用形態
+        salary_system_id: 給与体系
+        wages: 給与
+      work_pattern:
+        start_time: 出勤時間
+        end_time: 退勤時間
+      work_schedule:
+        work_date: 出勤日
+        work_start_time: 出勤時間
+        work_end_time: 退勤時間
+    models:
+      company: 会社情報
+      work_pattern: 出勤パターン
+      admin_work_pattern: 責任者の出勤パターン
+      employee_work_pattern: スタッフの出勤パターン
+      work_schedule: 勤務計画
