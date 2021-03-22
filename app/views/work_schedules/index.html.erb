@@ -40,8 +40,8 @@
       </div>
 
       <div class='search'>
-        <% if flash[:alert].present? %>
-          <div class='alert'><%= flash[:alert] %></div>
+        <% if flash[:error].present? %>
+          <div class='alert'><%= flash[:error] %></div>
         <% end %>
 
         <%= form_with url: work_schedules_path, method: :get, local: true do |f| %>

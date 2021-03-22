@@ -7,9 +7,10 @@
       <%= link_to 'スタッフの方はこちら', new_employee_session_path %>
     </div>
   </div>
-  
+
   <div class="account-page__inner--right">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= render "shared/flash", model: f.object %>
       <div class="field">
         <div class="field-label">
           <%= f.label :number, '社員番号' %>
