@@ -4,18 +4,29 @@
 
 /* --- 詳細ページ --- */
 
+.company-description {
+  padding: 0 30px;
+  margin-top: 70px;
+}
 .company-header {
-  margin: 0 0 10px 10px;
+  width: 200px;
+  padding: 10px 20px;
+  border-left: 5px solid #5ab4bd;
+  margin: 0 0 15px 10px;
+  background-color: #f4f4f4;
+  color: #494949;
   font-size: 18px;
+  text-align: center;
 }
 .company-content {
-  width: 1060px;
+  width: 100%;
   border: 1px solid #ddd;
   border-radius: 5px;
+  margin-bottom: 60px;
   display: flex;
 }
 .company-content__left, .company-content__right {
-  width: 530px;
+  width: 50%;
   padding: 0 10px;
 }
 .desc-text {
@@ -23,13 +34,20 @@
   margin: 15px;
 }
 .pattern-header {
-  margin: 50px 0 10px 10px;
+  width: 200px;
+  padding: 10px 20px;
+  border-left: 5px solid #5ab4bd;
+  margin: 0 0 15px 10px;
+  background-color: #f4f4f4;
+  color: #494949;
   font-size: 18px;
+  text-align: center;
 }
 .pattern-content {
-  width: 1060px;
+  width: 100%;
   border: 1px solid #ddd;
   border-radius: 5px;
+  margin-bottom: 70px;
 }
 .pattern-list {
   padding: 5px 0;
