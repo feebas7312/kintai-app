@@ -8,7 +8,9 @@
   </div>
 
   <div class="account-page__inner--right">
-    <%= render "shared/flash" %>
+    <% if flash[:alert].present? %>
+      <div class='alert'><%= flash[:alert] %></div>
+    <% end %>
 
     <div class='employee'>
       <div class='field-label'>

@@ -16,6 +16,7 @@ class Employee < ApplicationRecord
 
   belongs_to :admin
   has_many :employee_work_patterns, dependent: :destroy
+  has_many :work_schedules, dependent: :destroy
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :employment_status
