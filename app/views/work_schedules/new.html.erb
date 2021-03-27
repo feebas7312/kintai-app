@@ -63,10 +63,13 @@
                   <% if @exist_schedules.empty? %>
                     <%= field.text_field :work_start_time, class: 'field' %>〜
                     <%= field.text_field :work_end_time, class: 'field' %>
+                  <% elsif exist = @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]) %>
+                    <%= field.hidden_field :id, value: exist.id %>
+                    <%= field.text_field :work_start_time, value: exist.work_start_time, class: 'field' %>〜
+                    <%= field.text_field :work_end_time, value: exist.work_end_time, class: 'field' %>
                   <% else %>
-                    <%= field.hidden_field :id, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]).id %>
-                    <%= field.text_field :work_start_time, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]).work_start_time, class: 'field' %>〜
-                    <%= field.text_field :work_end_time, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]).work_end_time, class: 'field' %>
+                    <%= field.text_field :work_start_time, class: 'field' %>〜
+                    <%= field.text_field :work_end_time, class: 'field' %>
                   <% end%>
                 </div>
               <% end %>

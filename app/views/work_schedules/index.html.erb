@@ -74,13 +74,15 @@
         <% @days.times do |i| %>
           <div class='shift-content'>
             <div class='date-field'><%= "#{@date[i].day}日#{@wdays[@date[i].wday]}" %></div>
-            <div class='input-field admin-input-field'>
+            <div class='input-field'>
               <% unless @exist_schedules.empty? %>
                 <% exist = @exist_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:admin_id] == @admin.id } %>
-                <% unless exist.work_start_time.empty? && exist.work_end_time.empty? %>
-                  <%= "#{exist.work_start_time}〜#{exist.work_end_time}" %>
-                <% else %>
-                  <%= "休日" %>
+                <% unless exist.nil? %>
+                  <% unless exist.work_start_time.empty? && exist.work_end_time.empty? %>
+                    <%= "#{exist.work_start_time}〜#{exist.work_end_time}" %>
+                  <% else %>
+                    <%= "休日" %>
+                  <% end %>
                 <% end %>
               <% end %>
             </div>

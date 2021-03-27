@@ -64,7 +64,9 @@
                   <%= field.text_field :work_end_time, value: calc[:work_end_time], class: "field" %>
                   <%= field.hidden_field :admin_id, value: @admin.id %>
                   <% unless @exist_schedules.empty? %>
-                    <%= field.hidden_field :id, value: @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]).id %>
+                    <% if exist = @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]) %>
+                      <%= field.hidden_field :id, value: exist.id %>
+                    <% end %>
                   <% end%>
                 </div>
               <% end %>
