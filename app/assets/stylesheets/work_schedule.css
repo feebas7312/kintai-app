@@ -60,6 +60,35 @@
   border: 1px solid black;
   text-align: center;
 }
+.weekly-time {
+  height: 30px;
+  border-top: double 3px black;
+  border-bottom: double 3px black;
+  background-color: #fff;
+}
+.weekly-time .sum-date-field {
+  width: 160px;
+  padding-top: 5px;
+  text-align: center;
+}
+.month-field {
+  margin-top: 20px;
+}
+.month-time {
+  height: 30px;
+  /* margin-top: 20px; */
+  border-top: dashed 1px black;
+  border-bottom: dashed 1px black;
+  background-color: #fff;
+}
+.month-time .sum-date-field {
+  width: 160px;
+  padding-top: 5px;
+  text-align: right;
+}
+.sum-field {
+  width: 150px;
+}
 
 /* --- エラーメッセージ --- */
 
