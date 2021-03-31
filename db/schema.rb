@@ -91,6 +91,8 @@ ActiveRecord::Schema.define(version: 2021_02_16_015434) do
   create_table "work_patterns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "start_time", null: false
     t.string "end_time", null: false
+    t.integer "break_time", null: false
+    t.integer "work_time", null: false
     t.bigint "company_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -99,8 +101,8 @@ ActiveRecord::Schema.define(version: 2021_02_16_015434) do
 
   create_table "work_schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "work_date", null: false
-    t.string "work_start_time"
-    t.string "work_end_time"
+    t.string "start_time"
+    t.string "end_time"
     t.bigint "admin_id"
     t.bigint "employee_id"
     t.datetime "created_at", precision: 6, null: false
