@@ -121,6 +121,8 @@
 | ---------- | ---------- | ------------------------------ |
 | start_time | string     | null: false                    |
 | end_time   | string     | null: false                    |
+| break_time | integer    | null: false                    |
+| work_time  | integer    | null: false                    |
 | company    | references | null: false, foreign_key: true |
 
 ### Association
@@ -131,11 +133,11 @@
 
 ## admin_work_patterns テーブル
 
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| admin           | references | null: false, foreign_key: true |
-| work_pattern    | references | null: false, foreign_key: true |
-| possibility     | boolean    | null: false, default: false    |
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| admin        | references | null: false, foreign_key: true |
+| work_pattern | references | null: false, foreign_key: true |
+| possibility  | boolean    | null: false, default: false    |
 
 ### Association
 
@@ -144,11 +146,11 @@
 
 ## employee_work_patterns テーブル
 
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| employee        | references | null: false, foreign_key: true |
-| work_pattern    | references | null: false, foreign_key: true |
-| possibility     | boolean    | null: false, default: false    |
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| employee     | references | null: false, foreign_key: true |
+| work_pattern | references | null: false, foreign_key: true |
+| possibility  | boolean    | null: false, default: false    |
 
 ### Association
 
@@ -157,13 +159,13 @@
 
 ## work_schedules テーブル
 
-| Column          | Type       | Options                           |
-| --------------- | ---------- | --------------------------------- |
-| work_date       | date       | null: false                       |
-| work_start_time | string     | null: false                       |
-| work_end_time   | string     | null: false                       |
-| admin           | references | foreign_key: true, optional: true |
-| employee        | references | foreign_key: true, optional: true |
+| Column     | Type       | Options                           |
+| ---------- | ---------- | --------------------------------- |
+| work_date  | date       | null: false                       |
+| start_time | string     | null: false                       |
+| end_time   | string     | null: false                       |
+| admin      | references | foreign_key: true, optional: true |
+| employee   | references | foreign_key: true, optional: true |
 
 ### Association
 

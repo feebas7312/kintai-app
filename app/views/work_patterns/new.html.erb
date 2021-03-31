@@ -10,19 +10,20 @@
   <div class="account-page__inner--right">
     <%= form_with model: [@company, @work_pattern], url: company_work_patterns_path(@company), local: true do |f| %>
       <%= render 'shared/error_messages', model: f.object %>
-      <div class='field'>
-        <div class='field-label'>
-          <%= f.label :start_time, '出勤時間' %>
-        </div>
-        <div class='field-input'>
-          <%= f.text_field :start_time %>
-        </div>
-        <div class='field-label'>
-          <%= f.label :end_time, '退勤時間' %>
-        </div>
-        <div class='field-input'>
-          <%= f.text_field :end_time %>
-        </div>
+      <div class='field' id='pattern-form'>
+        <div class='field-label'><%= f.label :start_time, '出勤時間' %></div>
+        <div class='field-input'><%= f.text_field :start_time, autofocus: true, placeholder: "例）0900", maxlength: "4", id: "start-time" %></div>
+
+        <div class='field-label'><%= f.label :end_time, '退勤時間' %></div>
+        <div class='field-input'><%= f.text_field :end_time, placeholder: "例）1800", maxlength: "4", id: "end-time" %></div>
+
+        <div class='field-label'><%= f.label :break_time, '休憩時間（分）' %></div>
+        <div class='field-input'><%= f.text_field :break_time, placeholder: "例）60", maxlength: "3", id: "break-time" %></div>
+
+        <div class='field-label'><%= f.label :work_time, '労働時間（時間）' %></div>
+        <div class='field-input'><%= f.text_field :work_time_disp, readonly: true, id: "work-time-disp" %></div>
+        <%= f.hidden_field :work_time, id: "work-time" %>
+
         <div class="actions">
           <%= f.submit '登録', class: 'btn' %>
         </div>

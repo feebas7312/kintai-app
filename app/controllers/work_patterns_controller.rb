@@ -32,6 +32,6 @@ class WorkPatternsController < ApplicationController
   private
 
   def work_pattern_params
-    params.require(:work_pattern).permit(:start_time, :end_time).merge(company_id: params[:company_id])
+    params.require(:work_pattern).permit(:start_time, :end_time, :break_time, :work_time).merge(company_id: params[:company_id])
   end
 end

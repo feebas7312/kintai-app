@@ -46,7 +46,9 @@
             <% if @work_patterns %>
               <% @work_patterns.each do |pattern| %>
                 <div class='pattern-list'>
-                  <%= pattern.start_time %>〜<%= pattern.end_time %>
+                  <p class='start-time end-time'><%= "勤務時間帯：#{pattern.start_time}" %>〜<%= pattern.end_time %></p>
+                  <p class='break-time'><%= "休憩時間：#{pattern.break_time}分" %></p>
+                  <p class='work-time'><%= "労働時間：#{number_with_precision(pattern.work_time.to_f / 60.to_f, precision: 2, strip_insignificant_zeros: true)}時間" %></p>
                   <%= link_to '削除', company_work_pattern_path(@company, pattern), method: :delete, class: 'btn' %>
                 </div>
               <% end %>
