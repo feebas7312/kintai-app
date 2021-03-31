@@ -48,8 +48,8 @@ class CalculationWorkSchedulesService
           pattern = WorkPattern.find(key.to_s)
           num = probability_member.length
           result = probability_member[rand(num)]
-          schedule[result.to_s.to_sym][:work_start_time] = pattern.start_time
-          schedule[result.to_s.to_sym][:work_end_time] = pattern.end_time
+          schedule[result.to_s.to_sym][:start_time] = pattern.start_time
+          schedule[result.to_s.to_sym][:end_time] = pattern.end_time
           except_member << result   
         rescue => exception
           return false
@@ -57,7 +57,7 @@ class CalculationWorkSchedulesService
       end
 
       schedule.each do |key, value|
-        if value[:work_start_time] == "" && value[:work_end_time] == ""
+        if value[:start_time] == "" && value[:end_time] == ""
           consecutive_work[key] = 0
         else
           consecutive_work[key] += 1
@@ -83,15 +83,15 @@ class CalculationWorkSchedulesService
     schedule = {}
     schedule[admin.number.to_sym] = {
       work_date: "",
-      work_start_time: "",
-      work_end_time: "",
+      start_time: "",
+      end_time: "",
       admin_id: admin.id
     }
     employees.each do |employee|
       schedule[employee.number.to_sym] = {
         work_date: "",
-        work_start_time: "",
-        work_end_time: "",
+        start_time: "",
+        end_time: "",
         employee_id: employee.id
       }
     end

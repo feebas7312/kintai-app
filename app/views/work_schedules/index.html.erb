@@ -78,8 +78,8 @@
               <% unless @exist_schedules.empty? %>
                 <% exist = @exist_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:admin_id] == @admin.id } %>
                 <% unless exist.nil? %>
-                  <% unless exist.work_start_time.empty? && exist.work_end_time.empty? %>
-                    <%= "#{exist.work_start_time}〜#{exist.work_end_time}" %>
+                  <% unless exist.start_time.empty? && exist.end_time.empty? %>
+                    <%= "#{exist.start_time}〜#{exist.end_time}" %>
                   <% else %>
                     <%= "休日" %>
                   <% end %>
@@ -91,8 +91,8 @@
                 <% unless @exist_schedules.empty? %>
                   <% exist = @exist_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:employee_id] == employee.id } %>
                   <% unless exist.nil? %>
-                    <% unless exist.work_start_time.empty? && exist.work_end_time.empty? %>
-                      <%= "#{exist.work_start_time}〜#{exist.work_end_time}" %>
+                    <% unless exist.start_time.empty? && exist.end_time.empty? %>
+                      <%= "#{exist.start_time}〜#{exist.end_time}" %>
                     <% else %>
                       <%= "休日" %>
                     <% end %>
@@ -101,7 +101,39 @@
               </div>
             <% end %>
           </div>
+          <% if i==6 || i==13 || i==20 || i+1==@days %>
+            <div class='weekly-time'>
+              <div class='sum-date-field'><%= "第#{i/8+1}週合計" %></div>
+              <div class='sum-field'></div>
+              <% @employees.each do |employee| %>
+                <div class='sum-field'></div>
+              <% end %>
+            </div>
+          <% end %>
         <% end %>
+        <div class='month-field'>
+          <div class='month-time'>
+            <div class='sum-date-field'><%= "月末推定時間" %></div>
+            <div class='sum-field'></div>
+            <% @employees.each do |employee| %>
+              <div class='sum-field'></div>
+            <% end %>
+          </div>
+          <div class='month-time'>
+            <div class='sum-date-field'><%= "月初計画時間" %></div>
+            <div class='sum-field'></div>
+            <% @employees.each do |employee| %>
+              <div class='sum-field'></div>
+            <% end %>
+          </div>
+          <div class='month-time'>
+            <div class='sum-date-field'><%= "計画差異" %></div>
+            <div class='sum-field'></div>
+            <% @employees.each do |employee| %>
+              <div class='sum-field'></div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
 

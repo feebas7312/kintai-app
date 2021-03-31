@@ -60,8 +60,8 @@
                 <div class='input-field'>
                   <% calc = @calc_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:admin_id] == @admin.id } %>
                   <%= field.hidden_field :work_date, value: @date[i] %>
-                  <%= field.text_field :work_start_time, value: calc[:work_start_time], class: "field" %>〜
-                  <%= field.text_field :work_end_time, value: calc[:work_end_time], class: "field" %>
+                  <%= field.text_field :start_time, value: calc[:start_time], class: "field" %>〜
+                  <%= field.text_field :end_time, value: calc[:end_time], class: "field" %>
                   <%= field.hidden_field :admin_id, value: @admin.id %>
                   <% unless @exist_schedules.empty? %>
                     <% if exist = @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]) %>
@@ -75,8 +75,8 @@
                   <div class='input-field'>
                     <% calc = @calc_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:employee_id] == employee.id } %>
                     <%= field.hidden_field :work_date, value: @date[i] %>
-                    <%= field.text_field :work_start_time, value: calc[:work_start_time], class: "field" %>〜
-                    <%= field.text_field :work_end_time, value: calc[:work_end_time], class: "field" %>
+                    <%= field.text_field :start_time, value: calc[:start_time], class: "field" %>〜
+                    <%= field.text_field :end_time, value: calc[:end_time], class: "field" %>
                     <%= field.hidden_field :employee_id, value: employee.id %>
                     <% unless @exist_schedules.empty? %>
                       <% if exist = @exist_schedules.find_by(employee_id: employee.id, work_date: @date[i]) %>
