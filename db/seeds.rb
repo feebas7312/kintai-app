@@ -48,8 +48,8 @@ end
 
 WorkPattern.create(
   [
-    { start_time: '0900', end_time: '1800', company_id: 1 },
-    { start_time: '1100', end_time: '2000', company_id: 1 },
-    { start_time: '1300', end_time: '2200', company_id: 1 }
+    { start_time: '0900', end_time: '1800', break_time: 60, work_time: 480, company_id: 1 },
+    { start_time: '1100', end_time: '2000', break_time: 60, work_time: 480, company_id: 1 },
+    { start_time: '1300', end_time: '2200', break_time: 60, work_time: 480, company_id: 1 }
   ]
 )
