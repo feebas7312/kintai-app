@@ -50,6 +50,8 @@ class CalculationWorkSchedulesService
           result = probability_member[rand(num)]
           schedule[result.to_s.to_sym][:start_time] = pattern.start_time
           schedule[result.to_s.to_sym][:end_time] = pattern.end_time
+          schedule[result.to_s.to_sym][:break_time] = pattern.break_time
+          schedule[result.to_s.to_sym][:work_time] = pattern.work_time
           except_member << result   
         rescue => exception
           return false
@@ -85,6 +87,8 @@ class CalculationWorkSchedulesService
       work_date: "",
       start_time: "",
       end_time: "",
+      break_time: "",
+      work_time: "",
       admin_id: admin.id
     }
     employees.each do |employee|
@@ -92,6 +96,8 @@ class CalculationWorkSchedulesService
         work_date: "",
         start_time: "",
         end_time: "",
+        break_time: "",
+        work_time: "",
         employee_id: employee.id
       }
     end
