@@ -62,80 +62,93 @@
         <% end %>
       </div>
 
-      <div class='planning-content'>
-        <div class='member-content'>
-          <div class='date-field'><%= "#{@year}年#{@month}月度" %></div>
-          <div class='name-field'><%= @admin.last_name %></div>
-          <% @employees.each do |employee| %>
-            <div class='name-field'><%= employee.last_name %></div>
-          <% end %>
+      <div class='schedule-content index-page'>
+        <div class='date-field'>
+          <div class='date-header'><%= "#{@year}年#{@month}月度" %></div>
+          <div class='date'>
+            <% @days.times do |i| %>
+              <div class='day'><%= "#{@date[i].day}日#{@wdays[@date[i].wday]}" %></div>
+              <% if i==6 %>
+                <div class='work-time__week-total__desc'><%= "第1週合計" %></div>
+              <% elsif i==13 %>
+                <div class='work-time__week-total__desc'><%= "第2週合計" %></div>
+              <% elsif i==20 %>
+                <div class='work-time__week-total__desc'><%= "第3週合計" %></div>
+              <% elsif i+1==@days %>
+                <div class='work-time__week-total__desc'><%= "第4週合計" %></div>
+              <% end %>
+            <% end %>
+          </div>
+          <div class='work-time__month-total__desc'><%= "月末推定時間" %></div>
         </div>
 
-        <% @days.times do |i| %>
-          <div class='shift-content'>
-            <div class='date-field'><%= "#{@date[i].day}日#{@wdays[@date[i].wday]}" %></div>
-            <div class='input-field'>
-              <% unless @exist_schedules.empty? %>
-                <% exist = @exist_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:admin_id] == @admin.id } %>
-                <% unless exist.nil? %>
-                  <% unless exist.start_time.empty? && exist.end_time.empty? %>
-                    <%= "#{exist.start_time}〜#{exist.end_time}" %>
-                  <% else %>
-                    <%= "休日" %>
-                  <% end %>
-                <% end %>
-              <% end %>
-            </div>
-            <% @employees.each do |employee| %>
-              <div class='input-field'>
-                <% unless @exist_schedules.empty? %>
-                  <% exist = @exist_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:employee_id] == employee.id } %>
-                  <% unless exist.nil? %>
-                    <% unless exist.start_time.empty? && exist.end_time.empty? %>
-                      <%= "#{exist.start_time}〜#{exist.end_time}" %>
-                    <% else %>
-                      <%= "休日" %>
+        <div class='month-input-field'>
+          <div class='name-header'>
+            <div class='name'><%= @admin.last_name %></div>
+            <div class='break'>休憩時間</div>
+          </div>
+          <% 4.times do |week| %>
+            <div class='week-input-field'>
+              <% @week_days[week].times do |day| %>
+                <div class='input-field'>
+                  <% unless @exist_schedules.empty? %>
+                    <% exist = @exist_schedules.find{ |schedule| schedule[:work_date] == @date[day+week*7] && schedule[:admin_id] == @admin.id } %>
+                    <% unless exist.nil? %>
+                      <% unless exist.start_time.empty? && exist.end_time.empty? %>
+                        <div class='index-field'>
+                          <div class='exist-time'><%= "#{exist.start_time}〜#{exist.end_time}" %></div>
+                          <div class='break-time'><%= exist.break_time %></div>
+                          <div class='hidden'><%= exist.work_time %></div>
+                        </div>
+                      <% else %>
+                        <div class='break-day'><%= "休日" %></div>
+                      <% end %>
                     <% end %>
                   <% end %>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-          <% if i==6 || i==13 || i==20 || i+1==@days %>
-            <div class='weekly-time'>
-              <div class='sum-date-field'><%= "第#{i/8+1}週合計" %></div>
-              <div class='sum-field'></div>
-              <% @employees.each do |employee| %>
-                <div class='sum-field'></div>
+                </div>
               <% end %>
+              <div class='work-time__week-total'></div>
             </div>
           <% end %>
-        <% end %>
-        <div class='month-field'>
-          <div class='month-time'>
-            <div class='sum-date-field'><%= "月末推定時間" %></div>
-            <div class='sum-field'></div>
-            <% @employees.each do |employee| %>
-              <div class='sum-field'></div>
-            <% end %>
-          </div>
-          <div class='month-time'>
-            <div class='sum-date-field'><%= "月初計画時間" %></div>
-            <div class='sum-field'></div>
-            <% @employees.each do |employee| %>
-              <div class='sum-field'></div>
-            <% end %>
-          </div>
-          <div class='month-time'>
-            <div class='sum-date-field'><%= "計画差異" %></div>
-            <div class='sum-field'></div>
-            <% @employees.each do |employee| %>
-              <div class='sum-field'></div>
-            <% end %>
-          </div>
+          <div class='work-time__month-total'></div>
         </div>
+
+
+        <% @employees.each do |employee| %>
+          <div class='month-input-field'>
+            <div class='name-header'>
+              <div class='name'><%= employee.last_name %></div>
+              <div class='break'>休憩時間</div>
+            </div>
+            <% 4.times do |week| %>
+              <div class='week-input-field'>
+                <% @week_days[week].times do |day| %>
+                  <div class='input-field'>
+                    <% unless @exist_schedules.empty? %>
+                      <% exist = @exist_schedules.find{ |schedule| schedule[:work_date] == @date[day+week*7] && schedule[:employee_id] == employee.id } %>
+                      <% unless exist.nil? %>
+                        <% unless exist.start_time.empty? && exist.end_time.empty? %>
+                          <div class='index-field'>
+                            <div class='exist-time'><%= "#{exist.start_time}〜#{exist.end_time}" %></div>
+                            <div class='break-time'><%= exist.break_time %></div>
+                            <div class='hidden'><%= exist.work_time %></div>
+                          </div>
+                        <% else %>
+                          <div class='break-day'><%= "休日" %></div>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% end %>
+                <div class='work-time__week-total'></div>
+              </div>
+            <% end %>
+            <div class='work-time__month-total'></div>
+          </div>
+        <% end %>
       </div>
     </div>
+  </div>
 
   </div>
   <div class='form'>
