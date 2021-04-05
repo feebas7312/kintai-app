@@ -17,79 +17,6 @@
   line-height: 30px;
 }
 
-/* --- シフト欄 --- */
-
-.planning-content {
-  margin: 130px 40px 30px 0;
-  display: inline-block;
-  position: relative;
-  z-index: 3;
-}
-.planning-content .member-content {
-  background-color: #7fcdd4;
-  display: flex;
-}
-.shift-content {
-  background-color: #fff;
-  display: flex;
-}
-.shift-content:nth-child(odd) {
-  background-color: #eee;
-}
-.shift-content .field {
-  width: 50px;
-}
-.date-field {
-  height: 30px;
-  width: 160px;
-  padding-top: 7px;
-  border: 1px solid black;
-  text-align: center;
-}
-.name-field {
-  height: 30px;
-  width: 150px;
-  padding-top: 7px;
-  border: 1px solid black;
-  text-align: center;
-}
-.input-field {
-  height: 30px;
-  width: 150px;
-  padding-top: 5px;
-  border: 1px solid black;
-  text-align: center;
-}
-.weekly-time {
-  height: 30px;
-  border-top: double 3px black;
-  border-bottom: double 3px black;
-  background-color: #fff;
-}
-.weekly-time .sum-date-field {
-  width: 160px;
-  padding-top: 5px;
-  text-align: center;
-}
-.month-field {
-  margin-top: 20px;
-}
-.month-time {
-  height: 30px;
-  /* margin-top: 20px; */
-  border-top: dashed 1px black;
-  border-bottom: dashed 1px black;
-  background-color: #fff;
-}
-.month-time .sum-date-field {
-  width: 160px;
-  padding-top: 5px;
-  text-align: right;
-}
-.sum-field {
-  width: 150px;
-}
-
 /* --- エラーメッセージ --- */
 
 .alert {
@@ -102,4 +29,158 @@
   color: #3e3a3a;
   text-align: center;
   z-index: 1;
+}
+
+/* --- 作成ページ --- */
+
+.schedule-content {
+  margin: 130px 40px 30px 0;
+  display: flex;
+  position: relative;
+  z-index: 3;
+}
+.schedule-content .date-field .date-header {
+  height: 40px;
+  width: 160px;
+  padding-top: 12px;
+  border: 1px solid black;
+  background-color: #7fcdd4;
+  text-align: center;
+}
+.schedule-content .date-field .date {
+  background-color: #fff;
+  text-align: center;
+}
+.schedule-content .date-field .date .day {
+  height: 30px;
+  width: 160px;
+  padding-top: 7px;
+  border: 1px solid black;
+}
+.schedule-content .date-field .date .day:nth-child(even) {
+  background-color: #e0e0e0;
+}
+.schedule-content .date-field .date .work-time__week-total__desc {
+  height: 30px;
+  width: 160px;
+  padding-top: 5px;
+  border-top: double 3px black;
+  border-bottom: double 3px black;
+}
+.schedule-content .date-field .work-time__month-total__desc {
+  height: 30px;
+  width: 160px;
+  padding-top: 7px;
+  border-top: dashed 1px black;
+  border-bottom: dashed 1px black;
+  margin-top: 30px;
+  text-align: center;
+}
+.schedule-content .staff-field {
+  display: flex;
+}
+.schedule-content .name-header {
+  height: 40px;
+  width: 200px;
+  border: 1px solid black;
+  background-color: #7fcdd4;
+  text-align: center;
+  display: flex;
+}
+.schedule-content .name-header .name {
+  width: 150px;
+  padding-top: 12px;
+}
+.schedule-content .name-header .break {
+  width: 50px;
+  padding: 7px 15px 0 0;
+  font-size: 12px;
+}
+.schedule-content .input-field {
+  height: 30px;
+  width: 200px;
+  padding-top: 4px;
+  border: 1px solid black;
+  background-color: #fff;
+  text-align: center;
+  line-height: 20px;
+}
+.schedule-content .input-field:nth-child(even) {
+  background-color: #e0e0e0;
+}
+.schedule-content .input-field .field {
+  width: 50px;
+  text-align: center;
+}
+.schedule-content .input-field .break-field {
+  width: 30px;
+  margin-left: 10px;
+  text-align: center;
+}
+.schedule-content .work-time__week-total {
+  height: 30px;
+  width: 200px;
+  /* padding-top: 5px; */
+  border-top: double 3px black;
+  border-bottom: double 3px black;
+  border-left: none;
+  border-right: none;
+  background-color: #fff;
+  text-align: center;
+}
+.schedule-content .work-time__month-total {
+  height: 30px;
+  width: 200px;
+  /* padding-top: 7px; */
+  border-top: dashed 1px black;
+  border-bottom: dashed 1px black;
+  border-left: none;
+  border-right: none;
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* --- 一覧ページ --- */
+
+.schedule-content .input-field .index-field {
+  display: flex;
+}
+.schedule-content .input-field .index-field .exist-time {
+  width: 150px;
+}
+.schedule-content .input-field .index-field .break-time {
+  width: 30px;
+}
+.schedule-content .input-field .break-day {
+  width: 200px;
+}
+.schedule-content input[name="work-time__week-total"] {
+  height: 30px;
+  width: 200px;
+  border-top: double 3px black;
+  border-bottom: double 3px black;
+  border-left: none;
+  border-right: none;
+  background-color: #fff;
+  text-align: center;
+}
+.schedule-content input[name="work-time__month-total"] {
+  height: 30px;
+  width: 200px;
+  padding-top: 7px;
+  border-top: dashed 1px black;
+  border-bottom: dashed 1px black;
+  border-left: none;
+  border-right: none;
+  margin-top: 30px;
+  text-align: center;
+}
+.index-page .work-time__week-total {
+  padding-top: 5px;
+}
+.index-page .work-time__month-total {
+  padding-top: 7px;
+}
+.hidden {
+  display: none;
 }
