@@ -170,8 +170,10 @@ URL:http://54.178.16.210/
 | Column     | Type       | Options                           |
 | ---------- | ---------- | --------------------------------- |
 | work_date  | date       | null: false                       |
-| start_time | string     | null: false                       |
-| end_time   | string     | null: false                       |
+| start_time | string     |                                   |
+| end_time   | string     |                                   |
+| break_time | integer    |                                   |
+| work_time  | integer    |                                   |
 | admin      | references | foreign_key: true, optional: true |
 | employee   | references | foreign_key: true, optional: true |
 

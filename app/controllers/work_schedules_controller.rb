@@ -20,6 +20,7 @@ class WorkSchedulesController < ApplicationController
       @days = Date.new(@year, @month, -1).day
     end
     get_date
+    get_week_days
     @employees = Employee.where("(admin_id = ?) and (joining_date < ?)", @admin.id, Date.new(@year, @month, @start_day))
     @exist_schedules = SearchWorkSchedulesService.search(@year, @month, @days, @start_day, @admin, @employees)
   end
@@ -40,6 +41,7 @@ class WorkSchedulesController < ApplicationController
       @days = Date.new(@year, @month, -1).day
     end
     get_date
+    get_week_days
     @employees = Employee.where("(admin_id = ?) and (joining_date < ?)", @admin.id, Date.new(@year, @month, @start_day))
     @work_schedules = WorkScheduleCollection.new(@days, @admin, @employees)
     @exist_schedules = SearchWorkSchedulesService.search(@year, @month, @days, @start_day, @admin, @employees)
@@ -82,6 +84,7 @@ class WorkSchedulesController < ApplicationController
     @month = params[:month].to_i
     @days = params[:days].to_i
     get_date
+    get_week_days
     @employees = Employee.where("(admin_id = ?) and (joining_date < ?)", @admin.id, Date.new(@year, @month, @start_day))
     @exist_schedules = SearchWorkSchedulesService.search(@year, @month, @days, @start_day, @admin, @employees)
     @work_schedules = WorkScheduleCollection.new(@days, @admin, @employees)
@@ -108,5 +111,16 @@ class WorkSchedulesController < ApplicationController
 
   def delete_old_data
     WorkSchedule.where("work_date < ?", Date.today - 2.years).delete_all
+  end
+
+  def get_week_days
+    @week_days = []
+    4.times do |i|
+      if i==3
+        @week_days << @days - 21
+      else
+        @week_days << 7
+      end
+    end
   end
 end

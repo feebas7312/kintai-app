@@ -14,6 +14,8 @@ class WorkScheduleCollection
           work_date: value['work_date'],
           start_time: value['start_time'],
           end_time: value['end_time'],
+          break_time: value['break_time'],
+          work_time: value['work_time'],
           admin_id: value['admin_id'],
           employee_id: value['employee_id']
         )
@@ -32,7 +34,7 @@ class WorkScheduleCollection
   def save
     is_success = true
     work_schedules = []
-    is_success = false unless WorkSchedule.import collection, on_duplicate_key_update: [:start_time, :end_time], all_or_none: true
+    is_success = false unless WorkSchedule.import collection, on_duplicate_key_update: [:start_time, :end_time, :break_time, :work_time], all_or_none: true
     raise ActiveRecord::RecordInvalid unless is_success
     rescue
       p 'エラー'

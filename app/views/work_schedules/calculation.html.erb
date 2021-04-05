@@ -44,63 +44,106 @@
         <% end %>
       </div>
 
-      <div class='planning-content'>
-        <div class='member-content'>
-          <div class='date-field'><%= "#{@year}年#{@month}月度" %></div>
-          <div class='name-field'><%= @admin.last_name %></div>
-          <% @employees.each do |employee| %>
-            <div class='name-field'><%= employee.last_name %></div>
-          <% end %>
+      <div class='schedule-content'>
+        <div class='date-field'>
+          <div class='date-header'><%= "#{@year}年#{@month}月度" %></div>
+          <div class='date'>
+            <% @days.times do |i| %>
+              <div class='day'><%= "#{@date[i].day}日#{@wdays[@date[i].wday]}" %></div>
+              <% if i==6 %>
+                <div class='work-time__week-total__desc'><%= "第1週合計" %></div>
+              <% elsif i==13 %>
+                <div class='work-time__week-total__desc'><%= "第2週合計" %></div>
+              <% elsif i==20 %>
+                <div class='work-time__week-total__desc'><%= "第3週合計" %></div>
+              <% elsif i+1==@days %>
+                <div class='work-time__week-total__desc'><%= "第4週合計" %></div>
+              <% end %>
+            <% end %>
+          </div>
+          <div class='work-time__month-total__desc'><%= "月末推定時間" %></div>
         </div>
-        <%= form_with model: @work_schedules, url: work_schedules_path, method: :post, local: true do |f| %>
-          <% @work_schedules.collection.each_with_index do |work_schedule, i| %>
-            <div class='shift-content'>
-              <%= fields_for 'work_schedules[]', work_schedule do |field| %>
-                <div class='date-field'><%= "#{@date[i].day}日#{@wdays[@date[i].wday]}" %></div>
-                <div class='input-field'>
-                  <% calc = @calc_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:admin_id] == @admin.id } %>
-                  <%= field.hidden_field :work_date, value: @date[i] %>
-                  <%= field.text_field :start_time, value: calc[:start_time], class: "field" %>〜
-                  <%= field.text_field :end_time, value: calc[:end_time], class: "field" %>
-                  <%= field.hidden_field :admin_id, value: @admin.id %>
-                  <% unless @exist_schedules.empty? %>
-                    <% if exist = @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[i]) %>
-                      <%= field.hidden_field :id, value: exist.id %>
+
+        <%= form_with model: @work_schedules, url: work_schedules_path, method: :post, class: "staff-field", local: true do |f| %>
+          <div class='month-input-field'>
+            <% @work_schedules.collection.each do |work_schedule| %>
+              <div class='name-header'>
+                <div class='name'><%= @admin.last_name %></div>
+                <div class='break'>休憩時間</div>
+              </div>
+              <% 4.times do |week| %>
+                <div class='week-input-field'>
+                  <% @week_days[week].times do |day| %>
+                    <%= fields_for 'work_schedules[]', work_schedule do |field| %>
+                      <div class='input-field'>
+                        <% calc = @calc_schedules.find{ |schedule| schedule[:work_date] == @date[day+week*7] && schedule[:admin_id] == @admin.id } %>
+                        <%= field.hidden_field :work_date, value: @date[day+week*7], id: "work-date#{week}#{day}" %>
+                        <%= field.hidden_field :admin_id, value: @admin.id, id: "admin-id#{week}#{day}" %>
+                        <%= field.text_field :start_time, value: calc[:start_time], class: "field", id: "start-time#{week}#{day}" %>〜
+                        <%= field.text_field :end_time, value: calc[:end_time], class: "field", id: "end-time#{week}#{day}" %>
+                        <%= field.text_field :break_time, value: calc[:break_time], class: "break-field", id: "break-time#{week}#{day}" %>
+                        <%= field.hidden_field :work_time, value: calc[:work_time], id: "work-time#{week}#{day}" %>
+                        <% unless @exist_schedules.empty? %>
+                          <% if exist = @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[day+week*7]) %>
+                            <%= field.hidden_field :id, value: exist.id, id: "id#{week}#{day}" %>
+                          <% end %>
+                        <% end%>
+                      </div>
                     <% end %>
-                  <% end%>
+                  <% end %>
+                  <%= f.text_field :week_total, readonly: true, class: 'work-time__week-total', id: "work-time__week-total#{week}" %>
                 </div>
               <% end %>
-              <%= fields_for 'work_schedules[]', work_schedule do |field| %>
-                <% @employees.each do |employee| %>
-                  <div class='input-field'>
-                    <% calc = @calc_schedules.find{ |schedule| schedule[:work_date] == @date[i] && schedule[:employee_id] == employee.id } %>
-                    <%= field.hidden_field :work_date, value: @date[i] %>
-                    <%= field.text_field :start_time, value: calc[:start_time], class: "field" %>〜
-                    <%= field.text_field :end_time, value: calc[:end_time], class: "field" %>
-                    <%= field.hidden_field :employee_id, value: employee.id %>
-                    <% unless @exist_schedules.empty? %>
-                      <% if exist = @exist_schedules.find_by(employee_id: employee.id, work_date: @date[i]) %>
-                        <%= field.hidden_field :id, value: exist.id %>
-                      <% end %>
-                    <% end %>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
-            <% if i+1 == @days %>
+              <%= f.text_field :month_total, readonly: true, class: 'work-time__month-total', id: "work-time__month-total" %>
               <% break %>
             <% end %>
+          </div>
+
+          <% @work_schedules.collection.each do |work_schedule| %>
+            <% @employees.each do |employee| %>
+              <div class='month-input-field'>
+                <div class='name-header'>
+                  <div class='name'><%= employee.last_name %></div>
+                  <div class='break'>休憩時間</div>
+                </div>
+                <% 4.times do |week| %>
+                  <div class='week-input-field'>
+                    <% @week_days[week].times do |day| %>
+                      <%= fields_for 'work_schedules[]', work_schedule do |field| %>
+                        <div class='input-field'>
+                          <% calc = @calc_schedules.find{ |schedule| schedule[:work_date] == @date[day+week*7] && schedule[:employee_id] == employee.id } %>
+                          <%= field.hidden_field :work_date, value: @date[day+week*7], id: "work-date#{week}#{day}-#{employee.id}" %>
+                          <%= field.hidden_field :employee_id, value: employee.id, id: "employee-id#{week}#{day}-#{employee.id}" %>
+                          <%= field.text_field :start_time, value: calc[:start_time], class: "field", id: "start-time#{week}#{day}-#{employee.id}" %>〜
+                          <%= field.text_field :end_time, value: calc[:end_time], class: "field", id: "end-time#{week}#{day}-#{employee.id}" %>
+                          <%= field.text_field :break_time, value: calc[:break_time], class: "break-field", id: "break-time#{week}#{day}-#{employee.id}" %>
+                          <%= field.hidden_field :work_time, value: calc[:work_time], id: "work-time#{week}#{day}-#{employee.id}" %>
+                          <% unless @exist_schedules.empty? %>
+                            <% if exist = @exist_schedules.find_by(employee_id: employee.id, work_date: @date[day+week*7]) %>
+                              <%= field.hidden_field :id, value: exist.id, id: "id#{week}#{day}-#{employee.id}" %>
+                            <% end %>
+                          <% end %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                    <%= f.text_field :week_total, readonly: true, class: 'work-time__week-total', id: "work-time__week-total#{week}-#{employee.id}" %>
+                  </div>
+                <% end %>
+                <%= f.text_field :month_total, readonly: true, class: 'work-time__month-total', id: "work-time__month-total#{employee.id}" %>
+              </div>
+            <% end %>
+            <% break %>
           <% end %>
           <%= f.hidden_field :year, value: @year %>
           <%= f.hidden_field :month, value: @month %>
-          <%#= link_to '計算', calculation_work_schedules_path(year: @year, month: @month, days: @days), class: "planning-btn" %>
-          <%#= f.submit '保存', class: "search-btn" %>
+          <%#= f.submit '保存', class: 'btn' %>
         <%# end %>
       </div>
     </div>
   </div>
 
   <div class='form'>
+      <%= link_to '削除', work_schedule_path(@admin.id, year: @year, month: @month, days: @days), method: :delete, class: 'btn' %>
       <%= link_to '計算', calculation_work_schedules_path(year: @year, month: @month, days: @days), class: 'btn' %>
       <%= f.submit '保存', class: 'btn' %>
     <% end %>

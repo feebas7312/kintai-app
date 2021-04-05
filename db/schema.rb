@@ -103,6 +103,8 @@ ActiveRecord::Schema.define(version: 2021_02_16_015434) do
     t.date "work_date", null: false
     t.string "start_time"
     t.string "end_time"
+    t.integer "break_time"
+    t.integer "work_time"
     t.bigint "admin_id"
     t.bigint "employee_id"
     t.datetime "created_at", precision: 6, null: false
