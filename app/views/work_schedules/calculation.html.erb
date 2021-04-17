@@ -39,6 +39,8 @@
                           end_year: (Time.now.year + 2),
                           date_separator: '%s'),
                         "<p> 年 </p>") + "<p> 月 </p>" %>
+            <%= f.hidden_field :year, value: @year %>
+            <%= f.hidden_field :month, value: @month %>
             <%= f.submit "検索", class: 'search-btn' %>
           </div>
         <% end %>
@@ -79,9 +81,9 @@
                         <% calc = @calc_schedules.find{ |schedule| schedule[:work_date] == @date[day+week*7] && schedule[:admin_id] == @admin.id } %>
                         <%= field.hidden_field :work_date, value: @date[day+week*7], id: "work-date#{week}#{day}" %>
                         <%= field.hidden_field :admin_id, value: @admin.id, id: "admin-id#{week}#{day}" %>
-                        <%= field.text_field :start_time, value: calc[:start_time], class: "field", id: "start-time#{week}#{day}" %>〜
-                        <%= field.text_field :end_time, value: calc[:end_time], class: "field", id: "end-time#{week}#{day}" %>
-                        <%= field.text_field :break_time, value: calc[:break_time], class: "break-field", id: "break-time#{week}#{day}" %>
+                        <%= field.text_field :start_time, value: calc[:start_time], maxlength: "4", class: "field", id: "start-time#{week}#{day}" %>〜
+                        <%= field.text_field :end_time, value: calc[:end_time], maxlength: "4", class: "field", id: "end-time#{week}#{day}" %>
+                        <%= field.text_field :break_time, value: calc[:break_time], maxlength: "3", class: "break-field", id: "break-time#{week}#{day}" %>
                         <%= field.hidden_field :work_time, value: calc[:work_time], id: "work-time#{week}#{day}" %>
                         <% unless @exist_schedules.empty? %>
                           <% if exist = @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[day+week*7]) %>
@@ -114,9 +116,9 @@
                           <% calc = @calc_schedules.find{ |schedule| schedule[:work_date] == @date[day+week*7] && schedule[:employee_id] == employee.id } %>
                           <%= field.hidden_field :work_date, value: @date[day+week*7], id: "work-date#{week}#{day}-#{employee.id}" %>
                           <%= field.hidden_field :employee_id, value: employee.id, id: "employee-id#{week}#{day}-#{employee.id}" %>
-                          <%= field.text_field :start_time, value: calc[:start_time], class: "field", id: "start-time#{week}#{day}-#{employee.id}" %>〜
-                          <%= field.text_field :end_time, value: calc[:end_time], class: "field", id: "end-time#{week}#{day}-#{employee.id}" %>
-                          <%= field.text_field :break_time, value: calc[:break_time], class: "break-field", id: "break-time#{week}#{day}-#{employee.id}" %>
+                          <%= field.text_field :start_time, value: calc[:start_time], maxlength: "4", class: "field", id: "start-time#{week}#{day}-#{employee.id}" %>〜
+                          <%= field.text_field :end_time, value: calc[:end_time], maxlength: "4", class: "field", id: "end-time#{week}#{day}-#{employee.id}" %>
+                          <%= field.text_field :break_time, value: calc[:break_time], maxlength: "3", class: "break-field", id: "break-time#{week}#{day}-#{employee.id}" %>
                           <%= field.hidden_field :work_time, value: calc[:work_time], id: "work-time#{week}#{day}-#{employee.id}" %>
                           <% unless @exist_schedules.empty? %>
                             <% if exist = @exist_schedules.find_by(employee_id: employee.id, work_date: @date[day+week*7]) %>
@@ -145,7 +147,7 @@
   <div class='form'>
       <%= link_to '削除', work_schedule_path(@admin.id, year: @year, month: @month, days: @days), method: :delete, class: 'btn' %>
       <%= link_to '計算', calculation_work_schedules_path(year: @year, month: @month, days: @days), class: 'btn' %>
-      <%= f.submit '保存', class: 'btn' %>
+      <%= f.submit '保存', class: 'btn', id: 'js-submit' %>
     <% end %>
   </div>
 </div>
