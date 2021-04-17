@@ -2,7 +2,7 @@
   <div class="account-page__inner--left">
     <h2>Edit Account</h2>
     <h5>責任者の情報を編集する</h5>
-    <%= button_to "アカウント削除", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+    <%= button_to "アカウント削除", registration_path(resource_name), method: :delete, data: { confirm: "責任者のデータを削除すると、全てのデータが削除されます" } %>
     <br />
     <div class="account-link">
       <%= link_to "スタッフ一覧へ戻る", admins_home_path(current_admin) %>
