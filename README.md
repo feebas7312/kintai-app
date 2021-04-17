@@ -57,6 +57,9 @@ URL:http://54.178.16.210/
 - 希望休登録機能
 - チャット機能
 
+# ER図
+(https://i.gyazo.com/31d274091ff2ebe55e3643e73d7ab5e4.png)
+
 # DB設計
 
 ## companies テーブル
