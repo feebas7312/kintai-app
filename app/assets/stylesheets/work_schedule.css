@@ -64,15 +64,15 @@
   height: 30px;
   width: 160px;
   padding-top: 5px;
-  border-top: double 3px black;
-  border-bottom: double 3px black;
+  border-top: 3px double black;
+  border-bottom: 3px double black;
 }
 .schedule-content .date-field .work-time__month-total__desc {
   height: 30px;
   width: 160px;
   padding-top: 7px;
-  border-top: dashed 1px black;
-  border-bottom: dashed 1px black;
+  border-top: 1px dashed black;
+  border-bottom: 1px dashed black;
   margin-top: 30px;
   text-align: center;
 }
@@ -120,9 +120,8 @@
 .schedule-content .work-time__week-total {
   height: 30px;
   width: 200px;
-  /* padding-top: 5px; */
-  border-top: double 3px black;
-  border-bottom: double 3px black;
+  border-top: 3px double black;
+  border-bottom: 3px double black;
   border-left: none;
   border-right: none;
   background-color: #fff;
@@ -131,9 +130,8 @@
 .schedule-content .work-time__month-total {
   height: 30px;
   width: 200px;
-  /* padding-top: 7px; */
-  border-top: dashed 1px black;
-  border-bottom: dashed 1px black;
+  border-top: 1px dashed black;
+  border-bottom: 1px dashed black;
   border-left: none;
   border-right: none;
   margin-top: 30px;
@@ -157,8 +155,8 @@
 .schedule-content input[name="work-time__week-total"] {
   height: 30px;
   width: 200px;
-  border-top: double 3px black;
-  border-bottom: double 3px black;
+  border-top: 3px double black;
+  border-bottom: 3px double black;
   border-left: none;
   border-right: none;
   background-color: #fff;
@@ -168,8 +166,8 @@
   height: 30px;
   width: 200px;
   padding-top: 7px;
-  border-top: dashed 1px black;
-  border-bottom: dashed 1px black;
+  border-top: 1px dashed black;
+  border-bottom: 1px dashed black;
   border-left: none;
   border-right: none;
   margin-top: 30px;
