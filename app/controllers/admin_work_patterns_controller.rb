@@ -1,17 +1,13 @@
 class AdminWorkPatternsController < ApplicationController
   before_action :authenticate_admin!
+  before_action :set_admin
+  before_action :set_work_patterns
 
   def new
-    @admin = Admin.find(current_admin.id)
-    @work_patterns = WorkPattern.where(company_id: @admin.company.id)
-    @admin_work_patterns = AdminWorkPattern.where(admin_id: @admin.id)
     @new_pattern = AdminWorkPatternCollection.new(@work_patterns)
   end
 
   def create
-    @admin = Admin.find(current_admin.id)
-    @work_patterns = WorkPattern.where(company_id: @admin.company.id)
-    @admin_work_patterns = AdminWorkPattern.where(admin_id: @admin.id)
     @new_pattern = AdminWorkPatternCollection.new(@work_patterns, admin_work_patterns_collection_params)
     if @new_pattern.save
       flash[:alert] = '登録しました'
@@ -25,5 +21,14 @@ class AdminWorkPatternsController < ApplicationController
 
   def admin_work_patterns_collection_params
     params.require(:admin_work_patterns)
+  end
+
+  def set_admin
+    @admin = Admin.find(current_admin.id)
+  end
+
+  def set_work_patterns
+    @work_patterns = WorkPattern.where(company_id: @admin.company.id)
+    @admin_work_patterns = AdminWorkPattern.where(admin_id: @admin.id)
   end
 end
