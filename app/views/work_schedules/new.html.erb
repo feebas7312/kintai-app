@@ -39,6 +39,8 @@
                           end_year: (Time.now.year + 2),
                           date_separator: '%s'),
                         "<p> 年 </p>") + "<p> 月 </p>" %>
+            <%= f.hidden_field :year, value: @year %>
+            <%= f.hidden_field :month, value: @month %>
             <%= f.submit "検索", class: 'search-btn' %>
           </div>
         <% end %>
@@ -77,18 +79,29 @@
                     <%= fields_for 'work_schedules[]', work_schedule do |field| %>
                       <div class='input-field'>
                         <%= field.hidden_field :work_date, value: @date[day+week*7], id: "work-date#{week}#{day}" %>
-                        <%= field.hidden_field :admin_id, value: @admin.id, id: "admin#{week}#{day}" %>
-                        <% unless @exist_schedules.blank? || @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[day+week*7]).nil?  %>
+                        <%= field.hidden_field :admin_id, value: @admin.id, id: "admin-id#{week}#{day}" %>
+                        <% if @temporary.present? %>
+                          <% temporary = @temporary.collection.find{ |schedule| schedule[:work_date] == @date[day+week*7] && schedule[:admin_id] == @admin.id } %>
+                          <%= field.text_field :start_time, value: temporary[:start_time], maxlength: "4", class: "field", id: "start-time#{week}#{day}" %>〜
+                          <%= field.text_field :end_time, value: temporary[:end_time], maxlength: "4", class: "field", id: "end-time#{week}#{day}" %>
+                          <%= field.text_field :break_time, value: temporary[:break_time], maxlength: "3", class: "break-field", id: "break-time#{week}#{day}" %>
+                          <%= field.hidden_field :work_time, value: temporary[:work_time], id: "work-time#{week}#{day}" %>
+                          <% unless @exist_schedules.empty? %>
+                            <% if exist = @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[day+week*7]) %>
+                              <%= field.hidden_field :id, value: exist.id, id: "id#{week}#{day}" %>
+                            <% end %>
+                          <% end%>
+                        <% elsif @exist_schedules.present? && @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[day+week*7]).present?  %>
                           <% exist = @exist_schedules.find_by(admin_id: @admin.id, work_date: @date[day+week*7]) %>
-                          <%= field.text_field :start_time, value: exist.start_time, class: 'field', id: "start-time#{week}#{day}" %>〜
-                          <%= field.text_field :end_time, value: exist.end_time, class: 'field', id: "end-time#{week}#{day}" %>
-                          <%= field.text_field :break_time, value: exist.break_time, class: 'break-field', id: "break-time#{week}#{day}" %>
+                          <%= field.text_field :start_time, value: exist.start_time, maxlength: "4", class: 'field', id: "start-time#{week}#{day}" %>〜
+                          <%= field.text_field :end_time, value: exist.end_time, maxlength: "4", class: 'field', id: "end-time#{week}#{day}" %>
+                          <%= field.text_field :break_time, value: exist.break_time, maxlength: "3", class: 'break-field', id: "break-time#{week}#{day}" %>
                           <%= field.hidden_field :work_time, value: exist.work_time, id: "work-time#{week}#{day}" %>
                           <%= field.hidden_field :id, value: exist.id, id: "id#{week}#{day}" %>
                         <% else %>
-                          <%= field.text_field :start_time, class: 'field', id: "start-time#{week}#{day}" %>〜
-                          <%= field.text_field :end_time, class: 'field', id: "end-time#{week}#{day}" %>
-                          <%= field.text_field :break_time, class: 'break-field', id: "break-time#{week}#{day}" %>
+                          <%= field.text_field :start_time, maxlength: "4", class: 'field', id: "start-time#{week}#{day}" %>〜
+                          <%= field.text_field :end_time, maxlength: "4", class: 'field', id: "end-time#{week}#{day}" %>
+                          <%= field.text_field :break_time, maxlength: "3", class: 'break-field', id: "break-time#{week}#{day}" %>
                           <%= field.hidden_field :work_time, id: "work-time#{week}#{day}" %>
                         <% end %>
                       </div>
@@ -116,17 +129,28 @@
                         <div class='input-field'>
                           <%= field.hidden_field :work_date, value: @date[day+week*7], id: "work-date#{week}#{day}-#{employee.id}" %>
                           <%= field.hidden_field :employee_id, value: employee.id, id: "employee-id#{week}#{day}-#{employee.id}" %>
-                          <% unless @exist_schedules.blank? || @exist_schedules.find_by(employee_id: employee.id, work_date: @date[day+week*7]).nil? %>
+                          <% if @temporary.present? %>
+                            <% temporary = @temporary.collection.find{ |schedule| schedule[:work_date] == @date[day+week*7] && schedule[:employee_id] == employee.id } %>
+                            <%= field.text_field :start_time, value: temporary[:start_time], maxlength: "4", class: "field", id: "start-time#{week}#{day}-#{employee.id}" %>〜
+                            <%= field.text_field :end_time, value: temporary[:end_time], maxlength: "4", class: "field", id: "end-time#{week}#{day}-#{employee.id}" %>
+                            <%= field.text_field :break_time, value: temporary[:break_time], maxlength: "3", class: "break-field", id: "break-time#{week}#{day}-#{employee.id}" %>
+                            <%= field.hidden_field :work_time, value: temporary[:work_time], id: "work-time#{week}#{day}-#{employee.id}" %>
+                            <% unless @exist_schedules.empty? %>
+                              <% if exist = @exist_schedules.find_by(employee_id: employee.id, work_date: @date[day+week*7]) %>
+                                <%= field.hidden_field :id, value: exist.id, id: "id#{week}#{day}-#{employee.id}" %>
+                              <% end %>
+                            <% end %>
+                          <% elsif @exist_schedules.present? && @exist_schedules.find_by(employee_id: employee.id, work_date: @date[day+week*7]).present? %>
                             <% exist = @exist_schedules.find_by(employee_id: employee.id, work_date: @date[day+week*7]) %>
-                            <%= field.text_field :start_time, value: exist.start_time, class: 'field', id: "start-time#{week}#{day}-#{employee.id}" %>〜
-                            <%= field.text_field :end_time, value: exist.end_time, class: 'field', id: "end-time#{week}#{day}-#{employee.id}" %>
-                            <%= field.text_field :break_time, value: exist.break_time, class: 'break-field', id: "break-time#{week}#{day}-#{employee.id}" %>
+                            <%= field.text_field :start_time, value: exist.start_time, maxlength: "4", class: 'field', id: "start-time#{week}#{day}-#{employee.id}" %>〜
+                            <%= field.text_field :end_time, value: exist.end_time, maxlength: "4", class: 'field', id: "end-time#{week}#{day}-#{employee.id}" %>
+                            <%= field.text_field :break_time, value: exist.break_time, maxlength: "3", class: 'break-field', id: "break-time#{week}#{day}-#{employee.id}" %>
                             <%= field.hidden_field :work_time, value: exist.work_time, id: "work-time#{week}#{day}-#{employee.id}" %>
                             <%= field.hidden_field :id, value: exist.id, id: "id#{week}#{day}-#{employee.id}" %>
                           <% else %>
-                            <%= field.text_field :start_time, class: 'field', id: "start-time#{week}#{day}-#{employee.id}" %>〜
-                            <%= field.text_field :end_time, class: 'field', id: "end-time#{week}#{day}-#{employee.id}" %>
-                            <%= field.text_field :break_time, class: 'break-field', id: "break-time#{week}#{day}-#{employee.id}" %>
+                            <%= field.text_field :start_time, maxlength: "4", class: 'field', id: "start-time#{week}#{day}-#{employee.id}" %>〜
+                            <%= field.text_field :end_time, maxlength: "4", class: 'field', id: "end-time#{week}#{day}-#{employee.id}" %>
+                            <%= field.text_field :break_time, maxlength: "3", class: 'break-field', id: "break-time#{week}#{day}-#{employee.id}" %>
                             <%= field.hidden_field :work_time, id: "work-time#{week}#{day}-#{employee.id}" %>
                           <% end %>
                         </div>
@@ -149,9 +173,9 @@
   </div>
 
   <div class='form'>
-      <%= link_to '削除', work_schedule_path(@admin.id, year: @year, month: @month, days: @days), method: :delete, class: 'btn' %>
-      <%= link_to '計算', calculation_work_schedules_path(year: @year, month: @month, days: @days), class: 'btn' %>
-      <%= f.submit '保存', class: 'btn' %>
+      <%= link_to '削除', work_schedule_path(@admin.id, year: @year, month: @month, days: @days), method: :delete, class: 'btn', data: { confirm: "データを削除します" } %>
+      <%= link_to '計算', calculation_work_schedules_path(year: @year, month: @month, days: @days), class: 'btn', data: { confirm: "入力途中の場合は、保存していないデータは消去されます" } %>
+      <%= f.submit '保存', class: 'submit-btn', id: 'js-submit' %>
     <% end %>
   </div>
 </div>

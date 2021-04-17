@@ -141,3 +141,15 @@ input[name="tab-item"] {
   font-size: 13px;
   text-decoration: none;
 }
+.form .submit-btn {
+  height: 40px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 2px;
+  margin-left: 10px;
+  background-color: #4c78d6;
+  color: #fafafa;
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+}

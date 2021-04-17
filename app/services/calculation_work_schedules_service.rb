@@ -36,11 +36,11 @@ class CalculationWorkSchedulesService
               probability_member << mem
             end
           elsif int == 3
-            2.times do
+            # 2.times do
               probability_member << mem
-            end
-          elsif int == 4
-            probability_member << mem
+            # end
+          # elsif int == 4
+          #   probability_member << mem
           end
         end
 

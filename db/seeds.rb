@@ -24,7 +24,7 @@ Company.create(
   admin_id: 1
 )
 
-7.times do |i|
+5.times do |i|
   Employee.create(
     [
       {
@@ -51,5 +51,28 @@ WorkPattern.create(
     { start_time: '0900', end_time: '1800', break_time: 60, work_time: 480, company_id: 1 },
     { start_time: '1100', end_time: '2000', break_time: 60, work_time: 480, company_id: 1 },
     { start_time: '1300', end_time: '2200', break_time: 60, work_time: 480, company_id: 1 }
+  ]
+)
+
+AdminWorkPattern.create(
+  [
+    { admin_id: 1, work_pattern_id: 1, possibility: 1 },
+    { admin_id: 1, work_pattern_id: 2, possibility: 1 },
+    { admin_id: 1, work_pattern_id: 3, possibility: 1 }
+  ]
+)
+
+EmployeeWorkPattern.create(
+  [
+    { employee_id: 1, work_pattern_id: 1, possibility: 1 },
+    { employee_id: 1, work_pattern_id: 2, possibility: 1 },
+    { employee_id: 2, work_pattern_id: 2, possibility: 1 },
+    { employee_id: 2, work_pattern_id: 3, possibility: 1 },
+    { employee_id: 3, work_pattern_id: 1, possibility: 1 },
+    { employee_id: 3, work_pattern_id: 3, possibility: 1 },
+    { employee_id: 4, work_pattern_id: 1, possibility: 1 },
+    { employee_id: 4, work_pattern_id: 2, possibility: 1 },
+    { employee_id: 5, work_pattern_id: 2, possibility: 1 },
+    { employee_id: 5, work_pattern_id: 3, possibility: 1 }
   ]
 )

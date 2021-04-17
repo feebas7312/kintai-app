@@ -32,13 +32,12 @@ class WorkScheduleCollection
   end
 
   def save
-    is_success = true
-    work_schedules = []
-    is_success = false unless WorkSchedule.import collection, on_duplicate_key_update: [:start_time, :end_time, :break_time, :work_time], all_or_none: true
-    raise ActiveRecord::RecordInvalid unless is_success
+    error_count = 0
+    result = WorkSchedule.import collection, on_duplicate_key_update: [:start_time, :end_time, :break_time, :work_time], all_or_none: true
+    raise ActiveRecord::RecordInvalid unless result.failed_instances.blank?
     rescue
-      p 'エラー'
+      error_count = result.failed_instances.count
     ensure
-      return is_success
+      return error_count
   end
 end
