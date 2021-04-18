@@ -78,6 +78,8 @@ function workTimeCalc(){
         });
 
         weekTotal.value = (weekTotalCalc / 60).toLocaleString(undefined, { maximumFractionDigits: 1 }) + "時間";
+
+        // 週の労働時間の合計がオーバーしていたら文字を赤くする
         if ((scheduleFormDay.length == 7 && weekTotalCalc > 2400) || (scheduleFormDay.length < 10 && weekTotalCalc > 2880) || (scheduleFormDay.length == 10 && weekTotalCalc > 3360)) {
           weekTotal.setAttribute("style", "color: red; font-weight: bold;");
         } else {
@@ -88,12 +90,14 @@ function workTimeCalc(){
 
       monthTotal.value = (monthTotalCalc / 60).toLocaleString(undefined, { maximumFractionDigits: 1 }) + "時間";
 
+      // 全ての週合計のスタイルを確認して、真偽の配列を生成
       let weekTimeStyleArray = [];
       const weekTimeArray = document.querySelectorAll(".work-time__week-total");
       weekTimeArray.forEach( function(weekTime) {
         weekTimeStyleArray.push(weekTime.getAttribute("style") !== "color: red; font-weight: bold;")
       });
 
+      // 上記の配列に一つでもfalseがあればsubmitボタンを無効化する
       if (weekTimeStyleArray.every( function(value) { return value })) {
         submitBtn.disabled = false;
         submitBtn.removeAttribute("style", "opacity: 0.5;");

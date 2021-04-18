@@ -101,7 +101,7 @@ class WorkSchedulesController < ApplicationController
     @admin = Admin.find(current_admin.id) if admin_signed_in?
     @admin = Admin.find(current_employee.admin_id) if employee_signed_in?
     @start_day = @admin.company.cutoff_date.next_day
-    @employees = Employee.where("(admin_id = ?) and (joining_date < ?)", @admin.id, Date.new(@year, @month, @start_day))
+    @employees = Employee.where("(admin_id = ?) and (joining_date < ?)", @admin.id, Date.new(@year, @month, @start_day) >> 1)
   end
 
   def set_calendar   ## ビューで日付を出すときに使用

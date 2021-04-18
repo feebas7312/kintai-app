@@ -33,6 +33,7 @@ class WorkScheduleCollection
 
   def save
     error_count = 0
+    ## 既に一度作成されていればupdate、なければcreateする
     result = WorkSchedule.import collection, on_duplicate_key_update: [:start_time, :end_time, :break_time, :work_time], all_or_none: true
     raise ActiveRecord::RecordInvalid unless result.failed_instances.blank?
     rescue
