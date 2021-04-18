@@ -17,8 +17,9 @@ class WorkSchedule < ApplicationRecord
   validate :break_time_validation
 
   def break_time_validation
-    return if break_time.blank?
-    if work_time > 480 && break_time < 60
+    if break_time.blank? && start_time.present? && end_time.present?
+      errors.add(:break_time, 'を入力してください')
+    elsif work_time > 480 && break_time < 60
       errors.add(:break_time, 'は60分以上に設定してください')
     elsif work_time > 360 && break_time < 45
       errors.add(:break_time, 'は45分以上に設定してください')
