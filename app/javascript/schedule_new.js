@@ -70,6 +70,18 @@ function workTimeCalc(){
             const startTimeMinute = Number(startTime.slice(0,2)) * 60 + Number(startTime.slice(2,4));
             const endTimeMinute = Number(endTime.slice(0,2)) * 60 + Number(endTime.slice(2,4));
             const workTimeMinute = endTimeMinute - startTimeMinute - breakTime;
+
+            // 休憩時間が法定外だったら文字を赤くする
+            if ((workTimeMinute > 480 && breakTime < 60) || (workTimeMinute > 360 && breakTime < 45)) {
+              form.childNodes[5].setAttribute("style", "color: red; font-weight: bold;");
+              form.childNodes[7].setAttribute("style", "color: red; font-weight: bold;");
+              form.childNodes[9].setAttribute("style", "color: red; font-weight: bold;");
+            } else {
+              form.childNodes[5].removeAttribute("style", "color: red; font-weight: bold;");
+              form.childNodes[7].removeAttribute("style", "color: red; font-weight: bold;");
+              form.childNodes[9].removeAttribute("style", "color: red; font-weight: bold;");
+            }
+
             workTime.value = workTimeMinute;
           } else {
             workTime.value = 0;
@@ -90,15 +102,19 @@ function workTimeCalc(){
 
       monthTotal.value = (monthTotalCalc / 60).toLocaleString(undefined, { maximumFractionDigits: 1 }) + "時間";
 
-      // 全ての週合計のスタイルを確認して、真偽の配列を生成
-      let weekTimeStyleArray = [];
+      // 全てのスタイルを確認して、真偽の配列を生成
+      let styleArray = [];
+      const dayTimeArray = document.querySelectorAll(".js-field");
+      dayTimeArray.forEach( function(dayTime) {
+        styleArray.push(dayTime.getAttribute("style") !== "color: red; font-weight: bold;")
+      });
       const weekTimeArray = document.querySelectorAll(".work-time__week-total");
       weekTimeArray.forEach( function(weekTime) {
-        weekTimeStyleArray.push(weekTime.getAttribute("style") !== "color: red; font-weight: bold;")
+        styleArray.push(weekTime.getAttribute("style") !== "color: red; font-weight: bold;")
       });
 
       // 上記の配列に一つでもfalseがあればsubmitボタンを無効化する
-      if (weekTimeStyleArray.every( function(value) { return value })) {
+      if (styleArray.every( function(value) { return value })) {
         submitBtn.disabled = false;
         submitBtn.removeAttribute("style", "opacity: 0.5;");
       } else {
