@@ -3,7 +3,7 @@ Admin.create(
   last_name: '責任者',
   first_name: 'test',
   birth_date: '1990-01-01',
-  phone_number: '0901234567',
+  phone_number: '09012345678',
   email: '',
   password: 'password',
   password_confirmation: 'password',
