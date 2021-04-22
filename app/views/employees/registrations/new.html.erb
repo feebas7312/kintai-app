@@ -2,8 +2,10 @@
   <div class="account-page__inner--left">
     <h2>Staff登録</h2>
     <h5>新しく売場スタッフを登録する</h5>
-    <div class="account-link">
-      <%= link_to "スタッフ一覧へ戻る", admins_home_path(current_admin) %>
+    <div class='pc'>
+      <div class="account-link">
+        <%= link_to "スタッフ一覧へ戻る", admins_home_path(current_admin) %>
+      </div>
     </div>
   </div>
   
@@ -65,5 +67,11 @@
         </div>
       </div>
     <% end %>
+  </div>
+
+  <div class='sp'>
+    <div class="account-link">
+      <%= link_to "スタッフ一覧へ戻る", admins_home_path(current_admin) %>
+    </div>
   </div>
 </div>
