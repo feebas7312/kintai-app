@@ -23,9 +23,6 @@
         <div class="field-label"><%= f.label :phone_number, '電話番号' %></div>
         <div class="field-input"><%= f.telephone_field :phone_number, placeholder: "例）09012345678", maxlength: "11" %></div>
 
-        <div class="field-label"><%= f.label :cutoff_date_id, '締日' %><span class="indispensable">必須</span></div>
-        <div class="field-input"><%= f.collection_select(:cutoff_date_id, CutoffDate.all, :id, :name, { include_blank: "--" }, { class: "select-box" }) %></div>
-
         <div class="field-label"><%= f.label :opening_time, '開店時間' %><span class="indispensable">必須</span></div>
         <div class="field-input"><%= f.time_field :opening_time %></div>
 
