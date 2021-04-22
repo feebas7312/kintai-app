@@ -11,7 +11,7 @@ class WorkPattern < ApplicationRecord
   validates :company_id, presence: true
 
   def break_time_validation
-    return if break_time.blank?
+    return if work_time.blank? || break_time.blank?
     if work_time > 480 && break_time < 60
       errors.add(:break_time, 'は60分以上に設定してください')
     elsif work_time > 360 && break_time < 45

@@ -29,15 +29,21 @@ ja:
         employment_status_id: 雇用形態
         salary_system_id: 給与体系
         wages: 給与
+        admin: 責任者
       work_pattern:
         start_time: 出勤時間
         end_time: 退勤時間
         break_time: 休憩時間
         work_time: 労働時間
+        company: 所属会社
       work_schedule:
         work_date: 出勤日
         start_time: 出勤時間
         end_time: 退勤時間
+        break_time: 休憩時間
+        work_time: 労働時間
+        admin_id: ''
+        employee_id: ''
     models:
       company: 会社情報
       work_pattern: 出勤パターン
