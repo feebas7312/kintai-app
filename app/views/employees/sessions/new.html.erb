@@ -2,9 +2,11 @@
   <div class="account-page__inner--left">
     <h2>Log in</h2>
     <h5>登録されているスタッフでログイン</h5>
-    <%= render "employees/shared/links" %>
-    <div class="account-link">
-      <%= link_to "責任者の方はこちら", root_path %>
+    <div class='pc'>
+      <%= render "employees/shared/links" %>
+      <div class="account-link">
+        <%= link_to "責任者の方はこちら", root_path %>
+      </div>
     </div>
   </div>
   
@@ -25,7 +27,7 @@
           <%= f.password_field :password, autocomplete: "current-password" %>
         </div>
         <% if devise_mapping.rememberable? %>
-          <div class="field">
+          <div class="field remember-check">
             <%= f.check_box :remember_me %>
             <%= f.label :remember_me %>
           </div>
@@ -36,4 +38,11 @@
       </div>
     <% end %>
   </div>
+
+  <div class='sp'>
+      <%= render "employees/shared/links" %>
+      <div class="account-link">
+        <%= link_to "責任者の方はこちら", root_path %>
+      </div>
+    </div>
 </div>
