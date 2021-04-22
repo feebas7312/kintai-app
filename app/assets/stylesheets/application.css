@@ -17,3 +17,18 @@
  * {
   box-sizing: border-box;
 }
+.pc {
+  display: block !important;
+}
+.sp {
+  display: none !important;
+}
+
+@media (max-width: 599px) {
+  .pc {
+    display: none !important;
+  }
+  .sp {
+    display: block !important;
+  }
+}
