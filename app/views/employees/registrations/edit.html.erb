@@ -2,18 +2,20 @@
   <div class="account-page__inner--left">
     <h2>Staff編集</h2>
     <h5>売場スタッフの情報を編集する</h5>
-    <% if admin_signed_in? %>
-      <%= link_to "退職", employee_registration_path(id: @employee.id), method: :delete, class: 'btn', data: { confirm: "このスタッフのデータを削除します" } %>
-      <br />
-      <div class="account-link">
-        <%= link_to "スタッフ一覧へ戻る", admins_home_path(current_admin) %>
-      </div>
-    <% end %>
-    <% if employee_signed_in? %>
-      <div class="account-link">
-        <%= link_to "トップページへ戻る", employees_home_path(current_employee) %>
-      </div>
-    <% end %>
+    <div class='pc'>
+      <% if admin_signed_in? %>
+        <%= link_to "退職", employee_registration_path(id: @employee.id), method: :delete, class: 'btn', data: { confirm: "このスタッフのデータを削除します" } %>
+        <br />
+        <div class="account-link">
+          <%= link_to "スタッフ一覧へ戻る", admins_home_path(current_admin) %>
+        </div>
+      <% end %>
+      <% if employee_signed_in? %>
+        <div class="account-link">
+          <%= link_to "トップページへ戻る", employees_home_path(current_employee) %>
+        </div>
+      <% end %>
+    </div>
   </div>
   
   <div class="account-page__inner--right">
@@ -92,6 +94,21 @@
         <div class="actions">
           <%= f.submit "変更", class: "btn" %>
         </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class='sp'>
+    <% if admin_signed_in? %>
+      <%= link_to "退職", employee_registration_path(id: @employee.id), method: :delete, class: 'btn', data: { confirm: "このスタッフのデータを削除します" } %>
+      <br />
+      <div class="account-link">
+        <%= link_to "スタッフ一覧へ戻る", admins_home_path(current_admin) %>
+      </div>
+    <% end %>
+    <% if employee_signed_in? %>
+      <div class="account-link">
+        <%= link_to "トップページへ戻る", employees_home_index_path %>
       </div>
     <% end %>
   </div>
