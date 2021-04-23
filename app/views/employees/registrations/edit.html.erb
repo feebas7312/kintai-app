@@ -12,7 +12,7 @@
       <% end %>
       <% if employee_signed_in? %>
         <div class="account-link">
-          <%= link_to "トップページへ戻る", employees_home_index_path %>
+          <%= link_to "トップページへ戻る", employees_home_path(current_employee) %>
         </div>
       <% end %>
     </div>

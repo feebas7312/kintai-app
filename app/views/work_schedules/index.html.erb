@@ -56,7 +56,7 @@
                           start_year: (Time.now.year - 2),
                           end_year: (Time.now.year + 2),
                           date_separator: '%s'),
-                        "<p> 年 </p>") + "<p> 月 </p>" %>
+                        "<p> 年 </p>") + "<p> 月度 </p>" %>
             <%= f.hidden_field :year, value: @year %>
             <%= f.hidden_field :month, value: @month %>
             <%= f.submit "検索", class: 'search-btn' %>

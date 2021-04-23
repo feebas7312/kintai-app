@@ -54,7 +54,7 @@
               <div class='joining-date'><%= employee.joining_date %></div>
               <div class='employment-status'><%= employee.employment_status.name %></div>
               <div class='salary-system'><%= employee.salary_system.name %></div>
-              <div class='birth-date'><%= @admin.birth_date %></div>
+              <div class='birth-date'><%= employee.birth_date %></div>
             </div>
             <div class='edit-btn'>
               <%= link_to 'パターン登録', new_employee_work_pattern_path(employee_id: employee.id), class: 'btn' %>
