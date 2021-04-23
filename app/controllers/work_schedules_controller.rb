@@ -28,6 +28,7 @@ class WorkSchedulesController < ApplicationController
     @temporary = WorkScheduleCollection.new(@days, @admin, @employees, work_schedule_collection_params)
     error_count = @temporary.save
     if error_count == 0
+      flash[:error] = '保存が完了しました'
       redirect_to new_work_schedule_path("search_date(1i)"=>@year, "search_date(2i)"=>@month)
     else
       set_calendar
@@ -44,6 +45,7 @@ class WorkSchedulesController < ApplicationController
     set_staff
     set_exist_schedules
     if @exist_schedules.delete_all
+      flash[:error] = '削除しました'
       redirect_to new_work_schedule_path("search_date(1i)"=>@year, "search_date(2i)"=>@month)
     else
       redirect_back fallback_location: :new
