@@ -21,7 +21,7 @@ URL:http://54.178.16.210/
 # 使用技術
 - Ruby 2.6.5
 - Ruby on Rails 6.0.0
-- MySQL 5.3
+- MySQL 5.6
 - AWS
   - EC2
 - RSpec
